@@ -1,0 +1,9 @@
+{
+  "name": "@nodecfdi/cfdiutils-common",
+  "version": "0.3.0",
+  "description": "Libreria modularizada para contener las estructuras de datos comunes, y utilerias o funciones de ayuda común.",
+  "main": "index.js",
+  "repository": "https://github.com/nodecfdi/cfdiutils-common",
+  "author": "OcelotlStudio <contacto@ocelotlstudio.com>",
+  "license": "MIT"
+}
