@@ -10,9 +10,18 @@
     ],
     "homepage": "https://github.com/nodecfdi/cfdiutils-common",
     "repository": "https://github.com/nodecfdi/cfdiutils-common",
+    "bugs": {
+        "url": "https://github.com/nodecfdi/cfdiutils-common/issues"
+    },
     "author": "OcelotlStudio <contacto@ocelotlstudio.com>",
     "license": "MIT",
-    "keywords": [],
+    "keywords": [
+        "common",
+        "cfdi",
+        "estructura",
+        "struct",
+        "xml"
+    ],
     "scripts": {
         "dev": "rollup -c -w",
         "build": "rollup -c",
