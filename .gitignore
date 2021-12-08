@@ -5,3 +5,5 @@ docs
 
 .idea
 .vscode
+
+yarn.lock

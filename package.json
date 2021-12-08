@@ -1,9 +1,48 @@
 {
-  "name": "@nodecfdi/cfdiutils-common",
-  "version": "0.3.0",
-  "description": "Libreria modularizada para contener las estructuras de datos comunes, y utilerias o funciones de ayuda común.",
-  "main": "index.js",
-  "repository": "https://github.com/nodecfdi/cfdiutils-common",
-  "author": "OcelotlStudio <contacto@ocelotlstudio.com>",
-  "license": "MIT"
+    "name": "@nodecfdi/cfdiutils-common",
+    "version": "0.3.0",
+    "description": "Librería usada para contener las estructuras de datos comunes, y utilerías o funciones de ayuda común.",
+    "main": "dist/cfdiutils-common.cjs.js",
+    "module": "dist/cfdiutils-common.esm.js",
+    "browser": "dist/cfdiutils-common.umd.js",
+    "files": [
+        "dist"
+    ],
+    "homepage": "https://github.com/nodecfdi/cfdiutils-common",
+    "repository": "https://github.com/nodecfdi/cfdiutils-common",
+    "author": "OcelotlStudio <contacto@ocelotlstudio.com>",
+    "license": "MIT",
+    "keywords": [],
+    "scripts": {
+        "dev": "rollup -c -w",
+        "build": "rollup -c",
+        "build:types": "tsc -p ./tsconfig.json --outDir build --declaration true && api-extractor run",
+        "lint": "eslint --ext .js,.ts .",
+        "test": "jest",
+        "docs": "typedoc src --out docs"
+    },
+    "devDependencies": {
+        "@microsoft/api-extractor": "^7.18.21",
+        "@rollup/plugin-commonjs": "^21.0.1",
+        "@rollup/plugin-node-resolve": "^13.0.6",
+        "@rollup/plugin-typescript": "^8.3.0",
+        "@types/jest": "^27.0.3",
+        "@types/node": "^16.11.12",
+        "@typescript-eslint/eslint-plugin": "^5.6.0",
+        "@typescript-eslint/parser": "^5.6.0",
+        "eslint": "^8.4.1",
+        "eslint-config-prettier": "^8.3.0",
+        "eslint-plugin-prettier": "^4.0.0",
+        "jest": "^27.4.3",
+        "prettier": "^2.5.1",
+        "rollup": "^2.60.2",
+        "ts-jest": "^27.1.1",
+        "ts-node": "^10.4.0",
+        "tslib": "^2.3.1",
+        "typedoc": "^0.22.10",
+        "typescript": "^4.5.2"
+    },
+    "dependencies": {
+        "@xmldom/xmldom": "^0.7.5"
+    }
 }
