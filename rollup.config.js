@@ -1,22 +1,26 @@
 import resolve from '@rollup/plugin-node-resolve';
-import commonjs from "@rollup/plugin-commonjs";
-import typescript from "@rollup/plugin-typescript";
+import commonjs from '@rollup/plugin-commonjs';
+import typescript from '@rollup/plugin-typescript';
 import pkg from './package.json';
 
 export default [
     // browser-friendly UMD build
     {
-        input: "src/index.ts",
+        input: 'src/index.ts',
         output: {
-            name: "cfdiutils-common",
+            name: 'cfdiutils-common',
             file: pkg.browser,
-            format: "umd",
+            format: 'umd',
+            globals: {
+                '@xmldom/xmldom': '@xmldom/xmldom'
+            }
         },
         plugins: [
             resolve(),
             commonjs(),
-            typescript({tsconfig: "./tsconfig.json"}),
+            typescript({ tsconfig: './tsconfig.json' })
         ],
+        external: ['@xmldom/xmldom']
     },
 
     // CommonJS (for Node) and ES module (for bundlers) build.
@@ -26,11 +30,12 @@ export default [
     // an array for the `output` option, where we can specify
     // `file` and `format` for each target)
     {
-        input: "src/index.ts",
+        input: 'src/index.ts',
         output: [
-            {file: pkg.main, format: "cjs"},
-            {file: pkg.module, format: "es"},
+            { file: pkg.main, format: 'cjs' },
+            { file: pkg.module, format: 'es' }
         ],
-        plugins: [typescript({tsconfig: "./tsconfig.json"})],
-    },
+        plugins: [typescript({ tsconfig: './tsconfig.json' })],
+        external: ['@xmldom/xmldom']
+    }
 ];
