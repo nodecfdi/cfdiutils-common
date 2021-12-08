@@ -5,6 +5,7 @@
     "main": "dist/cfdiutils-common.cjs.js",
     "module": "dist/cfdiutils-common.esm.js",
     "browser": "dist/cfdiutils-common.umd.js",
+    "types": "dist/cfdiutils-common.d.ts",
     "files": [
         "dist"
     ],
@@ -25,7 +26,7 @@
     "scripts": {
         "dev": "rollup -c -w",
         "build": "rollup -c",
-        "build:types": "tsc -p ./tsconfig.json --outDir build --declaration true && api-extractor run",
+        "build:types": "rm -r build && tsc -p ./tsconfig.json --outDir build --declaration true && api-extractor run",
         "lint": "eslint --ext .js,.ts .",
         "test": "jest",
         "docs": "typedoc src --out docs"
