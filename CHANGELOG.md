@@ -1,5 +1,11 @@
 # @nodecfdi/cfdiutils-common ChangeLog
 
+## 0.4.0
+- Add Util Helper CurrencyDecimals
+- Added more rules to eslint
+- Fixed typo missing
+- Update dependencies
+
 ## 0.3.0
 - Add ES6 build, use Rollup 2.60.2
 - Increment strict on eslint and config with prettier

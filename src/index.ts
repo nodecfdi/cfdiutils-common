@@ -6,3 +6,4 @@ export * from './nodes/c-node';
 export * from './nodes/xml-node-utils';
 export * from './utils/xml';
 export * from './utils/dom-validators';
+export * from './utils/currency-decimals';
