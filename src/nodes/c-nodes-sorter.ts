@@ -70,12 +70,15 @@ export class CNodesSorter {
         let list = input.map((entry, i) => {
             return {
                 item: entry,
-                index: i
+                index: i,
             };
         });
 
         // Double check by function provider and indexed
-        const comparar = (a: { item: CNodeInterface; index: number }, b: { item: CNodeInterface; index: number }) => {
+        const comparar = (
+            a: { item: CNodeInterface; index: number },
+            b: { item: CNodeInterface; index: number }
+        ): number => {
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
             let value: number = this[callable](a.item, b.item) as number;

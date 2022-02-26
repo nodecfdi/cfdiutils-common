@@ -30,9 +30,9 @@ export class Xml {
         }
         const errors: Record<string, unknown> = {};
         const parser = new DOMParser({
-            errorHandler: (level, msg) => {
+            errorHandler: (level, msg): void => {
                 errors[level] = msg;
-            }
+            },
         });
         const docParse = parser.parseFromString(content, 'text/xml');
         if (Object.keys(errors).length !== 0) {
@@ -68,7 +68,9 @@ export class Xml {
             previousException = e as Error;
         }
         if (!element || !DomValidators.isElement(element)) {
-            throw new SyntaxError(`${errorMessage} on ${previousException ? previousException.message : 'not is element'}`);
+            throw new SyntaxError(
+                `${errorMessage} on ${previousException ? previousException.message : 'not is element'}`
+            );
         }
         if (content !== '') {
             element?.appendChild(Xml.ownerDocument(element).createTextNode(content));

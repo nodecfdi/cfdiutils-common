@@ -1,10 +1,6 @@
 import { Xml } from '../utils/xml';
 
 export class CAttributes extends Map<string, string> {
-    static get [Symbol.species]() {
-        return Map;
-    }
-
     constructor(attributes: Record<string, unknown> = {}) {
         super();
         this.importRecord(attributes);
@@ -65,5 +61,9 @@ export class CAttributes extends Map<string, string> {
             return value.toString();
         }
         throw new SyntaxError(`Cannot convert value of attribute ${key} to string`);
+    }
+
+    public static get [Symbol.species](): MapConstructor {
+        return Map;
     }
 }

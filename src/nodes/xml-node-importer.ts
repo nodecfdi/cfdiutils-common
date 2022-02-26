@@ -36,9 +36,8 @@ export class XmlNodeImporter {
         return node;
     }
 
-    private registerNamespace(node: CNode, prefix: string, uri: string) {
-        if (this.registeredNamespaces[prefix])
-            return;
+    private registerNamespace(node: CNode, prefix: string, uri: string): void {
+        if (this.registeredNamespaces[prefix]) return;
         this.registeredNamespaces[prefix] = uri;
         node.attributes().set(prefix, uri);
     }

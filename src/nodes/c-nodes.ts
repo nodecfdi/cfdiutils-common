@@ -24,7 +24,7 @@ export class CNodes extends Array<CNodeInterface> {
         return this;
     }
 
-    public order() {
+    public order(): void {
         this.splice(0, this.length, ...this._sorter.sort(this));
     }
 
@@ -32,7 +32,7 @@ export class CNodes extends Array<CNodeInterface> {
      * It takes only the unique string names and sort using the order of appearance
      * @param names
      */
-    public setOrder(names: string[]) {
+    public setOrder(names: string[]): void {
         if (this._sorter.setOrder(names)) {
             this.order();
         }
@@ -96,7 +96,7 @@ export class CNodes extends Array<CNodeInterface> {
         return this;
     }
 
-    static get [Symbol.species]() {
+    public static get [Symbol.species](): ArrayConstructor {
         return Array;
     }
 }

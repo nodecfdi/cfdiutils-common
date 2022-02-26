@@ -34,12 +34,12 @@ export class CNode implements CNodeInterface {
         return this._attributes;
     }
 
-    public clear() {
+    public clear(): void {
         this._attributes.clear();
         this._children.removeAll();
     }
 
-    public addAttributes(attributes: Record<string, unknown>) {
+    public addAttributes(attributes: Record<string, unknown>): void {
         this._attributes.importRecord(attributes);
     }
 
@@ -76,11 +76,11 @@ export class CNode implements CNodeInterface {
         return node;
     }
 
-    public count() {
+    public count(): number {
         return this.children().length;
     }
 
-    [Symbol.iterator](): IterableIterator<CNodeInterface> {
+    public [Symbol.iterator](): IterableIterator<CNodeInterface> {
         return this._children[Symbol.iterator]();
     }
 }

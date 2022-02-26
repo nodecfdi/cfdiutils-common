@@ -32,10 +32,10 @@ describe('Utils.Xml', () => {
         ['&amp;', '&'],
         ['&lt;', '<'],
         //['&gt;', '>'], // bug xmldom parser not fixed encoding for > to &gt; today 02/12/2021
-        ['\'', '\''],
+        ["'", "'"],
         ['"', '"'],
         ['&amp;copy;', '&copy;'],
-        ['foo &amp; bar', 'foo & bar']
+        ['foo &amp; bar', 'foo & bar'],
     ])('method createElement', (expected, content) => {
         const elementName = 'element';
         const document = Xml.newDocument();

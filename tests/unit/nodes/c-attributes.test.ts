@@ -9,7 +9,7 @@ describe('Nodes.CAttributes', () => {
     test('construct with members', () => {
         const data = {
             id: 'sample',
-            foo: 'bar'
+            foo: 'bar',
         };
         const attributes = new CAttributes(data);
         expect(attributes.size).toBe(2);
@@ -21,7 +21,7 @@ describe('Nodes.CAttributes', () => {
 
     test.each([
         ['empty', ''],
-        ['white space', '    ']
+        ['white space', '    '],
     ])('set method with invalid name %s', (opt, name) => {
         const attributes = new CAttributes();
         expect.assertions(1);
@@ -55,7 +55,7 @@ describe('Nodes.CAttributes', () => {
         ['digit hyphen text', '0-foo'],
         ['hyphen', '-'],
         ['hyphen text', '-x'],
-        ['inner space', 'foo bar']
+        ['inner space', 'foo bar'],
     ])('set with invalid names (%s)', (opt, name) => {
         const attributes = new CAttributes();
         expect(() => attributes.set(name, '')).toThrow('invalid xml name');
@@ -80,7 +80,7 @@ describe('Nodes.CAttributes', () => {
     test('iterator', () => {
         const data = {
             foo: 'bar',
-            lorem: 'ipsum'
+            lorem: 'ipsum',
         };
         const created: Record<string, string> = {};
         const attributes = new CAttributes(data);
@@ -93,7 +93,7 @@ describe('Nodes.CAttributes', () => {
     test('set to (undefined|null) perform remove', () => {
         const attributes = new CAttributes({
             foo: 'bar',
-            bar: 'foo'
+            bar: 'foo',
         });
         expect(attributes.has('foo')).toBeTruthy();
         expect(attributes.has('bar')).toBeTruthy();
@@ -109,7 +109,7 @@ describe('Nodes.CAttributes', () => {
             importArray: '1',
             offsetSet: '1',
             constructor: undefined,
-            empty: null
+            empty: null,
         });
         expect(attributes.size).toBe(3);
         expect(attributes.has('constructor')).toBeFalsy();
@@ -133,7 +133,7 @@ describe('Nodes.CAttributes', () => {
         expect(
             () =>
                 new CAttributes({
-                    foo: []
+                    foo: [],
                 })
         ).toThrow('Cannot convert value of attribute foo to string');
     });
@@ -141,7 +141,7 @@ describe('Nodes.CAttributes', () => {
     test('set with object to string', () => {
         const expectedValue = 'foo';
 
-        function Foo(this: { value: string }, value: string) {
+        function Foo(this: { value: string }, value: string): void {
             this.value = value;
         }
 
@@ -149,18 +149,18 @@ describe('Nodes.CAttributes', () => {
         // @ts-ignore
         const toStringObject = new Foo('foo');
 
-        Foo.prototype.toString = function() {
+        Foo.prototype.toString = function (): void {
             return this.value;
         };
 
         const attributes = new CAttributes({
-            constructor: toStringObject
+            constructor: toStringObject,
         });
 
         attributes.set('offsetSet', toStringObject);
         attributes.set('set', toStringObject);
         attributes.importRecord({
-            importArray: toStringObject
+            importArray: toStringObject,
         });
         expect(attributes.get('constructor')).toBe(expectedValue);
         expect(attributes.get('offsetSet')).toBe(expectedValue);
@@ -173,7 +173,7 @@ describe('Nodes.CAttributes', () => {
         attributes.set('foo', 'bar');
 
         expect(attributes.exportRecord()).toStrictEqual({
-            foo: 'bar'
+            foo: 'bar',
         });
     });
 });

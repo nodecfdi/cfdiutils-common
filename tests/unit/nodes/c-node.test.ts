@@ -11,7 +11,7 @@ describe('Nodes.CNode', () => {
     test('construct with arguments', () => {
         const dummyNode = new CNode('dummy');
         const attributes = {
-            foo: 'bar'
+            foo: 'bar',
         };
         const children = [dummyNode];
         const node = new CNode('name', attributes, children);
@@ -36,8 +36,8 @@ describe('Nodes.CNode', () => {
         const node = new CNode('root', { level: '1' }, [
             new CNode('child', { level: 2 }, [
                 new CNode('grandchild', { level: 3.1 }),
-                new CNode('grandchild', { level: 3.2 })
-            ])
+                new CNode('grandchild', { level: 3.2 }),
+            ]),
         ]);
 
         expect(node.searchAttribute('level')).toBe('1');

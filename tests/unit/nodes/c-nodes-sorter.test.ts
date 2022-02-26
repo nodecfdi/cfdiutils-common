@@ -17,7 +17,9 @@ describe('Nodes.CNodesSorter', () => {
         // all invalid values
         expect(sorter.parseNames([null, undefined, 0, ''])).toStrictEqual(new Map());
         // all valid values
-        expect(sorter.parseNames(['foo', 'bar'])).toStrictEqual(new Map(['foo', 'bar'].map((value, key) => [key, value])));
+        expect(sorter.parseNames(['foo', 'bar'])).toStrictEqual(
+            new Map(['foo', 'bar'].map((value, key) => [key, value]))
+        );
         // duplicated values
         expect(sorter.parseNames(['foo', 'bar', 'bar', 'foo', 'baz'])).toStrictEqual(
             new Map(['foo', 'bar', 'baz'].map((value, key) => [key, value]))

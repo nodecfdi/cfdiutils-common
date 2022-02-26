@@ -1,6 +1,5 @@
 import { CNode, XmlNodeUtils } from '../../../src';
 
-
 describe('XmlNodeUtils', () => {
     test('node to Xml string Xml Header', () => {
         const node = new CNode('book', {}, [new CNode('chapter', { toc: '1' }), new CNode('chapter', { toc: '2' })]);
