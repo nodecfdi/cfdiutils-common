@@ -6,22 +6,22 @@ export class CAttributes extends Map<string, string> {
         this.importRecord(attributes);
     }
 
-    public get(name: string): string | undefined {
+    public get(name: string): string {
         if (!this.has(name)) {
             return '';
         }
-        return super.get(name);
+        return super.get(name) || '';
     }
 
-    public set(name: string, value: unknown = null): this {
-        if (value === null) {
+    public set(name: string, value: string | null | undefined = null): this {
+        if (value === null || value === undefined) {
             this.delete(name);
             return this;
         }
         if (!Xml.isValidXmlName(name)) {
             throw new SyntaxError(`Cannot set attribute with an invalid xml name: ${name}`);
         }
-        super.set(name, `${value}`);
+        super.set(name, value.toString());
         return this;
     }
 
