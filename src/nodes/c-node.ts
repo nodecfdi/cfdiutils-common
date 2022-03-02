@@ -80,19 +80,19 @@ export class CNode implements CNodeInterface {
      * Array access implementation as attribute helpers
      */
     public offsetExists(offset: string): boolean {
-        return this.attributes().get(offset) !== undefined && this.attributes().get(offset) !== null;
+        return this.attributes().offsetExists(offset);
     }
 
     public get(offset: string): string {
-        return this.attributes().get(offset);
+        return this.attributes().offsetGet(offset);
     }
 
-    public set(offset: string, value: string): void {
-        this.attributes().set(offset, value);
+    public set(offset: string, value: unknown): void {
+        this.attributes().offsetSet(offset, value);
     }
 
     public unset(offset: string): void {
-        this.attributes().delete(offset);
+        this.attributes().offsetUnset(offset);
     }
 
     public count(): number {

@@ -87,7 +87,7 @@ describe('Nodes.CNode', () => {
         const node = new CNode('x');
         node.set('id', 'form');
 
-        expect(!!node.get('id')).toBeTruthy();
+        expect(node.offsetExists('id')).toBeTruthy();
         expect(node.get('id')).toBe('form');
 
         node.set('id', 'the-form');
@@ -95,7 +95,7 @@ describe('Nodes.CNode', () => {
 
         node.unset('id');
 
-        expect(!!node.get('id')).toBeFalsy();
+        expect(node.offsetExists('id')).toBeFalsy();
         expect(node.get('id')).toBe('');
     });
 });

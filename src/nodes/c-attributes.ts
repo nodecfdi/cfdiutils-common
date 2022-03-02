@@ -25,6 +25,17 @@ export class CAttributes extends Map<string, string> {
         return this;
     }
 
+    public exists(name: string): boolean {
+        let found = false;
+        for (const key of this.keys()) {
+            if (name === key) {
+                found = true;
+                break;
+            }
+        }
+        return found;
+    }
+
     public importRecord(attributes: Record<string, unknown>): this {
         if (attributes) {
             Object.entries(attributes).forEach(([key, value]) => {
@@ -61,6 +72,25 @@ export class CAttributes extends Map<string, string> {
             return value.toString();
         }
         throw new SyntaxError(`Cannot convert value of attribute ${key} to string`);
+    }
+
+    /**
+     * Array access implementation as attribute helpers
+     */
+    public offsetExists(offset: string): boolean {
+        return this.exists(offset);
+    }
+
+    public offsetGet(offset: string): string {
+        return this.get(offset);
+    }
+
+    public offsetSet(offset: string, value: unknown): void {
+        this.set(offset, CAttributes.castValueToString(offset, value));
+    }
+
+    public offsetUnset(offset: string): void {
+        super.delete(offset);
     }
 
     public static get [Symbol.species](): MapConstructor {

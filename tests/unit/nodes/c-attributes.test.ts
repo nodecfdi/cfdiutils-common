@@ -14,7 +14,7 @@ describe('Nodes.CAttributes', () => {
         const attributes = new CAttributes(data);
         expect(attributes.size).toBe(2);
         attributes.forEach((value, key) => {
-            expect(attributes.has(key)).toBeTruthy();
+            expect(attributes.exists(key)).toBeTruthy();
             expect(attributes.get(key)).toEqual(value);
         });
     });
@@ -77,6 +77,27 @@ describe('Nodes.CAttributes', () => {
         expect(attributes.size).toBe(0);
     });
 
+    test('map access', () => {
+        const attributes = new CAttributes();
+        attributes.offsetSet('id', 'sample');
+        attributes.offsetSet('foo', 'foo foo foo');
+        attributes.offsetSet('foo', 'bar'); // override
+        attributes.offsetSet('empty', '');
+        expect(attributes.size).toBe(3);
+
+        // existent
+        expect(attributes.offsetExists('empty')).toBeTruthy();
+        expect(attributes.offsetExists('id')).toBeTruthy();
+        expect(attributes.offsetGet('id')).toBe('sample');
+        expect(attributes.offsetGet('foo')).toBe('bar');
+        // non existent
+        expect(attributes.offsetExists('non-existent')).toBeFalsy();
+        expect(attributes.offsetGet('non-existent')).toBe('');
+        // remove and check
+        attributes.offsetUnset('foo');
+        expect(attributes.offsetGet('foo')).toBe('');
+    });
+
     test('iterator', () => {
         const data = {
             foo: 'bar',
@@ -95,12 +116,12 @@ describe('Nodes.CAttributes', () => {
             foo: 'bar',
             bar: 'foo',
         });
-        expect(attributes.has('foo')).toBeTruthy();
-        expect(attributes.has('bar')).toBeTruthy();
-        attributes.set('foo', undefined);
-        expect(attributes.has('foo')).toBeFalsy();
-        attributes.set('bar', null);
-        expect(attributes.has('bar')).toBeFalsy();
+        expect(attributes.exists('foo')).toBeTruthy();
+        expect(attributes.exists('bar')).toBeTruthy();
+        attributes.offsetSet('foo', undefined);
+        expect(attributes.exists('foo')).toBeFalsy();
+        attributes.offsetSet('bar', null);
+        expect(attributes.exists('bar')).toBeFalsy();
     });
 
     test('import with (undefined|null) perform remove', () => {
@@ -112,20 +133,20 @@ describe('Nodes.CAttributes', () => {
             empty: null,
         });
         expect(attributes.size).toBe(3);
-        expect(attributes.has('constructor')).toBeFalsy();
-        expect(attributes.has('empty')).toBeFalsy();
+        expect(attributes.exists('constructor')).toBeFalsy();
+        expect(attributes.exists('empty')).toBeFalsy();
         expect(attributes.size).toBe(3);
 
         attributes.set('set', undefined);
-        expect(attributes.has('set')).toBeFalsy();
+        expect(attributes.exists('set')).toBeFalsy();
         expect(attributes.size).toBe(2);
 
         attributes.importRecord({ importArray: undefined });
-        expect(attributes.has('importArray')).toBeFalsy();
+        expect(attributes.exists('importArray')).toBeFalsy();
         expect(attributes.size).toBe(1);
 
-        attributes.set('offsetSet', null);
-        expect(attributes.has('offsetSet')).toBeFalsy();
+        attributes.offsetSet('offsetSet', null);
+        expect(attributes.exists('offsetSet')).toBeFalsy();
         expect(attributes.size).toBe(0);
     });
 
