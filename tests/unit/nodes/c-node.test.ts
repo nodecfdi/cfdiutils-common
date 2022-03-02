@@ -82,4 +82,20 @@ describe('Nodes.CNode', () => {
         expect(root.searchNodes('not-found', 'child', 'grandchild')).toHaveLength(0);
         expect(root.searchNodes('not-found')).toHaveLength(0);
     });
+
+    test('map access to attributes', () => {
+        const node = new CNode('x');
+        node.set('id', 'form');
+
+        expect(!!node.get('id')).toBeTruthy();
+        expect(node.get('id')).toBe('form');
+
+        node.set('id', 'the-form');
+        expect(node.get('id')).toBe('the-form');
+
+        node.unset('id');
+
+        expect(!!node.get('id')).toBeFalsy();
+        expect(node.get('id')).toBe('');
+    });
 });

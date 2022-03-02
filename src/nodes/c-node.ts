@@ -76,6 +76,25 @@ export class CNode implements CNodeInterface {
         return node;
     }
 
+    /**
+     * Array access implementation as attribute helpers
+     */
+    public offsetExists(offset: string): boolean {
+        return this.attributes().get(offset) !== undefined && this.attributes().get(offset) !== null;
+    }
+
+    public get(offset: string): string | undefined {
+        return this.attributes().get(offset);
+    }
+
+    public set(offset: string, value: string): void {
+        this.attributes().set(offset, value);
+    }
+
+    public unset(offset: string): void {
+        this.attributes().delete(offset);
+    }
+
     public count(): number {
         return this.children().length;
     }
