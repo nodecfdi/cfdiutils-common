@@ -1,5 +1,12 @@
 # @nodecfdi/cfdiutils-common ChangeLog
 
+## 1.0.0
+- Happy to announce release stable version
+- Added last fixes for work has expected
+- Updated dependencies
+- Fixed bad set ang get on `CAttributes`
+- Added Map Accessors on `CNode`
+
 ## 0.4.0
 - Add Util Helper CurrencyDecimals
 - Added more rules to eslint
