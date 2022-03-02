@@ -19,4 +19,16 @@ export interface CNodeInterface {
     searchNodes(...searchPath: string[]): CNodes;
 
     searchNode(...searchPath: string[]): CNodeInterface | undefined;
+
+    offsetExists(offset: string): boolean;
+
+    get(offset: string): string;
+
+    set(offset: string, value: string): void;
+
+    unset(offset: string): void;
+
+    count(): number;
+
+    [Symbol.iterator](): IterableIterator<CNodeInterface>;
 }

@@ -83,7 +83,7 @@ export class CNode implements CNodeInterface {
         return this.attributes().get(offset) !== undefined && this.attributes().get(offset) !== null;
     }
 
-    public get(offset: string): string | undefined {
+    public get(offset: string): string {
         return this.attributes().get(offset);
     }
 
