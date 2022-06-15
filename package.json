@@ -1,6 +1,6 @@
 {
     "name": "@nodecfdi/cfdiutils-common",
-    "version": "1.0.1",
+    "version": "1.1.0",
     "description": "Librería usada para contener las estructuras de datos comunes, y utilerías o funciones de ayuda común.",
     "main": "dist/cfdiutils-common.cjs.js",
     "module": "dist/cfdiutils-common.esm.js",

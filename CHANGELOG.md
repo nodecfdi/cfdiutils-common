@@ -1,5 +1,11 @@
 # @nodecfdi/cfdiutils-common ChangeLog
 
+## 1.1.0
+
+- Introduce `CNodeHasValueInterface` to work with nodes simple text content.
+- The class `CNode` implements `CNodeHasValueInterface`.
+- The XML node importers and exporters now can read and write simple text content.
+
 ## 1.0.1
 
 - fix: added missing methods on CNodeInterface

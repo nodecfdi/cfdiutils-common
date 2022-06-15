@@ -96,3 +96,16 @@ La clase `CNode` tiene estos métodos de ayuda que sirven para trabajar directam
 
 - iterador: El método `foreach` se realiza sobre la colección de nodos.
 - `addChild(node: CNode)`: Agrega un nodo en la colección de nodos.
+
+## Contenido de texto
+
+Tradicionalmente, los CFDI Regulares, CFDI de Retenciones e Información de Pagos, así como sus complementos,
+siguen la estructura de elementos con valores en los atributos y sin texto.
+
+Sin embargo, el SAT —en su infinita consistencia— tiene el *Complemento de facturas del sector de ventas al detalle*
+disponible en <https://www.sat.gob.mx/consulta/76197/complemento-para-factura-electronica> donde, en lugar de poner
+los valores en atributos, pone los valores en el contenido textual del elemento, además de otros cambios como usar
+nombres de nodos en inglés.
+
+Por lo anterior, se introdujo la interfaz `CNodeHasValueInterface` que contiene los métodos `value(): string` y
+`setValue(valueString: string): void` con lo que se puede escribir y leer este contenido simple.
