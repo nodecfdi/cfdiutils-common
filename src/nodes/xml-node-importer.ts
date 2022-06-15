@@ -1,13 +1,20 @@
 import { CNodeInterface } from './c-node-interface';
 import { CNode } from './c-node';
 import { DomValidators } from '../utils/dom-validators';
+import { CNodeHasValueInterface } from './c-node-has-value-interface';
 
 export class XmlNodeImporter {
+    /**
+     * Local record for registered namespaces to avoid set the namespace declaration in every child
+     */
     private registeredNamespaces: Record<string, string> = {};
 
-    public import(element: Element): CNodeInterface {
+    public import(element: Element): CNodeInterface & CNodeHasValueInterface {
         const node = new CNode(element.tagName);
-        if (element.prefix !== '') {
+
+        node.setValue(this.extractValue(element));
+
+        if (element.prefix && element.prefix !== '') {
             this.registerNamespace(node, `xmlns:${element.prefix}`, element.namespaceURI || '');
             this.registerNamespace(node, `xmlns:xsi`, 'http://www.w3.org/2001/XMLSchema-instance');
         }
@@ -40,5 +47,19 @@ export class XmlNodeImporter {
         if (this.registeredNamespaces[prefix]) return;
         this.registeredNamespaces[prefix] = uri;
         node.attributes().set(prefix, uri);
+    }
+
+    private extractValue(element: Element): string {
+        const values: string[] = [];
+
+        for (const children of Array.from(element.childNodes)) {
+            if (!DomValidators.isText(children)) {
+                continue;
+            }
+
+            values.push(children.data);
+        }
+
+        return values.join('');
     }
 }

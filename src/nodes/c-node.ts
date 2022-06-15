@@ -2,19 +2,22 @@ import { CNodeInterface } from './c-node-interface';
 import { CAttributes } from './c-attributes';
 import { Xml } from '../utils/xml';
 import { CNodes } from './c-nodes';
+import { CNodeHasValueInterface } from './c-node-has-value-interface';
 
-export class CNode implements CNodeInterface {
+export class CNode implements CNodeInterface, CNodeHasValueInterface {
     private readonly _name: string;
     private readonly _attributes: CAttributes;
     private readonly _children: CNodes;
+    private _value: string;
 
-    constructor(name: string, attributes: Record<string, unknown> = {}, children: CNodeInterface[] = []) {
+    constructor(name: string, attributes: Record<string, unknown> = {}, children: CNodeInterface[] = [], value = '') {
         if (!Xml.isValidXmlName(name)) {
             throw new SyntaxError(`Cannot create a node with an invalid xml name: ${name}`);
         }
         this._name = name;
         this._attributes = new CAttributes(attributes);
         this._children = new CNodes(children);
+        this._value = value;
     }
 
     public name(): string {
@@ -41,6 +44,14 @@ export class CNode implements CNodeInterface {
 
     public addAttributes(attributes: Record<string, unknown>): void {
         this._attributes.importRecord(attributes);
+    }
+
+    public value(): string {
+        return this._value;
+    }
+
+    public setValue(value: string): void {
+        this._value = value;
     }
 
     public searchAttribute(...searchPath: string[]): string {

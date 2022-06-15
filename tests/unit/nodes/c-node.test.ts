@@ -6,6 +6,7 @@ describe('Nodes.CNode', () => {
         expect(node.name()).toBe('name');
         expect(node.count()).toBe(0);
         expect(node.children()).toHaveLength(0);
+        expect(node.value()).toBe('');
     });
 
     test('construct with arguments', () => {
@@ -14,9 +15,11 @@ describe('Nodes.CNode', () => {
             foo: 'bar',
         };
         const children = [dummyNode];
-        const node = new CNode('name', attributes, children);
+        const value = 'xee';
+        const node = new CNode('name', attributes, children, value);
         expect(node.attributes().get('foo')).toBe('bar');
         expect(node.children().firstNodeWithName('dummy')).toStrictEqual(dummyNode);
+        expect(node.value()).toBe(value);
     });
 
     test('construct with empty name', () => {
@@ -97,5 +100,15 @@ describe('Nodes.CNode', () => {
 
         expect(node.offsetExists('id')).toBeFalsy();
         expect(node.get('id')).toBe('');
+    });
+
+    test('value property', () => {
+        const node = new CNode('x');
+
+        node.setValue('first');
+        expect(node.value()).toBe('first');
+
+        node.setValue('second');
+        expect(node.value()).toBe('second');
     });
 });

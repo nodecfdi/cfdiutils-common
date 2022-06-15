@@ -3,6 +3,7 @@ import { CNodeInterface } from './c-node-interface';
 import { XmlNodeExporter } from './xml-node-exporter';
 import { XmlNodeImporter } from './xml-node-importer';
 import { Xml } from '../utils/xml';
+import { CNodeHasValueInterface } from './c-node-has-value-interface';
 
 export class XmlNodeUtils {
     public static nodeToXmlElement(node: CNodeInterface): Element {
@@ -20,11 +21,11 @@ export class XmlNodeUtils {
         return new XMLSerializer().serializeToString(element.ownerDocument);
     }
 
-    public static nodeFromXmlElement(element: Element): CNodeInterface {
+    public static nodeFromXmlElement(element: Element): CNodeInterface & CNodeHasValueInterface {
         return new XmlNodeImporter().import(element);
     }
 
-    public static nodeFromXmlString(content: string): CNodeInterface {
+    public static nodeFromXmlString(content: string): CNodeInterface & CNodeHasValueInterface {
         return XmlNodeUtils.nodeFromXmlElement(Xml.documentElement(Xml.newDocumentContent(content)));
     }
 }
