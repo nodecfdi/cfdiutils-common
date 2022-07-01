@@ -1,4 +1,4 @@
-import { CurrencyDecimals } from '../../../src/utils/currency-decimals';
+import { CurrencyDecimals } from '~/utils/currency-decimals';
 
 describe('CurrencyDecimals', () => {
     test('create generic', () => {
@@ -9,23 +9,21 @@ describe('CurrencyDecimals', () => {
     });
 
     test.each([[''], ['ÑÑÑ'], ['XXXX']])('create with empty code', (currency) => {
-        expect.hasAssertions();
-        try {
+        const t = (): void => {
             new CurrencyDecimals(currency, 2);
-        } catch (e) {
-            expect(e).toBeInstanceOf(Error);
-            expect((e as Error).message).toContain('currency');
-        }
+        };
+
+        expect(t).toThrow(Error);
+        expect(t).toThrow('currency');
     });
 
     test('create with negative decimals', () => {
-        expect.hasAssertions();
-        try {
+        const t = (): void => {
             new CurrencyDecimals('FOO', -1);
-        } catch (e) {
-            expect(e).toBeInstanceOf(Error);
-            expect((e as Error).message).toContain('decimals');
-        }
+        };
+
+        expect(t).toThrow(Error);
+        expect(t).toThrow('decimals');
     });
 
     test('does not exceed', () => {
@@ -51,13 +49,12 @@ describe('CurrencyDecimals', () => {
     });
 
     test('unknown currency', () => {
-        expect.hasAssertions();
-        try {
+        const t = (): void => {
             CurrencyDecimals.newFromKnownCurrencies('FOO');
-        } catch (e) {
-            expect(e).toBeInstanceOf(RangeError);
-            expect((e as RangeError).message).toContain('not known');
-        }
+        };
+
+        expect(t).toThrow(RangeError);
+        expect(t).toThrow('not known');
     });
 
     test('unknown currency with decimals', () => {

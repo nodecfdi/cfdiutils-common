@@ -1,4 +1,4 @@
-import { CAttributes } from '../../../src';
+import { CAttributes } from '~/index';
 
 describe('Nodes.CAttributes', () => {
     test('construct without arguments', () => {
@@ -9,7 +9,7 @@ describe('Nodes.CAttributes', () => {
     test('construct with members', () => {
         const data = {
             id: 'sample',
-            foo: 'bar',
+            foo: 'bar'
         };
         const attributes = new CAttributes(data);
         expect(attributes.size).toBe(2);
@@ -19,17 +19,13 @@ describe('Nodes.CAttributes', () => {
         });
     });
 
-    test.each([
-        ['empty', ''],
-        ['white space', '    '],
-    ])('set method with invalid name %s', (opt, name) => {
+    test.each([[/** empty */ ''], [/** white spaces */ '    ']])('set method with invalid name', (name) => {
         const attributes = new CAttributes();
-        expect.assertions(1);
-        try {
+        const t = (): void => {
             attributes.set(name, '');
-        } catch (e) {
-            expect(e).toBeInstanceOf(SyntaxError);
-        }
+        };
+
+        expect(t).toThrow(SyntaxError);
     });
 
     test('set method', () => {
@@ -49,14 +45,14 @@ describe('Nodes.CAttributes', () => {
     });
 
     test.each([
-        ['empty', ''],
-        ['white space', ' '],
-        ['digit', '0'],
-        ['digit hyphen text', '0-foo'],
-        ['hyphen', '-'],
-        ['hyphen text', '-x'],
-        ['inner space', 'foo bar'],
-    ])('set with invalid names (%s)', (opt, name) => {
+        [/* 'empty', */ ''],
+        [/* 'white space',  */ ' '],
+        [/* 'digit', */ '0'],
+        [/* 'digit hyphen text', */ '0-foo'],
+        [/* 'hyphen', */ '-'],
+        [/* 'hyphen text', */ '-x'],
+        [/* 'inner space', */ 'foo bar']
+    ])('set with invalid names', (name) => {
         const attributes = new CAttributes();
         expect(() => attributes.set(name, '')).toThrow('invalid xml name');
     });
@@ -101,7 +97,7 @@ describe('Nodes.CAttributes', () => {
     test('iterator', () => {
         const data = {
             foo: 'bar',
-            lorem: 'ipsum',
+            lorem: 'ipsum'
         };
         const created: Record<string, string> = {};
         const attributes = new CAttributes(data);
@@ -114,7 +110,7 @@ describe('Nodes.CAttributes', () => {
     test('set to (undefined|null) perform remove', () => {
         const attributes = new CAttributes({
             foo: 'bar',
-            bar: 'foo',
+            bar: 'foo'
         });
         expect(attributes.exists('foo')).toBeTruthy();
         expect(attributes.exists('bar')).toBeTruthy();
@@ -130,7 +126,7 @@ describe('Nodes.CAttributes', () => {
             importArray: '1',
             offsetSet: '1',
             constructor: undefined,
-            empty: null,
+            empty: null
         });
         expect(attributes.size).toBe(3);
         expect(attributes.exists('constructor')).toBeFalsy();
@@ -154,7 +150,7 @@ describe('Nodes.CAttributes', () => {
         expect(
             () =>
                 new CAttributes({
-                    foo: [],
+                    foo: []
                 })
         ).toThrow('Cannot convert value of attribute foo to string');
     });
@@ -175,14 +171,15 @@ describe('Nodes.CAttributes', () => {
         };
 
         const attributes = new CAttributes({
-            constructor: toStringObject,
+            constructor: toStringObject
         });
 
         attributes.set('offsetSet', toStringObject);
         attributes.set('set', toStringObject);
         attributes.importRecord({
-            importArray: toStringObject,
+            importArray: toStringObject
         });
+
         expect(attributes.get('constructor')).toBe(expectedValue);
         expect(attributes.get('offsetSet')).toBe(expectedValue);
         expect(attributes.get('set')).toBe(expectedValue);
@@ -194,7 +191,7 @@ describe('Nodes.CAttributes', () => {
         attributes.set('foo', 'bar');
 
         expect(attributes.exportRecord()).toStrictEqual({
-            foo: 'bar',
+            foo: 'bar'
         });
     });
 });

@@ -1,13 +1,16 @@
 import { CNodeInterface } from './c-node-interface';
 import { CAttributes } from './c-attributes';
-import { Xml } from '../utils/xml';
+import { Xml } from '~/utils/xml';
 import { CNodes } from './c-nodes';
 import { CNodeHasValueInterface } from './c-node-has-value-interface';
 
 export class CNode implements CNodeInterface, CNodeHasValueInterface {
     private readonly _name: string;
+
     private readonly _attributes: CAttributes;
+
     private readonly _children: CNodes;
+
     private _value: string;
 
     constructor(name: string, attributes: Record<string, unknown> = {}, children: CNodeInterface[] = [], value = '') {
@@ -30,6 +33,7 @@ export class CNode implements CNodeInterface, CNodeHasValueInterface {
 
     public addChild(node: CNodeInterface): CNodeInterface {
         this._children.add(node);
+
         return node;
     }
 
@@ -58,6 +62,7 @@ export class CNode implements CNodeInterface, CNodeHasValueInterface {
         const attribute = searchPath.pop();
         const node = this.searchNode(...searchPath);
         if (!node || !attribute) return '';
+
         return node.attributes().get(attribute) || '';
     }
 
@@ -72,6 +77,7 @@ export class CNode implements CNodeInterface, CNodeHasValueInterface {
                 }
             });
         }
+
         return nodes;
     }
 
@@ -84,6 +90,7 @@ export class CNode implements CNodeInterface, CNodeHasValueInterface {
                 break;
             }
         }
+
         return node;
     }
 

@@ -1,12 +1,13 @@
 import { CNodeInterface } from './c-node-interface';
 import { CNodeHasValueInterface } from './c-node-has-value-interface';
-import { Xml } from '../utils/xml';
+import { Xml } from '~/utils/xml';
 
 export class XmlNodeExporter {
     public export(node: CNodeInterface): Element {
         const document = Xml.newDocument();
         const rootElement = this.exportRecursive(document, node);
         document.appendChild(rootElement);
+
         return rootElement;
     }
 

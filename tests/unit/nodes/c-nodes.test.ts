@@ -1,4 +1,4 @@
-import { CNode, CNodeInterface, CNodes } from '../../../src';
+import { CNode, CNodeInterface, CNodes } from '~/index';
 
 describe('Nodes.CNodes', () => {
     test('empty nodes', () => {

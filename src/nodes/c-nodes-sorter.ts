@@ -2,6 +2,7 @@ import { CNodeInterface } from './c-node-interface';
 
 export class CNodesSorter {
     private _order: Map<string, number> = new Map<string, number>();
+
     private size!: number;
 
     constructor(order: string[] = []) {
@@ -10,7 +11,7 @@ export class CNodesSorter {
 
     /**
      * It takes only the unique strings names and sort using the order of appearance
-     * @param names
+     * @param names - unique strings
      */
     public setOrder(names: string[]): boolean {
         const order = new Map(Array.from(this.parseNames(names), (entry) => [entry[1], entry[0]]));
@@ -19,6 +20,7 @@ export class CNodesSorter {
         }
         this._order = order;
         this.size = order.size;
+
         return true;
     }
 
@@ -26,6 +28,7 @@ export class CNodesSorter {
         const isValidName = (name: unknown): boolean => {
             return !!name && typeof name === 'string' && name !== '0';
         };
+
         return new Map(
             [...new Set(names.filter(isValidName) as string[])].map((entry, i) => {
                 return [i, entry];
@@ -38,6 +41,7 @@ export class CNodesSorter {
      */
     public getOrder(): string[] {
         const flippedArray = new Map(Array.from(this._order, (entry) => [entry[1], entry[0]]));
+
         return [...flippedArray.values()];
     }
 
@@ -45,32 +49,34 @@ export class CNodesSorter {
         if (this.size > 0) {
             nodes = this.stableArraySort(nodes, 'compareNodesByName');
         }
+
         return nodes;
     }
 
     public compareNodesByName(a: CNodeInterface, b: CNodeInterface): number {
         const aNumber = this.valueByName(a.name());
         const bNumber = this.valueByName(b.name());
+
         return Math.sign(aNumber - bNumber);
     }
 
     public valueByName(name: string): number {
         const getOrder = this._order.get(name);
+
         return getOrder !== undefined ? getOrder : this.size;
     }
 
     /**
      * This function is a replacement for sort that try to sort
      * but if items are equal then uses the relative position as second argument
-     * @param input
-     * @param callable
-     * @private
+     * @param input - CNodeInterface
+     * @param callable - function callable
      */
     private stableArraySort(input: CNodeInterface[], callable: string): CNodeInterface[] {
         let list = input.map((entry, i) => {
             return {
                 item: entry,
-                index: i,
+                index: i
             };
         });
 
@@ -85,10 +91,12 @@ export class CNodesSorter {
             if (value === 0) {
                 value = Math.sign(a.index - b.index);
             }
+
             return value;
         };
 
         list = list.sort(comparar);
+
         return list.map((node) => {
             return node.item;
         });
@@ -96,9 +104,8 @@ export class CNodesSorter {
 
     /**
      * Internal compare Maps
-     * @param a
-     * @param b
-     * @private
+     * @param a - map
+     * @param b - map
      */
     private static compareMaps(a: Map<unknown, unknown>, b: Map<unknown, unknown>): boolean {
         let testVal;
@@ -111,6 +118,7 @@ export class CNodesSorter {
                 return false;
             }
         }
+
         return true;
     }
 }

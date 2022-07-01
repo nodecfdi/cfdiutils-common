@@ -21,6 +21,7 @@ export class CNodes extends Array<CNodeInterface> {
         if (somethingChange) {
             this.order();
         }
+
         return this;
     }
 
@@ -30,7 +31,7 @@ export class CNodes extends Array<CNodeInterface> {
 
     /**
      * It takes only the unique string names and sort using the order of appearance
-     * @param names
+     * @param names - names for order
      */
     public setOrder(names: string[]): void {
         if (this._sorter.setOrder(names)) {
@@ -47,11 +48,13 @@ export class CNodes extends Array<CNodeInterface> {
         if (index >= 0) {
             this.splice(index, 1);
         }
+
         return this;
     }
 
     public removeAll(): this {
         this.splice(0, this.length);
+
         return this;
     }
 
@@ -69,6 +72,7 @@ export class CNodes extends Array<CNodeInterface> {
         if (!value) {
             throw new RangeError(`The index ${position} does not exists`);
         }
+
         return value;
     }
 
@@ -83,6 +87,7 @@ export class CNodes extends Array<CNodeInterface> {
                 nodes.add(node);
             }
         });
+
         return nodes;
     }
 
@@ -93,6 +98,7 @@ export class CNodes extends Array<CNodeInterface> {
             }
         });
         this.add(...nodes);
+
         return this;
     }
 

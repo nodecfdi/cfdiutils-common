@@ -1,7 +1,7 @@
 node_modules
 dist
-build
 docs
 coverage
-
-jest.config.js
+web_modules
+.prettierrc.js
+tsconfig.json

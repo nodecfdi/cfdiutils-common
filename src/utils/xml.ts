@@ -1,11 +1,12 @@
-import { DOMParser, DOMImplementation } from '@xmldom/xmldom';
 import { DomValidators } from './dom-validators';
+import { getDom, getParser } from '~/dom';
 
 export class Xml {
     public static documentElement(document: Document): Element {
         if (!DomValidators.isElement(document.documentElement)) {
             throw new SyntaxError('Document does not have root element');
         }
+
         return document.documentElement;
     }
 
@@ -16,11 +17,13 @@ export class Xml {
             }
             throw new TypeError('node.ownerDocument is undefined but node is not a Document');
         }
+
         return node.ownerDocument;
     }
 
     public static newDocument(document?: Document): Document {
-        if (!document) document = new DOMImplementation().createDocument('', '', null);
+        if (!document) document = getDom().createDocument(null, null, null);
+
         return document;
     }
 
@@ -28,21 +31,24 @@ export class Xml {
         if (content === '') {
             throw new SyntaxError('Received xml string argument is empty');
         }
-        const errors: Record<string, unknown> = {};
-        const parser = new DOMParser({
-            errorHandler: (level, msg): void => {
-                errors[level] = msg;
-            },
-        });
-        const docParse = parser.parseFromString(content, 'text/xml');
-        if (Object.keys(errors).length !== 0) {
-            throw new SyntaxError(`Cannot create a Document from xml string, errors: ${JSON.stringify(errors)}`);
+        const parser = getParser();
+        try {
+            const docParse = parser.parseFromString(content, 'text/xml');
+
+            // Capture errors for browser usage
+            if (docParse.getElementsByTagName('parsererror').length > 0) {
+                throw new Error('Error parsing XML');
+            }
+
+            return Xml.newDocument(docParse);
+        } catch (error) {
+            throw new SyntaxError(`Cannot create a Document from xml string, errors: ${JSON.stringify(error)}`);
         }
-        return Xml.newDocument(docParse);
     }
 
     public static isValidXmlName(name: string): boolean {
         if (name === '') return false;
+
         return /^[\p{L}_:][\p{L}\d_:.-]*$/u.test(name);
     }
 
@@ -52,6 +58,7 @@ export class Xml {
                 if (!name) {
                     throw new SyntaxError('Empty Name');
                 }
+
                 return document.createElement(name);
             },
             `Cannot create element with name ${name}`,
@@ -75,6 +82,7 @@ export class Xml {
         if (content !== '') {
             element?.appendChild(Xml.ownerDocument(element).createTextNode(content));
         }
+
         return element;
     }
 }

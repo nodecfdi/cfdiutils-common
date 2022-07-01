@@ -1,4 +1,4 @@
-import { Xml } from '../utils/xml';
+import { Xml } from '~/utils/xml';
 
 export class CAttributes extends Map<string, string> {
     constructor(attributes: Record<string, unknown> = {}) {
@@ -6,22 +6,25 @@ export class CAttributes extends Map<string, string> {
         this.importRecord(attributes);
     }
 
-    public get(name: string): string {
+    public override get(name: string): string {
         if (!this.has(name)) {
             return '';
         }
+
         return super.get(name) || '';
     }
 
-    public set(name: string, value: string | null | undefined = null): this {
+    public override set(name: string, value: string | null | undefined = null): this {
         if (value === null || value === undefined) {
             this.delete(name);
+
             return this;
         }
         if (!Xml.isValidXmlName(name)) {
             throw new SyntaxError(`Cannot set attribute with an invalid xml name: ${name}`);
         }
         super.set(name, value.toString());
+
         return this;
     }
 
@@ -33,6 +36,7 @@ export class CAttributes extends Map<string, string> {
                 break;
             }
         }
+
         return found;
     }
 
@@ -43,6 +47,7 @@ export class CAttributes extends Map<string, string> {
                 this.set(key, fixedValue);
             });
         }
+
         return this;
     }
 
@@ -51,15 +56,15 @@ export class CAttributes extends Map<string, string> {
         for (const [key, val] of this.entries()) {
             jsonResponse[key] = val;
         }
+
         return jsonResponse;
     }
 
     /**
      * Cast any value to string
      *
-     * @param key
-     * @param value
-     * @private
+     * @param key - key
+     * @param value - value
      */
     private static castValueToString(key: string, value: unknown): null | string {
         if (value === null || value === undefined) {
@@ -91,9 +96,5 @@ export class CAttributes extends Map<string, string> {
 
     public offsetUnset(offset: string): void {
         super.delete(offset);
-    }
-
-    public static get [Symbol.species](): MapConstructor {
-        return Map;
     }
 }

@@ -1,12 +1,13 @@
-import 'jest-xml-matcher';
-import { XMLSerializer } from '@xmldom/xmldom';
+import { XMLSerializer, DOMImplementation, DOMParser } from '@xmldom/xmldom';
 import { readFileSync } from 'fs';
-import { useTestCase } from '../../test-case';
-import { CNode, Xml, XmlNodeUtils } from '../../../src';
-
-const { utilAsset } = useTestCase();
+import { CNode, install, Xml, XmlNodeUtils } from '~/index';
+import { TestCase } from '../../test-case';
 
 describe('XmlNodeUtils', () => {
+    beforeEach(() => {
+        install(new DOMParser(), new XMLSerializer(), new DOMImplementation());
+    });
+
     test('node to Xml string Xml Header', () => {
         const node = new CNode('book', {}, [new CNode('chapter', { toc: '1' }), new CNode('chapter', { toc: '2' })]);
 
@@ -18,10 +19,10 @@ describe('XmlNodeUtils', () => {
     });
 
     test.each([
-        ['simple-xml', utilAsset('nodes/sample.xml')],
-        ['with-texts-xml', utilAsset('nodes/sample-with-texts.xml')],
-        ['cfdi', utilAsset('cfdi33.xml')],
-    ])('export from file and export again %s', (title: string, filename: string) => {
+        [/* 'simple-xml',  */ TestCase.utilAsset('nodes/sample.xml')],
+        [/* 'with-texts-xml', */ TestCase.utilAsset('nodes/sample-with-texts.xml')],
+        [/* 'cfdi', */ TestCase.utilAsset('cfdi33.xml')]
+    ])('export from file and export again', (filename: string) => {
         const source = readFileSync(filename, 'utf-8');
 
         const document = Xml.newDocumentContent(source);
@@ -49,11 +50,11 @@ describe('XmlNodeUtils', () => {
     });
 
     test('import xml with namespace without prefix', () => {
-        const file = utilAsset('xml-with-namespace-definitions-at-child-level.xml');
+        const file = TestCase.utilAsset('xml-with-namespace-definitions-at-child-level.xml');
         const node = XmlNodeUtils.nodeFromXmlString(readFileSync(file, 'utf-8'));
         const inspected = node.searchNode('base:Third', 'innerNS');
         if (!inspected) {
-            fail('The specimen does not have the required test case');
+            throw new Error('The specimen does not have the required test case');
         }
         expect(inspected.get('xmlns')).toBe('http://external.com/inner');
     });

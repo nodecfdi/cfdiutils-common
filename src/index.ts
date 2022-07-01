@@ -1,3 +1,5 @@
+export * from './exceptions/dom-not-found-error';
+export * from './dom';
 export * from './nodes/c-attributes';
 export * from './nodes/c-nodes-sorter';
 export * from './nodes/c-nodes';
