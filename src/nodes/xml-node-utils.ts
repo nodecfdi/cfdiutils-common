@@ -16,8 +16,10 @@ export class XmlNodeUtils {
             const document = element.ownerDocument;
             const pi = document.createProcessingInstruction('xml', 'version="1.0" encoding="UTF-8"');
             document.insertBefore(pi, document.firstChild);
+
             return new XMLSerializer().serializeToString(document);
         }
+
         return new XMLSerializer().serializeToString(element.ownerDocument);
     }
 

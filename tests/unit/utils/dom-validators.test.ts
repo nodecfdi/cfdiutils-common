@@ -1,5 +1,5 @@
 import { DOMImplementation } from '@xmldom/xmldom';
-import { DomValidators } from '../../../src';
+import { DomValidators } from '~/index';
 
 describe('DomValidators', () => {
     let document: Document;

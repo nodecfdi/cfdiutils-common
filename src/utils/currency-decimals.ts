@@ -1,5 +1,6 @@
 export class CurrencyDecimals {
     private readonly _currency: string;
+
     private readonly _decimals: number;
 
     constructor(currency: string, decimals: number) {
@@ -31,6 +32,7 @@ export class CurrencyDecimals {
 
     public static decimalsCount(value: string): number {
         const values = value.split('.');
+
         return values.length > 1 ? values[values.length - 1].length : 0;
     }
 
@@ -42,6 +44,7 @@ export class CurrencyDecimals {
             }
             decimals = defaultVal;
         }
+
         return new CurrencyDecimals(currency, decimals);
     }
 
@@ -50,7 +53,7 @@ export class CurrencyDecimals {
             MXN: 2,
             EUR: 2,
             USD: 2,
-            XXX: 0,
+            XXX: 0
         };
 
         return map[currency] || -1;

@@ -40,6 +40,7 @@ export class XmlNodeImporter {
             const childNode = this.import(child);
             node.children().add(childNode);
         }
+
         return node;
     }
 

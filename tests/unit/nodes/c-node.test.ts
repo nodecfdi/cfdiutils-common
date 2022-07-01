@@ -1,4 +1,4 @@
-import { CNode } from '../../../src';
+import { CNode } from '~/index';
 
 describe('Nodes.CNode', () => {
     test('construct without arguments', () => {
@@ -12,7 +12,7 @@ describe('Nodes.CNode', () => {
     test('construct with arguments', () => {
         const dummyNode = new CNode('dummy');
         const attributes = {
-            foo: 'bar',
+            foo: 'bar'
         };
         const children = [dummyNode];
         const value = 'xee';
@@ -23,12 +23,12 @@ describe('Nodes.CNode', () => {
     });
 
     test('construct with empty name', () => {
-        try {
+        const t = (): void => {
             new CNode('\n  \t  \n');
-        } catch (e) {
-            expect(e).toBeInstanceOf(SyntaxError);
-        }
-        expect(() => new CNode('\n  \t  \n')).toThrow('invalid xml name');
+        };
+
+        expect(t).toThrow(SyntaxError);
+        expect(t).toThrow('invalid xml name');
     });
 
     test('construct with untrimmed name', () => {
@@ -39,8 +39,8 @@ describe('Nodes.CNode', () => {
         const node = new CNode('root', { level: '1' }, [
             new CNode('child', { level: 2 }, [
                 new CNode('grandchild', { level: 3.1 }),
-                new CNode('grandchild', { level: 3.2 }),
-            ]),
+                new CNode('grandchild', { level: 3.2 })
+            ])
         ]);
 
         expect(node.searchAttribute('level')).toBe('1');

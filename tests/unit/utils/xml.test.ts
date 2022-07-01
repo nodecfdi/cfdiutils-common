@@ -1,4 +1,4 @@
-import { Xml } from '../../../src';
+import { Xml } from '~/index';
 import { DOMImplementation, XMLSerializer } from '@xmldom/xmldom';
 
 describe('Utils.Xml', () => {
@@ -31,11 +31,11 @@ describe('Utils.Xml', () => {
         ['foo', 'foo'],
         ['&amp;', '&'],
         ['&lt;', '<'],
-        //['&gt;', '>'], // bug xmldom parser not fixed encoding for > to &gt; today 02/12/2021
+        ['&gt;', '>'],
         ["'", "'"],
         ['"', '"'],
         ['&amp;copy;', '&copy;'],
-        ['foo &amp; bar', 'foo & bar'],
+        ['foo &amp; bar', 'foo & bar']
     ])('method createElement', (expected, content) => {
         const elementName = 'element';
         const document = Xml.newDocument();

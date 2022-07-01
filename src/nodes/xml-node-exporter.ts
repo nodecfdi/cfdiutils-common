@@ -7,6 +7,7 @@ export class XmlNodeExporter {
         const document = Xml.newDocument();
         const rootElement = this.exportRecursive(document, node);
         document.appendChild(rootElement);
+
         return rootElement;
     }
 

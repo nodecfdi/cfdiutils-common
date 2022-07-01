@@ -1,4 +1,4 @@
-import { CNode, CNodesSorter } from '../../../src';
+import { CNode, CNodesSorter } from '~/index';
 
 describe('Nodes.CNodesSorter', () => {
     test('construct with names', () => {
