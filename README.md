@@ -1,36 +1,27 @@
-# @nodecfdi/cfdiutils-common
+# `@nodecfdi/cfdiutils-common`
 
 [![Source Code][badge-source]][source]
-[![Software License][badge-license]][license]
-[![Latest Version][badge-release]][release]
+[![Npm Node Version Support][badge-node-version]][node-version]
 [![Discord][badge-discord]][discord]
+[![Latest Version][badge-release]][release]
+[![Software License][badge-license]][license]
+[![Build Status][badge-build]][build]
+[![Reliability][badge-reliability]][reliability]
+[![Maintainability][badge-maintainability]][maintainability]
+[![Code Coverage][badge-coverage]][coverage]
+[![Violations][badge-violations]][violations]
+[![Total Downloads][badge-downloads]][downloads]
 
-[source]: https://github.com/nodecfdi/cfdiutils-common
-
-[badge-source]: https://img.shields.io/badge/source-nodecfdi%2Fcfdiutils--common-blue?logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMTIgMTIgNDAgNDAiPjxwYXRoIGZpbGw9IiMzMzMzMzMiIGQ9Ik0zMiwxMy40Yy0xMC41LDAtMTksOC41LTE5LDE5YzAsOC40LDUuNSwxNS41LDEzLDE4YzEsMC4yLDEuMy0wLjQsMS4zLTAuOWMwLTAuNSwwLTEuNywwLTMuMiBjLTUuMywxLjEtNi40LTIuNi02LjQtMi42QzIwLDQxLjYsMTguOCw0MSwxOC44LDQxYy0xLjctMS4yLDAuMS0xLjEsMC4xLTEuMWMxLjksMC4xLDIuOSwyLDIuOSwyYzEuNywyLjksNC41LDIuMSw1LjUsMS42IGMwLjItMS4yLDAuNy0yLjEsMS4yLTIuNmMtNC4yLTAuNS04LjctMi4xLTguNy05LjRjMC0yLjEsMC43LTMuNywyLTUuMWMtMC4yLTAuNS0wLjgtMi40LDAuMi01YzAsMCwxLjYtMC41LDUuMiwyIGMxLjUtMC40LDMuMS0wLjcsNC44LTAuN2MxLjYsMCwzLjMsMC4yLDQuNywwLjdjMy42LTIuNCw1LjItMiw1LjItMmMxLDIuNiwwLjQsNC42LDAuMiw1YzEuMiwxLjMsMiwzLDIsNS4xYzAsNy4zLTQuNSw4LjktOC43LDkuNCBjMC43LDAuNiwxLjMsMS43LDEuMywzLjVjMCwyLjYsMCw0LjYsMCw1LjJjMCwwLjUsMC40LDEuMSwxLjMsMC45YzcuNS0yLjYsMTMtOS43LDEzLTE4LjFDNTEsMjEuOSw0Mi41LDEzLjQsMzIsMTMuNHoiLz48L3N2Zz4%3D
-
-[license]: https://github.com/nodecfdi/cfdiutils-common/blob/main/LICENSE
-
-[badge-license]: https://img.shields.io/github/license/nodecfdi/cfdiutils-common?logo=open-source-initiative&style=flat-square
-
-[badge-release]: https://img.shields.io/npm/v/@nodecfdi/cfdiutils-common
-
-[release]: https://www.npmjs.com/package/@nodecfdi/cfdiutils-common
-
-[badge-discord]: https://img.shields.io/discord/459860554090283019?logo=discord&style=flat-square
-
-[discord]: https://discord.gg/aFGYXvX
-
-> Sub-library of @nodecfdi/cfdiutils for common structs and helpers
+> Sub-library of `@nodecfdi/cfdiutils-common` for common structs and helpers
 
 :us: The documentation of this project is in spanish as this is the natural language for intended audience.
 
 :mexico: La documentación del proyecto está en español porque ese es el lenguaje principal de los usuarios.
 
-## Acerca de @nodecfdi/cfdiutils-common
+## Acerca de `@nodecfdi/cfdiutils-common`
 
 Librería para contener las estructuras de datos comunes, y utilerías o funciones de ayuda común. Inspirada por la
-versión de php https://github.com/eclipxe13/CfdiUtils
+versión de php <https://github.com/eclipxe13/CfdiUtils>
 
 ## Instalación
 
@@ -48,6 +39,8 @@ yarn add @nodecfdi/cfdiutils-common --save
 
 ## Uso básico
 
+Estructura de datos CNode
+
 ```ts
 import { CNode } from '@nodecfdi/cfdiutils-common';
 // Creación de un nodo con atributos
@@ -63,6 +56,26 @@ node.attributes().delete('id'); // elimina el atributo 'id'
 node.attributes().forEach((attributeValue, attributeName) => {
     console.log(`${attributeName}: ${attributeValue}`);
 });
+```
+
+Utileria XmlNodeUtils y XML
+
+```ts
+import { CNode, install, Xml, XmlNodeUtils } from '@nodecfdi/cfdiutils-common';
+
+// DomParser, XMLSerializer, DOMImplementation agnostic can use xmldom, jsdom, etc.
+// Is necesary install for XML helper and XmlNodeUtils
+install(new DOMParser(), new XMLSerializer(), new DOMImplementation());
+
+const node = new CNode('book', {}, [new CNode('chapter', { toc: '1' }), new CNode('chapter', { toc: '2' })]);
+const xmlString = XmlNodeUtils.nodeToXmlString(node, true);
+console.log(xmlString); // xml valido en formato string
+
+// Create xml document from xml string
+const document = Xml.newDocumentContent('my xml string');
+
+// create node from element
+const node = XmlNodeUtils.nodeFromXmlElement(Xml.documentElement(document));
 ```
 
 ## Objeto CNode
@@ -97,6 +110,18 @@ La clase `CNode` tiene estos métodos de ayuda que sirven para trabajar directam
 - iterador: El método `foreach` se realiza sobre la colección de nodos.
 - `addChild(node: CNode)`: Agrega un nodo en la colección de nodos.
 
+## XmlNodeUtils
+
+Esta es una clase de utilerías que contiene métodos estáticos que permiten crear estructuras de nodos desde XML y generar XML a partir de los nodos. Recuerde que los nodos solo pueden almacenar atributos y nodos hijos.
+
+Actualmente, permite exportar e importar a/desde: `Document`, `Element` y `string` (con contenido válido).
+
+Advertencias:
+
+- Los nodos no son una reescritura fiel de DOM.
+- Los nodos solo contienen atributos, hijos y contenido textual simple.
+- Importar XML que no siga la estructura de atributos, hijos y contenido textual simple exclusivamente puede resultar en pérdida de datos.
+
 ## Contenido de texto
 
 Tradicionalmente, los CFDI Regulares, CFDI de Retenciones e Información de Pagos, así como sus complementos,
@@ -109,3 +134,51 @@ nombres de nodos en inglés.
 
 Por lo anterior, se introdujo la interfaz `CNodeHasValueInterface` que contiene los métodos `value(): string` y
 `setValue(valueString: string): void` con lo que se puede escribir y leer este contenido simple.
+
+## Soporte
+
+Puedes obtener soporte abriendo un ticket en Github.
+
+Adicionalmente, esta librería pertenece a la comunidad [OcelotlStudio](https://ocelotlstudio.com), así que puedes usar los mismos canales de comunicación para obtener ayuda de algún miembro de la comunidad.
+
+## Compatibilidad
+
+Esta librería se mantendrá compatible con al menos la versión con
+[soporte activo de Node](https://nodejs.org/es/about/releases/) más reciente.
+
+También utilizamos [Versionado Semántico 2.0.0](https://semver.org/lang/es/) por lo que puedes usar esta librería sin temor a romper tu aplicación.
+
+## Contribuciones
+
+Las contribuciones con bienvenidas. Por favor lee [CONTRIBUTING][] para más detalles y recuerda revisar el archivo [CHANGELOG][].
+
+## Copyright and License
+
+The `@nodecfdi/cfdiutils-common` library is copyright © [NodeCfdi](https://github.com/nodecfdi) - [OcelotlStudio](https://ocelotlstudio.com) and licensed for use under the MIT License (MIT). Please see [LICENSE][] for more information.
+
+[contributing]: https://github.com/nodecfdi/cfdiutils-common/blob/main/CONTRIBUTING.md
+[changelog]: https://github.com/nodecfdi/cfdiutils-common/blob/main/CHANGELOG.md
+
+[source]: https://github.com/nodecfdi/cfdiutils-common
+[node-version]: https://www.npmjs.com/package/@nodecfdi/cfdiutils-common
+[discord]: https://discord.gg/AsqX8fkW2k
+[release]: https://www.npmjs.com/package/@nodecfdi/cfdiutils-common
+[license]: https://github.com/nodecfdi/cfdiutils-common/blob/main/LICENSE
+[build]: https://github.com/nodecfdi/cfdiutils-common/actions/workflows/build.yml?query=branch:main
+[reliability]:https://sonarcloud.io/component_measures?id=nodecfdi_cfdiutils-common&metric=Reliability
+[maintainability]: https://sonarcloud.io/component_measures?id=nodecfdi_cfdiutils-common&metric=Maintainability
+[coverage]: https://sonarcloud.io/component_measures?id=nodecfdi_cfdiutils-common&metric=Coverage
+[violations]: https://sonarcloud.io/project/issues?id=nodecfdi_cfdiutils-common&resolved=false
+[downloads]: https://www.npmjs.com/package/@nodecfdi/cfdiutils-common
+
+[badge-source]: https://img.shields.io/badge/source-nodecfdi/cfdiutils--common-blue.svg?logo=github
+[badge-node-version]: https://img.shields.io/node/v/@nodecfdi/cfdiutils-common.svg?logo=nodedotjs
+[badge-discord]: https://img.shields.io/discord/459860554090283019?logo=discord
+[badge-release]: https://img.shields.io/npm/v/@nodecfdi/cfdiutils-common.svg?logo=npm
+[badge-license]: https://img.shields.io/github/license/nodecfdi/cfdiutils-common.svg?logo=open-source-initiative
+[badge-build]: https://img.shields.io/github/workflow/status/nodecfdi/cfdiutils-common/build/main?logo=github-actions
+[badge-reliability]: https://sonarcloud.io/api/project_badges/measure?project=nodecfdi_cfdiutils-common&metric=reliability_rating
+[badge-maintainability]: https://sonarcloud.io/api/project_badges/measure?project=nodecfdi_cfdiutils-common&metric=sqale_rating
+[badge-coverage]: https://img.shields.io/sonar/coverage/nodecfdi_cfdiutils-common/main?logo=sonarcloud&server=https%3A%2F%2Fsonarcloud.io
+[badge-violations]: https://img.shields.io/sonar/violations/nodecfdi_cfdiutils-common/main?format=long&logo=sonarcloud&server=https%3A%2F%2Fsonarcloud.io
+[badge-downloads]: https://img.shields.io/npm/dm/@nodecfdi/cfdiutils-common.svg?logo=npm
