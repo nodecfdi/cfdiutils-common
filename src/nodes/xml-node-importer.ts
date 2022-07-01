@@ -1,6 +1,6 @@
 import { CNodeInterface } from './c-node-interface';
 import { CNode } from './c-node';
-import { DomValidators } from '../utils/dom-validators';
+import { DomValidators } from '~/utils/dom-validators';
 import { CNodeHasValueInterface } from './c-node-has-value-interface';
 
 export class XmlNodeImporter {

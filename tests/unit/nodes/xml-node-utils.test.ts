@@ -1,9 +1,13 @@
-import { XMLSerializer } from '@xmldom/xmldom';
+import { XMLSerializer, DOMImplementation, DOMParser } from '@xmldom/xmldom';
 import { readFileSync } from 'fs';
-import { CNode, Xml, XmlNodeUtils } from '~/index';
+import { CNode, install, Xml, XmlNodeUtils } from '~/index';
 import { TestCase } from '../../test-case';
 
 describe('XmlNodeUtils', () => {
+    beforeEach(() => {
+        install(new DOMParser(), new XMLSerializer(), new DOMImplementation());
+    });
+
     test('node to Xml string Xml Header', () => {
         const node = new CNode('book', {}, [new CNode('chapter', { toc: '1' }), new CNode('chapter', { toc: '2' })]);
 

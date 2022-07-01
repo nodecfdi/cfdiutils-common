@@ -1,9 +1,9 @@
-import { XMLSerializer } from '@xmldom/xmldom';
 import { CNodeInterface } from './c-node-interface';
 import { XmlNodeExporter } from './xml-node-exporter';
 import { XmlNodeImporter } from './xml-node-importer';
-import { Xml } from '../utils/xml';
+import { Xml } from '~/utils/xml';
 import { CNodeHasValueInterface } from './c-node-has-value-interface';
+import { getSerializer } from '~/dom';
 
 export class XmlNodeUtils {
     public static nodeToXmlElement(node: CNodeInterface): Element {
@@ -17,10 +17,10 @@ export class XmlNodeUtils {
             const pi = document.createProcessingInstruction('xml', 'version="1.0" encoding="UTF-8"');
             document.insertBefore(pi, document.firstChild);
 
-            return new XMLSerializer().serializeToString(document);
+            return getSerializer().serializeToString(document);
         }
 
-        return new XMLSerializer().serializeToString(element.ownerDocument);
+        return getSerializer().serializeToString(element.ownerDocument);
     }
 
     public static nodeFromXmlElement(element: Element): CNodeInterface & CNodeHasValueInterface {

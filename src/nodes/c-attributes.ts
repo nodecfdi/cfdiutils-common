@@ -1,4 +1,4 @@
-import { Xml } from '../utils/xml';
+import { Xml } from '~/utils/xml';
 
 export class CAttributes extends Map<string, string> {
     constructor(attributes: Record<string, unknown> = {}) {

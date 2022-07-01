@@ -1,5 +1,5 @@
-import { DOMParser, DOMImplementation } from '@xmldom/xmldom';
 import { DomValidators } from './dom-validators';
+import { getDom, getParser } from '~/dom';
 
 export class Xml {
     public static documentElement(document: Document): Element {
@@ -22,7 +22,7 @@ export class Xml {
     }
 
     public static newDocument(document?: Document): Document {
-        if (!document) document = new DOMImplementation().createDocument('', '', null);
+        if (!document) document = getDom().createDocument('', '', null);
 
         return document;
     }
@@ -31,18 +31,19 @@ export class Xml {
         if (content === '') {
             throw new SyntaxError('Received xml string argument is empty');
         }
-        const errors: Record<string, unknown> = {};
-        const parser = new DOMParser({
-            errorHandler: (level, msg): void => {
-                errors[level] = msg;
-            }
-        });
-        const docParse = parser.parseFromString(content, 'text/xml');
-        if (Object.keys(errors).length !== 0) {
-            throw new SyntaxError(`Cannot create a Document from xml string, errors: ${JSON.stringify(errors)}`);
-        }
+        const parser = getParser();
+        try {
+            const docParse = parser.parseFromString(content, 'text/xml');
 
-        return Xml.newDocument(docParse);
+            // Capture errors for browser usage
+            if (docParse.getElementsByTagName('parsererror').length > 0) {
+                throw new Error('Error parsing XML');
+            }
+
+            return Xml.newDocument(docParse);
+        } catch (error) {
+            throw new SyntaxError(`Cannot create a Document from xml string, errors: ${JSON.stringify(error)}`);
+        }
     }
 
     public static isValidXmlName(name: string): boolean {
