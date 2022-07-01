@@ -22,7 +22,7 @@ export class Xml {
     }
 
     public static newDocument(document?: Document): Document {
-        if (!document) document = getDom().createDocument('', '', null);
+        if (!document) document = getDom().createDocument(null, null, null);
 
         return document;
     }
