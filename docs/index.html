@@ -1,0 +1,229 @@
+<!DOCTYPE html><html class="default"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>@nodecfdi/cfdiutils-common</title><meta name="description" content="Documentation for @nodecfdi/cfdiutils-common"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script async src="assets/search.js" id="search-script"></script><link rel="stylesheet" href="assets/custom.css"/></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os"</script><header class="tsd-page-toolbar">
+<div class="tsd-toolbar-contents container">
+<div class="table-cell" id="tsd-search" data-base=".">
+<div class="field"><label for="tsd-search-field" class="tsd-widget search no-caption"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M15.7824 13.833L12.6666 10.7177C12.5259 10.5771 12.3353 10.499 12.1353 10.499H11.6259C12.4884 9.39596 13.001 8.00859 13.001 6.49937C13.001 2.90909 10.0914 0 6.50048 0C2.90959 0 0 2.90909 0 6.49937C0 10.0896 2.90959 12.9987 6.50048 12.9987C8.00996 12.9987 9.39756 12.4863 10.5008 11.6239V12.1332C10.5008 12.3332 10.5789 12.5238 10.7195 12.6644L13.8354 15.7797C14.1292 16.0734 14.6042 16.0734 14.8948 15.7797L15.7793 14.8954C16.0731 14.6017 16.0731 14.1267 15.7824 13.833ZM6.50048 10.499C4.29094 10.499 2.50018 8.71165 2.50018 6.49937C2.50018 4.29021 4.28781 2.49976 6.50048 2.49976C8.71001 2.49976 10.5008 4.28708 10.5008 6.49937C10.5008 8.70852 8.71314 10.499 6.50048 10.499Z" fill="var(--color-text)"></path></svg></label><input type="text" id="tsd-search-field" aria-label="Search"/></div>
+<ul class="results">
+<li class="state loading">Preparing search index...</li>
+<li class="state failure">The search index is not available</li></ul><a href="index.html" class="title">@nodecfdi/cfdiutils-common</a></div>
+<div class="table-cell" id="tsd-widgets"><a href="#" class="tsd-widget menu no-caption" data-toggle="menu" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="2" fill="var(--color-text)"></rect><rect x="1" y="7" width="14" height="2" fill="var(--color-text)"></rect><rect x="1" y="11" width="14" height="2" fill="var(--color-text)"></rect></svg></a></div></div></header>
+<div class="container container-main">
+<div class="col-8 col-content">
+<div class="tsd-page-title">
+<h2> @nodecfdi/cfdiutils-common</h2></div>
+<div class="tsd-panel tsd-typography">
+<a href="#nodecfdicfdiutils-common" id="nodecfdicfdiutils-common" style="color: inherit; text-decoration: none;">
+  <h1><code>@nodecfdi/cfdiutils-common</code></h1>
+</a>
+<p><a href="https://github.com/nodecfdi/cfdiutils-common"><img src="https://img.shields.io/badge/source-nodecfdi/cfdiutils--common-blue.svg?logo=github" alt="Source Code"></a>
+<a href="https://www.npmjs.com/package/@nodecfdi/cfdiutils-common"><img src="https://img.shields.io/node/v/@nodecfdi/cfdiutils-common.svg?logo=nodedotjs" alt="Npm Node Version Support"></a>
+<a href="https://discord.gg/AsqX8fkW2k"><img src="https://img.shields.io/discord/459860554090283019?logo=discord" alt="Discord"></a>
+<a href="https://www.npmjs.com/package/@nodecfdi/cfdiutils-common"><img src="https://img.shields.io/npm/v/@nodecfdi/cfdiutils-common.svg?logo=npm" alt="Latest Version"></a>
+<a href="https://github.com/nodecfdi/cfdiutils-common/blob/main/LICENSE"><img src="https://img.shields.io/github/license/nodecfdi/cfdiutils-common.svg?logo=open-source-initiative" alt="Software License"></a>
+<a href="https://github.com/nodecfdi/cfdiutils-common/actions/workflows/build.yml?query=branch:main"><img src="https://img.shields.io/github/workflow/status/nodecfdi/cfdiutils-common/build/main?logo=github-actions" alt="Build Status"></a>
+<a href="https://sonarcloud.io/component_measures?id=nodecfdi_cfdiutils-common&amp;metric=Reliability"><img src="https://sonarcloud.io/api/project_badges/measure?project=nodecfdi_cfdiutils-common&metric=reliability_rating" alt="Reliability"></a>
+<a href="https://sonarcloud.io/component_measures?id=nodecfdi_cfdiutils-common&amp;metric=Maintainability"><img src="https://sonarcloud.io/api/project_badges/measure?project=nodecfdi_cfdiutils-common&metric=sqale_rating" alt="Maintainability"></a>
+<a href="https://sonarcloud.io/component_measures?id=nodecfdi_cfdiutils-common&amp;metric=Coverage"><img src="https://img.shields.io/sonar/coverage/nodecfdi_cfdiutils-common/main?logo=sonarcloud&server=https%3A%2F%2Fsonarcloud.io" alt="Code Coverage"></a>
+<a href="https://sonarcloud.io/project/issues?id=nodecfdi_cfdiutils-common&amp;resolved=false"><img src="https://img.shields.io/sonar/violations/nodecfdi_cfdiutils-common/main?format=long&logo=sonarcloud&server=https%3A%2F%2Fsonarcloud.io" alt="Violations"></a>
+<a href="https://www.npmjs.com/package/@nodecfdi/cfdiutils-common"><img src="https://img.shields.io/npm/dm/@nodecfdi/cfdiutils-common.svg?logo=npm" alt="Total Downloads"></a></p>
+<blockquote>
+<p>Sub-library of <code>@nodecfdi/cfdiutils-common</code> for common structs and helpers</p>
+</blockquote>
+<p>:us: The documentation of this project is in spanish as this is the natural language for intended audience.</p>
+<p>:mexico: La documentación del proyecto está en español porque ese es el lenguaje principal de los usuarios.</p>
+
+<a href="#acerca-de-nodecfdicfdiutils-common" id="acerca-de-nodecfdicfdiutils-common" style="color: inherit; text-decoration: none;">
+  <h2>Acerca de <code>@nodecfdi/cfdiutils-common</code></h2>
+</a>
+<p>Librería para contener las estructuras de datos comunes, y utilerías o funciones de ayuda común. Inspirada por la
+versión de php <a href="https://github.com/eclipxe13/CfdiUtils">https://github.com/eclipxe13/CfdiUtils</a></p>
+
+<a href="#instalación" id="instalación" style="color: inherit; text-decoration: none;">
+  <h2>Instalación</h2>
+</a>
+
+<a href="#node-npm" id="node-npm" style="color: inherit; text-decoration: none;">
+  <h3>Node NPM</h3>
+</a>
+<pre><code class="language-shell"><span class="hl-0">npm i @nodecfdi/cfdiutils-common --save</span>
+</code></pre>
+
+<a href="#yarn-npm" id="yarn-npm" style="color: inherit; text-decoration: none;">
+  <h3>Yarn NPM</h3>
+</a>
+<pre><code class="language-shell"><span class="hl-0">yarn add @nodecfdi/cfdiutils-common --save</span>
+</code></pre>
+
+<a href="#uso-básico" id="uso-básico" style="color: inherit; text-decoration: none;">
+  <h2>Uso básico</h2>
+</a>
+<p>Estructura de datos CNode</p>
+<pre><code class="language-ts"><span class="hl-1">import</span><span class="hl-0"> { </span><span class="hl-2">CNode</span><span class="hl-0"> } </span><span class="hl-1">from</span><span class="hl-0"> </span><span class="hl-3">&#39;@nodecfdi/cfdiutils-common&#39;</span><span class="hl-0">;</span><br/><span class="hl-4">// Creación de un nodo con atributos</span><br/><span class="hl-5">const</span><span class="hl-0"> </span><span class="hl-6">node</span><span class="hl-0"> = </span><span class="hl-5">new</span><span class="hl-0"> </span><span class="hl-7">CNode</span><span class="hl-0">(</span><span class="hl-3">&#39;root&#39;</span><span class="hl-0">, {</span><br/><span class="hl-0">    </span><span class="hl-2">id:</span><span class="hl-0"> </span><span class="hl-3">&#39;1&#39;</span><span class="hl-0">,</span><br/><span class="hl-0">});</span><br/><span class="hl-2">console</span><span class="hl-0">.</span><span class="hl-7">log</span><span class="hl-0">(</span><span class="hl-2">node</span><span class="hl-0">.</span><span class="hl-7">attributes</span><span class="hl-0">().</span><span class="hl-7">get</span><span class="hl-0">(</span><span class="hl-3">&#39;id&#39;</span><span class="hl-0">)); </span><span class="hl-4">// &#39;1&#39;</span><br/><span class="hl-2">console</span><span class="hl-0">.</span><span class="hl-7">log</span><span class="hl-0">(</span><span class="hl-2">node</span><span class="hl-0">.</span><span class="hl-7">attributes</span><span class="hl-0">().</span><span class="hl-7">get</span><span class="hl-0">(</span><span class="hl-3">&#39;no-existe&#39;</span><span class="hl-0">)); </span><span class="hl-4">// cadena de caracteres vacia &#39;&#39;</span><br/><span class="hl-2">console</span><span class="hl-0">.</span><span class="hl-7">log</span><span class="hl-0">(</span><span class="hl-2">node</span><span class="hl-0">.</span><span class="hl-7">attributes</span><span class="hl-0">().</span><span class="hl-7">get</span><span class="hl-0">(</span><span class="hl-3">&#39;no-existe&#39;</span><span class="hl-0">) ? </span><span class="hl-3">&#39;si&#39;</span><span class="hl-0"> : </span><span class="hl-3">&#39;no&#39;</span><span class="hl-0">); </span><span class="hl-4">// &#39;no&#39;</span><br/><span class="hl-2">node</span><span class="hl-0">.</span><span class="hl-7">attributes</span><span class="hl-0">().</span><span class="hl-7">set</span><span class="hl-0">(</span><span class="hl-3">&#39;atributo&#39;</span><span class="hl-0">, </span><span class="hl-3">&#39;valor&#39;</span><span class="hl-0">); </span><span class="hl-4">// establece el valor</span><br/><span class="hl-2">node</span><span class="hl-0">.</span><span class="hl-7">attributes</span><span class="hl-0">().</span><span class="hl-7">delete</span><span class="hl-0">(</span><span class="hl-3">&#39;id&#39;</span><span class="hl-0">); </span><span class="hl-4">// elimina el atributo &#39;id&#39;</span><br/><span class="hl-4">// recorrer la colección de atributos</span><br/><span class="hl-2">node</span><span class="hl-0">.</span><span class="hl-7">attributes</span><span class="hl-0">().</span><span class="hl-7">forEach</span><span class="hl-0">((</span><span class="hl-2">attributeValue</span><span class="hl-0">, </span><span class="hl-2">attributeName</span><span class="hl-0">) </span><span class="hl-5">=&gt;</span><span class="hl-0"> {</span><br/><span class="hl-0">    </span><span class="hl-2">console</span><span class="hl-0">.</span><span class="hl-7">log</span><span class="hl-0">(</span><span class="hl-3">`</span><span class="hl-5">${</span><span class="hl-2">attributeName</span><span class="hl-5">}</span><span class="hl-3">: </span><span class="hl-5">${</span><span class="hl-2">attributeValue</span><span class="hl-5">}</span><span class="hl-3">`</span><span class="hl-0">);</span><br/><span class="hl-0">});</span>
+</code></pre>
+<p>Utileria XmlNodeUtils y XML</p>
+<pre><code class="language-ts"><span class="hl-1">import</span><span class="hl-0"> { </span><span class="hl-2">CNode</span><span class="hl-0">, </span><span class="hl-2">install</span><span class="hl-0">, </span><span class="hl-2">Xml</span><span class="hl-0">, </span><span class="hl-2">XmlNodeUtils</span><span class="hl-0"> } </span><span class="hl-1">from</span><span class="hl-0"> </span><span class="hl-3">&#39;@nodecfdi/cfdiutils-common&#39;</span><span class="hl-0">;</span><br/><br/><span class="hl-4">// DomParser, XMLSerializer, DOMImplementation agnostic can use xmldom, jsdom, etc.</span><br/><span class="hl-4">// Is necesary install for XML helper and XmlNodeUtils</span><br/><span class="hl-7">install</span><span class="hl-0">(</span><span class="hl-5">new</span><span class="hl-0"> </span><span class="hl-7">DOMParser</span><span class="hl-0">(), </span><span class="hl-5">new</span><span class="hl-0"> </span><span class="hl-7">XMLSerializer</span><span class="hl-0">(), </span><span class="hl-5">new</span><span class="hl-0"> </span><span class="hl-7">DOMImplementation</span><span class="hl-0">());</span><br/><br/><span class="hl-5">const</span><span class="hl-0"> </span><span class="hl-6">node</span><span class="hl-0"> = </span><span class="hl-5">new</span><span class="hl-0"> </span><span class="hl-7">CNode</span><span class="hl-0">(</span><span class="hl-3">&#39;book&#39;</span><span class="hl-0">, {}, [</span><span class="hl-5">new</span><span class="hl-0"> </span><span class="hl-7">CNode</span><span class="hl-0">(</span><span class="hl-3">&#39;chapter&#39;</span><span class="hl-0">, { </span><span class="hl-2">toc:</span><span class="hl-0"> </span><span class="hl-3">&#39;1&#39;</span><span class="hl-0"> }), </span><span class="hl-5">new</span><span class="hl-0"> </span><span class="hl-7">CNode</span><span class="hl-0">(</span><span class="hl-3">&#39;chapter&#39;</span><span class="hl-0">, { </span><span class="hl-2">toc:</span><span class="hl-0"> </span><span class="hl-3">&#39;2&#39;</span><span class="hl-0"> })]);</span><br/><span class="hl-5">const</span><span class="hl-0"> </span><span class="hl-6">xmlString</span><span class="hl-0"> = </span><span class="hl-2">XmlNodeUtils</span><span class="hl-0">.</span><span class="hl-7">nodeToXmlString</span><span class="hl-0">(</span><span class="hl-2">node</span><span class="hl-0">, </span><span class="hl-5">true</span><span class="hl-0">);</span><br/><span class="hl-2">console</span><span class="hl-0">.</span><span class="hl-7">log</span><span class="hl-0">(</span><span class="hl-2">xmlString</span><span class="hl-0">); </span><span class="hl-4">// xml valido en formato string</span><br/><br/><span class="hl-4">// Create xml document from xml string</span><br/><span class="hl-5">const</span><span class="hl-0"> </span><span class="hl-6">document</span><span class="hl-0"> = </span><span class="hl-2">Xml</span><span class="hl-0">.</span><span class="hl-7">newDocumentContent</span><span class="hl-0">(</span><span class="hl-3">&#39;my xml string&#39;</span><span class="hl-0">);</span><br/><br/><span class="hl-4">// create node from element</span><br/><span class="hl-5">const</span><span class="hl-0"> </span><span class="hl-6">node</span><span class="hl-0"> = </span><span class="hl-2">XmlNodeUtils</span><span class="hl-0">.</span><span class="hl-7">nodeFromXmlElement</span><span class="hl-0">(</span><span class="hl-2">Xml</span><span class="hl-0">.</span><span class="hl-7">documentElement</span><span class="hl-0">(</span><span class="hl-2">document</span><span class="hl-0">));</span>
+</code></pre>
+
+<a href="#objeto-cnode" id="objeto-cnode" style="color: inherit; text-decoration: none;">
+  <h2>Objeto CNode</h2>
+</a>
+<p>Esta es la estructura básica. Un nodo debe tener un nombre y esta propiedad no se puede cambiar. Su constructor admite
+tres parámetros:</p>
+<ul>
+<li><code>name: string</code>: Nombre del nodo, se eliminan espacios en blanco al inicio y al final, no permite vacíos.</li>
+<li><code>attributes: Record&lt;string, unknown&gt;</code>: Objeto de elementos clave/valor que serán importados como atributos.</li>
+<li><code>nodes: CNode[]</code>: Arreglo de elementos <code>CNode</code> que serán importados como nodos hijo.</li>
+</ul>
+
+<a href="#atributos-de-nodos-cattributes" id="atributos-de-nodos-cattributes" style="color: inherit; text-decoration: none;">
+  <h2>Atributos de nodos CAttributes</h2>
+</a>
+<p>Se accede a sus atributos utilizando la forma de Map de javascript siguiendo estas reglas básicas:</p>
+<ul>
+<li>La lectura de un nodo siempre devuelve una cadena de caracteres aunque el atributo no exista.</li>
+<li>La escritura de un nodo es siempre con una cadena de caracteres, también puede ser un objeto que implemente el
+método <code>toString</code></li>
+</ul>
+<p>Los atributos se manejan con una colección de tipo <code>CAttributes</code> y se pueden obtener usando el método <code>attributes()</code> en
+el objeto <code>CNode</code>.</p>
+
+<a href="#cnodes" id="cnodes" style="color: inherit; text-decoration: none;">
+  <h2>CNodes</h2>
+</a>
+<p>Los nodos hijos se manejan a través de una colección de nodos <code>CNodes</code>. Se puede acceder al objeto <code>CNodes</code> usando el
+método <code>children()</code> en el objeto <code>CNode</code>.</p>
+<p>Cuando se itera el objeto en realidad se está iterando sobre la colección de nodos.</p>
+<p>La clase <code>CNode</code> tiene estos métodos de ayuda que sirven para trabajar directamente sobre la colección CNodes:</p>
+<ul>
+<li>iterador: El método <code>foreach</code> se realiza sobre la colección de nodos.</li>
+<li><code>addChild(node: CNode)</code>: Agrega un nodo en la colección de nodos.</li>
+</ul>
+
+<a href="#xmlnodeutils" id="xmlnodeutils" style="color: inherit; text-decoration: none;">
+  <h2>XmlNodeUtils</h2>
+</a>
+<p>Esta es una clase de utilerías que contiene métodos estáticos que permiten crear estructuras de nodos desde XML y generar XML a partir de los nodos. Recuerde que los nodos solo pueden almacenar atributos y nodos hijos.</p>
+<p>Actualmente, permite exportar e importar a/desde: <code>Document</code>, <code>Element</code> y <code>string</code> (con contenido válido).</p>
+<p>Advertencias:</p>
+<ul>
+<li>Los nodos no son una reescritura fiel de DOM.</li>
+<li>Los nodos solo contienen atributos, hijos y contenido textual simple.</li>
+<li>Importar XML que no siga la estructura de atributos, hijos y contenido textual simple exclusivamente puede resultar en pérdida de datos.</li>
+</ul>
+
+<a href="#contenido-de-texto" id="contenido-de-texto" style="color: inherit; text-decoration: none;">
+  <h2>Contenido de texto</h2>
+</a>
+<p>Tradicionalmente, los CFDI Regulares, CFDI de Retenciones e Información de Pagos, así como sus complementos,
+siguen la estructura de elementos con valores en los atributos y sin texto.</p>
+<p>Sin embargo, el SAT —en su infinita consistencia— tiene el <em>Complemento de facturas del sector de ventas al detalle</em>
+disponible en <a href="https://www.sat.gob.mx/consulta/76197/complemento-para-factura-electronica">https://www.sat.gob.mx/consulta/76197/complemento-para-factura-electronica</a> donde, en lugar de poner
+los valores en atributos, pone los valores en el contenido textual del elemento, además de otros cambios como usar
+nombres de nodos en inglés.</p>
+<p>Por lo anterior, se introdujo la interfaz <code>CNodeHasValueInterface</code> que contiene los métodos <code>value(): string</code> y
+<code>setValue(valueString: string): void</code> con lo que se puede escribir y leer este contenido simple.</p>
+
+<a href="#soporte" id="soporte" style="color: inherit; text-decoration: none;">
+  <h2>Soporte</h2>
+</a>
+<p>Puedes obtener soporte abriendo un ticket en Github.</p>
+<p>Adicionalmente, esta librería pertenece a la comunidad <a href="https://ocelotlstudio.com">OcelotlStudio</a>, así que puedes usar los mismos canales de comunicación para obtener ayuda de algún miembro de la comunidad.</p>
+
+<a href="#compatibilidad" id="compatibilidad" style="color: inherit; text-decoration: none;">
+  <h2>Compatibilidad</h2>
+</a>
+<p>Esta librería se mantendrá compatible con al menos la versión con
+<a href="https://nodejs.org/es/about/releases/">soporte activo de Node</a> más reciente.</p>
+<p>También utilizamos <a href="https://semver.org/lang/es/">Versionado Semántico 2.0.0</a> por lo que puedes usar esta librería sin temor a romper tu aplicación.</p>
+
+<a href="#contribuciones" id="contribuciones" style="color: inherit; text-decoration: none;">
+  <h2>Contribuciones</h2>
+</a>
+<p>Las contribuciones con bienvenidas. Por favor lee <a href="https://github.com/nodecfdi/cfdiutils-common/blob/main/CONTRIBUTING.md">CONTRIBUTING</a> para más detalles y recuerda revisar el archivo <a href="https://github.com/nodecfdi/cfdiutils-common/blob/main/CHANGELOG.md">CHANGELOG</a>.</p>
+
+<a href="#copyright-and-license" id="copyright-and-license" style="color: inherit; text-decoration: none;">
+  <h2>Copyright and License</h2>
+</a>
+<p>The <code>@nodecfdi/cfdiutils-common</code> library is copyright © <a href="https://github.com/nodecfdi">NodeCfdi</a> - <a href="https://ocelotlstudio.com">OcelotlStudio</a> and licensed for use under the MIT License (MIT). Please see <a href="https://github.com/nodecfdi/cfdiutils-common/blob/main/LICENSE">LICENSE</a> for more information.</p>
+</div></div>
+<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+<div class="tree">
+<div class="tree-config"><button class="tree-config__button tree-config__button--expand js-tree-expand" title="Expand All"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 490.72 490.72" fill="currentColor"><path d="M480.027,288.027H10.693c-5.867,0-10.667,4.8-10.667,10.667c0,5.867,4.8,10.667,10.667,10.667h213.333v144.96l-45.76-45.76c-4.267-4.053-10.987-3.947-15.04,0.213c-3.947,4.16-3.947,10.667,0,14.827l64,64c4.16,4.16,10.88,4.16,15.04,0l64-64c4.053-4.267,3.947-10.987-0.213-15.04c-4.16-3.947-10.667-3.947-14.827,0l-45.867,45.76V309.36h234.667c5.867,0,10.667-4.8,10.667-10.667C490.693,292.827,485.893,288.027,480.027,288.027z"></path><path d="M10.693,224.027h469.333c5.867,0,10.667-4.8,10.667-10.667c0-5.867-4.8-10.667-10.667-10.667H245.36V36.4l45.76,45.76c4.267,4.053,10.987,3.947,15.04-0.213c3.947-4.16,3.947-10.667,0-14.827l-64-64c-4.16-4.16-10.88-4.16-15.04,0l-64,64c-4.053,4.267-3.947,10.987,0.213,15.04c4.16,3.947,10.667,3.947,14.827,0l45.867-45.76v166.293H10.693c-5.867,0-10.667,4.8-10.667,10.667C0.027,219.227,4.827,224.027,10.693,224.027z"></path></svg></button><button class="tree-config__button tree-config__button--collapse js-tree-collapse" title="Collapse All"><svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13A.5.5 0 0 1 1 8zm7-8a.5.5 0 0 1 .5.5v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 1 1 .708-.708L7.5 4.293V.5A.5.5 0 0 1 8 0zm-.5 11.707-1.146 1.147a.5.5 0 0 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 11.707V15.5a.5.5 0 0 1-1 0v-3.793z"></path></svg></button><button class="tree-config__button tree-config__button--target js-tree-target" title="Scroll to current file"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><circle cx="12" cy="12" r="3"></circle><path d="M13 4.069V2h-2v2.069A8.008 8.008 0 0 0 4.069 11H2v2h2.069A8.007 8.007 0 0 0 11 19.931V22h2v-2.069A8.007 8.007 0 0 0 19.931 13H22v-2h-2.069A8.008 8.008 0 0 0 13 4.069zM12 18c-3.309 0-6-2.691-6-6s2.691-6 6-6 6 2.691 6 6-2.691 6-6 6z"></path></svg></button></div>
+<div class="tree-content">
+<ul class="js-category-list category" data-id="root">
+<li><span class="js-category-title category__title" data-id="root-src">
+<div class="category__folder" data-id="root-src"></div>src</span>
+<ul class="js-category-list category" data-id="root-src">
+<li><span class="js-category-title category__title" data-id="root-src-exceptions">
+<div class="category__folder" data-id="root-src-exceptions"></div>exceptions</span>
+<ul class="js-category-list category" data-id="root-src-exceptions">
+<li><a class="category__link js-category-link category__link--ts" href="modules/exceptions_dom_not_found_error.html" data-id="/modules/exceptions_dom_not_found_error.html">dom-not-found-error.ts</a>
+<ul>
+<li class="tsd-kind-class tsd-parent-kind-module"><a class="category__link tsd-kind-icon js-category-link" href="classes/exceptions_dom_not_found_error.DOMNotFoundError.html" data-id="/classes/exceptions_dom_not_found_error.DOMNotFoundError.html">DOMNotFoundError</a></li></ul></li></ul></li>
+<li><span class="js-category-title category__title" data-id="root-src-nodes">
+<div class="category__folder" data-id="root-src-nodes"></div>nodes</span>
+<ul class="js-category-list category" data-id="root-src-nodes">
+<li><a class="category__link js-category-link category__link--ts" href="modules/nodes_c_attributes.html" data-id="/modules/nodes_c_attributes.html">c-attributes.ts</a>
+<ul>
+<li class="tsd-kind-class tsd-parent-kind-module"><a class="category__link tsd-kind-icon js-category-link" href="classes/nodes_c_attributes.CAttributes.html" data-id="/classes/nodes_c_attributes.CAttributes.html">CAttributes</a></li></ul></li>
+<li><a class="category__link js-category-link category__link--ts" href="modules/nodes_c_node.html" data-id="/modules/nodes_c_node.html">c-node.ts</a>
+<ul>
+<li class="tsd-kind-class tsd-parent-kind-module"><a class="category__link tsd-kind-icon js-category-link" href="classes/nodes_c_node.CNode.html" data-id="/classes/nodes_c_node.CNode.html">CNode</a></li></ul></li>
+<li><a class="category__link js-category-link category__link--ts" href="modules/nodes_c_node_has_value_interface.html" data-id="/modules/nodes_c_node_has_value_interface.html">c-node-has-value-interface.ts</a>
+<ul>
+<li class="tsd-kind-interface tsd-parent-kind-module"><a class="category__link tsd-kind-icon js-category-link" href="interfaces/nodes_c_node_has_value_interface.CNodeHasValueInterface.html" data-id="/interfaces/nodes_c_node_has_value_interface.CNodeHasValueInterface.html">CNodeHasValueInterface</a></li></ul></li>
+<li><a class="category__link js-category-link category__link--ts" href="modules/nodes_c_node_interface.html" data-id="/modules/nodes_c_node_interface.html">c-node-interface.ts</a>
+<ul>
+<li class="tsd-kind-interface tsd-parent-kind-module"><a class="category__link tsd-kind-icon js-category-link" href="interfaces/nodes_c_node_interface.CNodeInterface.html" data-id="/interfaces/nodes_c_node_interface.CNodeInterface.html">CNodeInterface</a></li></ul></li>
+<li><a class="category__link js-category-link category__link--ts" href="modules/nodes_c_nodes.html" data-id="/modules/nodes_c_nodes.html">c-nodes.ts</a>
+<ul>
+<li class="tsd-kind-class tsd-parent-kind-module"><a class="category__link tsd-kind-icon js-category-link" href="classes/nodes_c_nodes.CNodes.html" data-id="/classes/nodes_c_nodes.CNodes.html">CNodes</a></li></ul></li>
+<li><a class="category__link js-category-link category__link--ts" href="modules/nodes_c_nodes_sorter.html" data-id="/modules/nodes_c_nodes_sorter.html">c-nodes-sorter.ts</a>
+<ul>
+<li class="tsd-kind-class tsd-parent-kind-module"><a class="category__link tsd-kind-icon js-category-link" href="classes/nodes_c_nodes_sorter.CNodesSorter.html" data-id="/classes/nodes_c_nodes_sorter.CNodesSorter.html">CNodesSorter</a></li></ul></li>
+<li><a class="category__link js-category-link category__link--ts" href="modules/nodes_xml_node_exporter.html" data-id="/modules/nodes_xml_node_exporter.html">xml-node-exporter.ts</a>
+<ul>
+<li class="tsd-kind-class tsd-parent-kind-module"><a class="category__link tsd-kind-icon js-category-link" href="classes/nodes_xml_node_exporter.XmlNodeExporter.html" data-id="/classes/nodes_xml_node_exporter.XmlNodeExporter.html">XmlNodeExporter</a></li></ul></li>
+<li><a class="category__link js-category-link category__link--ts" href="modules/nodes_xml_node_importer.html" data-id="/modules/nodes_xml_node_importer.html">xml-node-importer.ts</a>
+<ul>
+<li class="tsd-kind-class tsd-parent-kind-module"><a class="category__link tsd-kind-icon js-category-link" href="classes/nodes_xml_node_importer.XmlNodeImporter.html" data-id="/classes/nodes_xml_node_importer.XmlNodeImporter.html">XmlNodeImporter</a></li></ul></li>
+<li><a class="category__link js-category-link category__link--ts" href="modules/nodes_xml_node_utils.html" data-id="/modules/nodes_xml_node_utils.html">xml-node-utils.ts</a>
+<ul>
+<li class="tsd-kind-class tsd-parent-kind-module"><a class="category__link tsd-kind-icon js-category-link" href="classes/nodes_xml_node_utils.XmlNodeUtils.html" data-id="/classes/nodes_xml_node_utils.XmlNodeUtils.html">XmlNodeUtils</a></li></ul></li></ul></li>
+<li><span class="js-category-title category__title" data-id="root-src-utils">
+<div class="category__folder" data-id="root-src-utils"></div>utils</span>
+<ul class="js-category-list category" data-id="root-src-utils">
+<li><a class="category__link js-category-link category__link--ts" href="modules/utils_currency_decimals.html" data-id="/modules/utils_currency_decimals.html">currency-decimals.ts</a>
+<ul>
+<li class="tsd-kind-class tsd-parent-kind-module"><a class="category__link tsd-kind-icon js-category-link" href="classes/utils_currency_decimals.CurrencyDecimals.html" data-id="/classes/utils_currency_decimals.CurrencyDecimals.html">CurrencyDecimals</a></li></ul></li>
+<li><a class="category__link js-category-link category__link--ts" href="modules/utils_dom_validators.html" data-id="/modules/utils_dom_validators.html">dom-validators.ts</a>
+<ul>
+<li class="tsd-kind-class tsd-parent-kind-module"><a class="category__link tsd-kind-icon js-category-link" href="classes/utils_dom_validators.DomValidators.html" data-id="/classes/utils_dom_validators.DomValidators.html">DomValidators</a></li></ul></li>
+<li><a class="category__link js-category-link category__link--ts" href="modules/utils_xml.html" data-id="/modules/utils_xml.html">xml.ts</a>
+<ul>
+<li class="tsd-kind-class tsd-parent-kind-module"><a class="category__link tsd-kind-icon js-category-link" href="classes/utils_xml.Xml.html" data-id="/classes/utils_xml.Xml.html">Xml</a></li></ul></li></ul></li>
+<li><a class="category__link js-category-link category__link--ts" href="modules/dom.html" data-id="/modules/dom.html">dom.ts</a>
+<ul>
+<li class="tsd-kind-function tsd-parent-kind-module"><a class="category__link tsd-kind-icon js-category-link" href="functions/dom.getDom.html" data-id="/functions/dom.getDom.html">getDom</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a class="category__link tsd-kind-icon js-category-link" href="functions/dom.getParser.html" data-id="/functions/dom.getParser.html">getParser</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a class="category__link tsd-kind-icon js-category-link" href="functions/dom.getSerializer.html" data-id="/functions/dom.getSerializer.html">getSerializer</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a class="category__link tsd-kind-icon js-category-link" href="functions/dom.install.html" data-id="/functions/dom.install.html">install</a></li></ul></li>
+<li><a class="category__link js-category-link category__link--ts" href="modules/index.html" data-id="/modules/index.html">index.ts</a>
+<ul>
+<li class="tsd-kind-reference tsd-parent-kind-module"><a class="category__link tsd-kind-icon js-category-link" href="modules/index.html#CAttributes" data-id="/modules/index.html#CAttributes">CAttributes</a></li>
+<li class="tsd-kind-reference tsd-parent-kind-module"><a class="category__link tsd-kind-icon js-category-link" href="modules/index.html#CNode" data-id="/modules/index.html#CNode">CNode</a></li>
+<li class="tsd-kind-reference tsd-parent-kind-module"><a class="category__link tsd-kind-icon js-category-link" href="modules/index.html#CNodeHasValueInterface" data-id="/modules/index.html#CNodeHasValueInterface">CNodeHasValueInterface</a></li>
+<li class="tsd-kind-reference tsd-parent-kind-module"><a class="category__link tsd-kind-icon js-category-link" href="modules/index.html#CNodeInterface" data-id="/modules/index.html#CNodeInterface">CNodeInterface</a></li>
+<li class="tsd-kind-reference tsd-parent-kind-module"><a class="category__link tsd-kind-icon js-category-link" href="modules/index.html#CNodes" data-id="/modules/index.html#CNodes">CNodes</a></li>
+<li class="tsd-kind-reference tsd-parent-kind-module"><a class="category__link tsd-kind-icon js-category-link" href="modules/index.html#CNodesSorter" data-id="/modules/index.html#CNodesSorter">CNodesSorter</a></li>
+<li class="tsd-kind-reference tsd-parent-kind-module"><a class="category__link tsd-kind-icon js-category-link" href="modules/index.html#CurrencyDecimals" data-id="/modules/index.html#CurrencyDecimals">CurrencyDecimals</a></li>
+<li class="tsd-kind-reference tsd-parent-kind-module"><a class="category__link tsd-kind-icon js-category-link" href="modules/index.html#DOMNotFoundError" data-id="/modules/index.html#DOMNotFoundError">DOMNotFoundError</a></li>
+<li class="tsd-kind-reference tsd-parent-kind-module"><a class="category__link tsd-kind-icon js-category-link" href="modules/index.html#DomValidators" data-id="/modules/index.html#DomValidators">DomValidators</a></li>
+<li class="tsd-kind-reference tsd-parent-kind-module"><a class="category__link tsd-kind-icon js-category-link" href="modules/index.html#Xml" data-id="/modules/index.html#Xml">Xml</a></li>
+<li class="tsd-kind-reference tsd-parent-kind-module"><a class="category__link tsd-kind-icon js-category-link" href="modules/index.html#XmlNodeUtils" data-id="/modules/index.html#XmlNodeUtils">XmlNodeUtils</a></li>
+<li class="tsd-kind-reference tsd-parent-kind-module"><a class="category__link tsd-kind-icon js-category-link" href="modules/index.html#getDom" data-id="/modules/index.html#getDom">getDom</a></li>
+<li class="tsd-kind-reference tsd-parent-kind-module"><a class="category__link tsd-kind-icon js-category-link" href="modules/index.html#getParser" data-id="/modules/index.html#getParser">getParser</a></li>
+<li class="tsd-kind-reference tsd-parent-kind-module"><a class="category__link tsd-kind-icon js-category-link" href="modules/index.html#getSerializer" data-id="/modules/index.html#getSerializer">getSerializer</a></li>
+<li class="tsd-kind-reference tsd-parent-kind-module"><a class="category__link tsd-kind-icon js-category-link" href="modules/index.html#install" data-id="/modules/index.html#install">install</a></li></ul></li></ul></li></ul></div></div></div></div>
+<div class="container tsd-generator">
+<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></div>
+<div class="overlay"></div><script src="assets/main.js"></script><script src="assets/custom.js"></script></body></html>
