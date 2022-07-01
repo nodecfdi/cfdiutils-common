@@ -1,5 +1,25 @@
 # @nodecfdi/cfdiutils-common ChangeLog
 
+## 1.2.0
+
+### Minor Changes
+
+- ab38a00: DOM agnostic
+
+  ***
+
+  - Add helper for install and use anything DOM implementation class.
+  - Improve documentation about new process to use `XML` and `XmlNodeUtils` helper classes.
+
+  CI
+
+  - Update workflow for use pnpm and better test coverage.
+  - Added Sonarcloud for better continuous code quality.
+
+  Build
+
+  - Replace rollup bundle for microbundle for generation of library.
+
 ## 1.1.0
 
 - Introduce `CNodeHasValueInterface` to work with nodes simple text content.
