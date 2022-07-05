@@ -1,5 +1,5 @@
 import { DomValidators } from './dom-validators';
-import { getDom, getParser } from '~/dom';
+import { getDom, getParser } from '../dom';
 
 export class Xml {
     public static documentElement(document: Document): Element {

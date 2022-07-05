@@ -1,4 +1,4 @@
-import { DOMNotFoundError } from '~/exceptions/dom-not-found-error';
+import { DOMNotFoundError } from './exceptions/dom-not-found-error';
 
 let _dom: DOMImplementation | undefined;
 let _parser: DOMParser | undefined;

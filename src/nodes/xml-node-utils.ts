@@ -1,9 +1,9 @@
 import { CNodeInterface } from './c-node-interface';
 import { XmlNodeExporter } from './xml-node-exporter';
 import { XmlNodeImporter } from './xml-node-importer';
-import { Xml } from '~/utils/xml';
+import { Xml } from '../utils/xml';
 import { CNodeHasValueInterface } from './c-node-has-value-interface';
-import { getSerializer } from '~/dom';
+import { getSerializer } from '../dom';
 
 export class XmlNodeUtils {
     public static nodeToXmlElement(node: CNodeInterface): Element {
