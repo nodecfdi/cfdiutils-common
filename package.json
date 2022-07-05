@@ -1,6 +1,6 @@
 {
     "name": "@nodecfdi/cfdiutils-common",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "description": "Librería usada para contener las estructuras de datos comunes, y utilerías o funciones de ayuda común.",
     "keywords": [
         "common",
