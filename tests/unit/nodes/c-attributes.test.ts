@@ -120,6 +120,20 @@ describe('Nodes.CAttributes', () => {
         expect(attributes.exists('bar')).toBeFalsy();
     });
 
+    test('import with empty', () => {
+        const attributes = new CAttributes({
+            foo: 'bar',
+            bar: 'foo'
+        });
+        expect(attributes.size).toBe(2);
+
+        attributes.importRecord({});
+        expect(attributes.size).toBe(2);
+
+        attributes.importRecord({ another: 'another' });
+        expect(attributes.size).toBe(3);
+    });
+
     test('import with (undefined|null) perform remove', () => {
         const attributes = new CAttributes({
             set: '1',

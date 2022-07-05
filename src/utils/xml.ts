@@ -1,5 +1,5 @@
 import { DomValidators } from './dom-validators';
-import { getDom, getParser } from '~/dom';
+import { getDom, getParser } from '../dom';
 
 export class Xml {
     public static documentElement(document: Document): Element {
@@ -36,6 +36,7 @@ export class Xml {
             const docParse = parser.parseFromString(content, 'text/xml');
 
             // Capture errors for browser usage
+            /* istanbul ignore next */
             if (docParse.getElementsByTagName('parsererror').length > 0) {
                 throw new Error('Error parsing XML');
             }

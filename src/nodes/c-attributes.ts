@@ -1,4 +1,4 @@
-import { Xml } from '~/utils/xml';
+import { Xml } from '../utils/xml';
 
 export class CAttributes extends Map<string, string> {
     constructor(attributes: Record<string, unknown> = {}) {
@@ -7,11 +7,13 @@ export class CAttributes extends Map<string, string> {
     }
 
     public override get(name: string): string {
-        if (!this.has(name)) {
+        const value = super.get(name);
+
+        if (value === undefined) {
             return '';
         }
 
-        return super.get(name) || '';
+        return value;
     }
 
     public override set(name: string, value: string | null | undefined = null): this {
@@ -41,7 +43,7 @@ export class CAttributes extends Map<string, string> {
     }
 
     public importRecord(attributes: Record<string, unknown>): this {
-        if (attributes) {
+        if (Object.keys(attributes).length > 0) {
             Object.entries(attributes).forEach(([key, value]) => {
                 const fixedValue = CAttributes.castValueToString(key, value);
                 this.set(key, fixedValue);

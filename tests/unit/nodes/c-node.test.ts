@@ -111,4 +111,34 @@ describe('Nodes.CNode', () => {
         node.setValue('second');
         expect(node.value()).toBe('second');
     });
+
+    test('add children', () => {
+        const node = new CNode('x');
+        const childrenNode = new CNode('y');
+
+        node.addChild(childrenNode);
+
+        expect(node.count()).toBe(1);
+    });
+
+    test('add attributes', () => {
+        const node = new CNode('x');
+        expect(node.attributes().size).toBe(0);
+
+        node.addAttributes({ foo: 'foo' });
+        expect(node.attributes().size).toBe(1);
+    });
+
+    test('clear all', () => {
+        const node = new CNode('x', { foo: '1' });
+        const childrenNode = new CNode('y');
+        node.addChild(childrenNode);
+
+        expect(node.count()).toBe(1);
+        expect(node.attributes().size).toBe(1);
+
+        node.clear();
+        expect(node.count()).toBe(0);
+        expect(node.attributes().size).toBe(0);
+    });
 });

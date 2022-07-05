@@ -1,4 +1,4 @@
-import { DOMNotFoundError } from '~/exceptions/dom-not-found-error';
+import { DOMNotFoundError } from './exceptions/dom-not-found-error';
 
 let _dom: DOMImplementation | undefined;
 let _parser: DOMParser | undefined;
@@ -19,6 +19,13 @@ const getParser = (): DOMParser => {
     return _parser;
 };
 
+/**
+ * Get instance of XMLSerializer
+ *
+ * @returns the current XMLSerializer object
+ *
+ * @throws {@link DOMNotFoundError} This exception is throw if not install XMLSerializer.
+ */
 const getSerializer = (): XMLSerializer => {
     if (!_serializer) {
         throw new DOMNotFoundError('XMLSerializer');
@@ -27,6 +34,13 @@ const getSerializer = (): XMLSerializer => {
     return _serializer;
 };
 
+/**
+ * Get instance of DOMImplementation
+ *
+ * @returns the current DOMImplementation object
+ *
+ * @throws {@link DOMNotFoundError} This exception is throw if not install DOMImplementation.
+ */
 const getDom = (): DOMImplementation => {
     if (!_dom) {
         throw new DOMNotFoundError('DOMImplementation');
@@ -35,6 +49,9 @@ const getDom = (): DOMImplementation => {
     return _dom;
 };
 
+/**
+ * Install DOM instances for usage on this library
+ */
 const install = (parser?: DOMParser, serializer?: XMLSerializer, dom?: DOMImplementation): void => {
     _parser = parser;
     _serializer = serializer;

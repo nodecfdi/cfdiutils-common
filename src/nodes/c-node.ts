@@ -1,6 +1,6 @@
 import { CNodeInterface } from './c-node-interface';
 import { CAttributes } from './c-attributes';
-import { Xml } from '~/utils/xml';
+import { Xml } from '../utils/xml';
 import { CNodes } from './c-nodes';
 import { CNodeHasValueInterface } from './c-node-has-value-interface';
 
