@@ -36,6 +36,7 @@ export class Xml {
             const docParse = parser.parseFromString(content, 'text/xml');
 
             // Capture errors for browser usage
+            /* istanbul ignore next */
             if (docParse.getElementsByTagName('parsererror').length > 0) {
                 throw new Error('Error parsing XML');
             }

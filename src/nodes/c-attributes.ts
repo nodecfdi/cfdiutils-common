@@ -43,7 +43,7 @@ export class CAttributes extends Map<string, string> {
     }
 
     public importRecord(attributes: Record<string, unknown>): this {
-        if (attributes != {}) {
+        if (Object.keys(attributes).length > 0) {
             Object.entries(attributes).forEach(([key, value]) => {
                 const fixedValue = CAttributes.castValueToString(key, value);
                 this.set(key, fixedValue);
