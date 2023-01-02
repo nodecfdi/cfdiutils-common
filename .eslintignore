@@ -1,7 +1,7 @@
 node_modules
-dist
-docs
 coverage
-web_modules
-.prettierrc.js
-tsconfig.json
+dist
+
+# Config files
+tsup.config.ts
+vitest.config.ts
