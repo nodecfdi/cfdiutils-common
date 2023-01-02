@@ -1,7 +1,14 @@
-import { join } from 'path';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-export class TestCase {
-    public static utilAsset(file: string): string {
-        return join(__dirname, '_files', file);
-    }
-}
+const useTestCase = (): {
+    utilAsset: (file: string) => string;
+} => {
+    const utilAsset = (file: string): string => join(dirname(fileURLToPath(import.meta.url)), '_files', file);
+
+    return {
+        utilAsset
+    };
+};
+
+export { useTestCase };

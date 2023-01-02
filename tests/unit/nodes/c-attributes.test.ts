@@ -1,4 +1,4 @@
-import { CAttributes } from '~/index';
+import { CAttributes } from '~/nodes/c-attributes';
 
 describe('Nodes.CAttributes', () => {
     test('construct without arguments', () => {
@@ -13,10 +13,10 @@ describe('Nodes.CAttributes', () => {
         };
         const attributes = new CAttributes(data);
         expect(attributes.size).toBe(2);
-        attributes.forEach((value, key) => {
+        for (const [key, value] of attributes.entries()) {
             expect(attributes.exists(key)).toBeTruthy();
             expect(attributes.get(key)).toEqual(value);
-        });
+        }
     });
 
     test.each([[/** empty */ ''], [/** white spaces */ '    ']])('set method with invalid name', (name) => {
@@ -30,15 +30,15 @@ describe('Nodes.CAttributes', () => {
 
     test('set method', () => {
         const attributes = new CAttributes();
-        // first
+        // First
         attributes.set('foo', 'bar');
         expect(attributes.size).toBe(1);
         expect(attributes.get('foo')).toBe('bar');
-        // second
+        // Second
         attributes.set('lorem', 'ipsum');
         expect(attributes.size).toBe(2);
         expect(attributes.get('lorem')).toBe('ipsum');
-        // override
+        // Override
         attributes.set('foo', 'BAR');
         expect(attributes.size).toBe(2);
         expect(attributes.get('foo')).toBe('BAR');
@@ -77,19 +77,19 @@ describe('Nodes.CAttributes', () => {
         const attributes = new CAttributes();
         attributes.offsetSet('id', 'sample');
         attributes.offsetSet('foo', 'foo foo foo');
-        attributes.offsetSet('foo', 'bar'); // override
+        attributes.offsetSet('foo', 'bar'); // Override
         attributes.offsetSet('empty', '');
         expect(attributes.size).toBe(3);
 
-        // existent
+        // Existent
         expect(attributes.offsetExists('empty')).toBeTruthy();
         expect(attributes.offsetExists('id')).toBeTruthy();
         expect(attributes.offsetGet('id')).toBe('sample');
         expect(attributes.offsetGet('foo')).toBe('bar');
-        // non existent
+        // Non existent
         expect(attributes.offsetExists('non-existent')).toBeFalsy();
         expect(attributes.offsetGet('non-existent')).toBe('');
-        // remove and check
+        // Remove and check
         attributes.offsetUnset('foo');
         expect(attributes.offsetGet('foo')).toBe('');
     });
@@ -101,9 +101,10 @@ describe('Nodes.CAttributes', () => {
         };
         const created: Record<string, string> = {};
         const attributes = new CAttributes(data);
-        attributes.forEach((value, key) => {
+        for (const [key, value] of attributes.entries()) {
             created[key] = value;
-        });
+        }
+
         expect(created).toStrictEqual(data);
     });
 
@@ -114,9 +115,9 @@ describe('Nodes.CAttributes', () => {
         });
         expect(attributes.exists('foo')).toBeTruthy();
         expect(attributes.exists('bar')).toBeTruthy();
-        attributes.offsetSet('foo', undefined);
+        attributes.offsetSet('foo');
         expect(attributes.exists('foo')).toBeFalsy();
-        attributes.offsetSet('bar', null);
+        attributes.offsetSet('bar');
         expect(attributes.exists('bar')).toBeFalsy();
     });
 
@@ -172,16 +173,16 @@ describe('Nodes.CAttributes', () => {
     test('set with object to string', () => {
         const expectedValue = 'foo';
 
+        // eslint-disable-next-line unicorn/consistent-function-scoping
         function Foo(this: { value: string }, value: string): void {
             this.value = value;
         }
 
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        const toStringObject = new Foo('foo');
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
+        const toStringObject: string = new (Foo as any)('foo');
 
-        Foo.prototype.toString = function (): void {
-            return this.value;
+        Foo.prototype.toString = function (): string {
+            return (this as { value: string }).value;
         };
 
         const attributes = new CAttributes({

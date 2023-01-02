@@ -1,7 +1,7 @@
-import { CNodeInterface } from './c-node-interface';
-import { CNode } from './c-node';
 import { DomValidators } from '../utils/dom-validators';
-import { CNodeHasValueInterface } from './c-node-has-value-interface';
+import { CNode } from './c-node';
+import { type CNodeHasValueInterface } from './c-node-has-value-interface';
+import { type CNodeInterface } from './c-node-interface';
 
 export class XmlNodeImporter {
     /**
@@ -15,28 +15,29 @@ export class XmlNodeImporter {
         node.setValue(this.extractValue(element));
 
         if (element.prefix && element.prefix !== '') {
-            this.registerNamespace(node, `xmlns:${element.prefix}`, element.namespaceURI || '');
+            this.registerNamespace(node, `xmlns:${element.prefix}`, element.namespaceURI ?? '');
             this.registerNamespace(node, `xmlns:xsi`, 'http://www.w3.org/2001/XMLSchema-instance');
         }
 
         const xmlAttributes = element.attributes;
-        let i;
-        for (i = 0; i < xmlAttributes.length; i++) {
-            node.attributes().set(xmlAttributes[i].name, xmlAttributes[i].value);
+        let index;
+        for (index = 0; index < xmlAttributes.length; index++) {
+            node.attributes().set(xmlAttributes[index].name, xmlAttributes[index].value);
         }
 
-        // element is like <element namespace="uri"/>
+        // Element is like <element namespace="uri"/>
         if (element.hasAttributeNS('http://www.w3.org/2000/xmlns/', '')) {
-            node.attributes().set('xmlns', element.getAttributeNS('http://www.w3.org/2000/xmlns/', ''));
+            node.attributes().set('xmlns', element.getAttributeNS('http://www.w3.org/2000/xmlns/', '') ?? '');
         }
 
         const children = element.childNodes;
-        let j;
-        for (j = 0; j < children.length; j++) {
-            const child = children[j];
+        let index_;
+        for (index_ = 0; index_ < children.length; index_++) {
+            const child = children[index_];
             if (!DomValidators.isElement(child)) {
                 continue;
             }
+
             const childNode = this.import(child);
             node.children().add(childNode);
         }

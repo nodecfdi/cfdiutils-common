@@ -1,39 +1,39 @@
 import { DOMImplementation } from '@xmldom/xmldom';
-import { DomValidators } from '~/index';
+import { DomValidators } from '~/utils/dom-validators';
 
 describe('DomValidators', () => {
     let document: Document;
     let element: Element;
-    let attr: Attr;
+    let attribute: Attr;
     beforeEach(() => {
         document = new DOMImplementation().createDocument('', '');
         element = document.createElement('myNode');
         element.setAttribute('name', 'first');
-        attr = element.attributes.getNamedItem('name') as Attr;
+        attribute = element.attributes.getNamedItem('name')!;
     });
 
     test('is element', () => {
         expect(DomValidators.isElement(document)).toBeFalsy();
         expect(DomValidators.isElement(element)).toBeTruthy();
-        expect(DomValidators.isElement(attr)).toBeFalsy();
+        expect(DomValidators.isElement(attribute)).toBeFalsy();
     });
 
     test('is document', () => {
         expect(DomValidators.isDocument(document)).toBeTruthy();
         expect(DomValidators.isDocument(element)).toBeFalsy();
-        expect(DomValidators.isDocument(attr)).toBeFalsy();
+        expect(DomValidators.isDocument(attribute)).toBeFalsy();
     });
 
     test('is attr', () => {
         expect(DomValidators.isAttr(document)).toBeFalsy();
         expect(DomValidators.isAttr(element)).toBeFalsy();
-        expect(DomValidators.isAttr(attr)).toBeTruthy();
+        expect(DomValidators.isAttr(attribute)).toBeTruthy();
     });
 
     test('is text', () => {
         expect(DomValidators.isText(document)).toBeFalsy();
         expect(DomValidators.isText(element)).toBeFalsy();
-        expect(DomValidators.isText(attr)).toBeFalsy();
+        expect(DomValidators.isText(attribute)).toBeFalsy();
 
         const textNode = document.createTextNode('first');
         expect(DomValidators.isText(textNode)).toBeTruthy();

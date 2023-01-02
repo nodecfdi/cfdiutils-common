@@ -36,6 +36,8 @@
                 }
             }
         ],
+        "@typescript-eslint/naming-convention": ["error", { "selector": "class", "format": null }],
+        "@typescript-eslint/no-base-to-string": "off",
 
         // Unicorn rules
         "unicorn/consistent-function-scoping": [
@@ -44,6 +46,8 @@
                 "checkArrowFunctions": false
             }
         ],
-        "unicorn/prefer-spread": "off"
+        "unicorn/prefer-spread": "off",
+        "unicorn/no-null": "off",
+        "unicorn/prefer-dom-node-append": "off"
     }
 }

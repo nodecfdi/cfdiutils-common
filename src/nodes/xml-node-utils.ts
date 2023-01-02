@@ -1,10 +1,11 @@
-import { CNodeInterface } from './c-node-interface';
+import { getSerializer } from '../dom';
+import { Xml } from '../utils/xml';
+import { type CNodeHasValueInterface } from './c-node-has-value-interface';
+import { type CNodeInterface } from './c-node-interface';
 import { XmlNodeExporter } from './xml-node-exporter';
 import { XmlNodeImporter } from './xml-node-importer';
-import { Xml } from '../utils/xml';
-import { CNodeHasValueInterface } from './c-node-has-value-interface';
-import { getSerializer } from '../dom';
 
+// eslint-disable-next-line @typescript-eslint/no-extraneous-class
 export class XmlNodeUtils {
     public static nodeToXmlElement(node: CNodeInterface): Element {
         return new XmlNodeExporter().export(node);

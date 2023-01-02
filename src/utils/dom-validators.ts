@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-extraneous-class
 export class DomValidators {
     public static isElement(nodo: Node): nodo is Element {
         return nodo && nodo.nodeType === 1;

@@ -1,4 +1,4 @@
-import { CNode } from '~/index';
+import { CNode } from '~/nodes/c-node';
 
 describe('Nodes.CNode', () => {
     test('construct without arguments', () => {
@@ -23,9 +23,7 @@ describe('Nodes.CNode', () => {
     });
 
     test('construct with empty name', () => {
-        const t = (): void => {
-            new CNode('\n  \t  \n');
-        };
+        const t = (): CNode => new CNode('\n  \t  \n');
 
         expect(t).toThrow(SyntaxError);
         expect(t).toThrow('invalid xml name');

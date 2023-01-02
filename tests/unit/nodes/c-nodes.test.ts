@@ -1,4 +1,6 @@
-import { CNode, CNodeInterface, CNodes } from '~/index';
+import { CNode } from '~/nodes/c-node';
+import { type CNodeInterface } from '~/nodes/c-node-interface';
+import { CNodes } from '~/nodes/c-nodes';
 
 describe('Nodes.CNodes', () => {
     test('empty nodes', () => {
@@ -12,9 +14,9 @@ describe('Nodes.CNodes', () => {
 
         const nodes = new CNodes(expected);
         expect(nodes).toHaveLength(2);
-        nodes.forEach((node, i) => {
-            expect(node).toStrictEqual(expected[i]);
-        });
+        for (const [index, node] of nodes.entries()) {
+            expect(node).toStrictEqual(expected[index]);
+        }
     });
 
     test('manipulate the collection', () => {
@@ -31,19 +33,19 @@ describe('Nodes.CNodes', () => {
         const equalToFirst = new CNode('foo');
         expect(nodes.exists(equalToFirst)).toBeFalsy();
 
-        // add an equal node
+        // Add an equal node
         nodes.add(equalToFirst);
         expect(nodes).toHaveLength(3);
 
-        // add an identical node
+        // Add an identical node
         nodes.add(equalToFirst);
         expect(nodes).toHaveLength(3);
 
-        // remove the node
+        // Remove the node
         nodes.remove(equalToFirst);
         expect(nodes).toHaveLength(2);
 
-        // remove the node again
+        // Remove the node again
         nodes.remove(equalToFirst);
         expect(nodes).toHaveLength(2);
 
@@ -66,6 +68,7 @@ describe('Nodes.CNodes', () => {
         if (found) {
             nodes.remove(found);
         }
+
         expect(nodes.exists(child)).toBeFalsy();
     });
 
@@ -102,7 +105,7 @@ describe('Nodes.CNodes', () => {
         expect(nodes.get(0)).toStrictEqual(foo);
         expect(nodes.get(1)).toStrictEqual(bar);
 
-        // get after remove
+        // Get after remove
         nodes.remove(foo);
         expect(nodes.get(0)).toStrictEqual(bar);
     });
@@ -124,26 +127,26 @@ describe('Nodes.CNodes', () => {
 
     test('ordered children', () => {
         const nodes = new CNodes([new CNode('foo'), new CNode('bar'), new CNode('baz')]);
-        // test initial order
+        // Test initial order
         expect(JSON.stringify([nodes.get(0).name(), nodes.get(1).name(), nodes.get(2).name()])).toEqual(
             JSON.stringify(['foo', 'bar', 'baz'])
         );
 
-        // sort previous values
+        // Sort previous values
         nodes.setOrder(['baz', '', '0', 'foo', '', 'bar', 'baz']);
         expect(nodes.getOrder()).toEqual(['baz', 'foo', 'bar']);
         expect(JSON.stringify([nodes.get(0).name(), nodes.get(1).name(), nodes.get(2).name()])).toEqual(
             JSON.stringify(['baz', 'foo', 'bar'])
         );
 
-        // add other baz (inserted at the bottom)
+        // Add other baz (inserted at the bottom)
         nodes.add(new CNode('baz', { id: 'second' }));
         expect(JSON.stringify([nodes.get(0).name(), nodes.get(1).name(), nodes.get(2).name()])).toEqual(
             JSON.stringify(['baz', 'baz', 'foo'])
         );
         expect(nodes.get(1).attributes().get('id')).toEqual('second');
 
-        // add other not listed
+        // Add other not listed
         const notListed = new CNode('yyy');
         nodes.add(notListed);
         expect(nodes.get(4)).toStrictEqual(notListed);

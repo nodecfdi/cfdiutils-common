@@ -1,5 +1,5 @@
-export interface CNodeHasValueInterface {
+export type CNodeHasValueInterface = {
     value(): string;
 
     setValue(value: string): void;
-}
+};
