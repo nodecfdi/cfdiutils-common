@@ -1,5 +1,5 @@
 /**
- * @vitest-environment jsdom
+ * \@vitest-environment jsdom
  */
 
 import 'jest-xml-matcher';

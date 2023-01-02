@@ -4,9 +4,10 @@ import { defineConfig, type Options } from 'tsup';
 const entry = 'src/index.ts';
 
 const sharedConfig = defineConfig({
+    globalName: 'cfdiutilsCommon',
     splitting: false,
     sourcemap: true,
-    format: ['esm', 'cjs'],
+    format: ['esm', 'cjs', 'iife'],
     treeshake: true,
     minify: isCI,
     bundle: true
@@ -14,13 +15,17 @@ const sharedConfig = defineConfig({
 
 const mainConfig = defineConfig({
     ...sharedConfig,
-    entry: [entry],
+    entry: {
+        'cfdiutils-common': entry
+    },
     dts: false
 }) as Options;
 
 const dtsConfig = defineConfig({
     ...sharedConfig,
-    entry: [entry],
+    entry: {
+        'cfdiutils-common': entry
+    },
     dts: {
         entry,
         only: true

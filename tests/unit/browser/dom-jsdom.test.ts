@@ -1,5 +1,5 @@
 /**
- * @vitest-environment jsdom
+ * \@vitest-environment jsdom
  */
 
 import { getDom, getParser, getSerializer, install } from '~/dom';

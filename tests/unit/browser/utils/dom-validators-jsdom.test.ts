@@ -1,5 +1,5 @@
 /**
- * @vitest-environment jsdom
+ * \@vitest-environment jsdom
  */
 
 import { DomValidators } from '~/utils/dom-validators';
