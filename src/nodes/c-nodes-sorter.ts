@@ -95,7 +95,7 @@ export class CNodesSorter {
      * @param input - CNodeInterface
      * @param callable - function callable
      */
-    private stableArraySort(input: CNodeInterface[], callable: string): CNodeInterface[] {
+    private stableArraySort(input: CNodeInterface[], callable: keyof this): CNodeInterface[] {
         let list = input.map((entry, index) => ({
             item: entry,
             index
@@ -106,10 +106,7 @@ export class CNodesSorter {
             a: { item: CNodeInterface; index: number },
             b: { item: CNodeInterface; index: number }
         ): number => {
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-expect-error
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-            let value: number = this[callable](a.item, b.item) as number;
+            let value: number = (this[callable] as (a: CNodeInterface, b: CNodeInterface) => number)(a.item, b.item);
             if (value === 0) {
                 value = Math.sign(a.index - b.index);
             }

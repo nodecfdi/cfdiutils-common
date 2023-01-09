@@ -2,20 +2,19 @@ import { getDom, getParser } from '../dom';
 import { DomValidators } from './dom-validators';
 
 /**
- * XML static class utils
+ * XML static utils
  * @public
  */
-// eslint-disable-next-line @typescript-eslint/no-extraneous-class
-export class Xml {
-    public static documentElement(document: Document): Element {
+export const Xml = {
+    documentElement(document: Document): Element {
         if (!DomValidators.isElement(document.documentElement)) {
             throw new SyntaxError('Document does not have root element');
         }
 
         return document.documentElement;
-    }
+    },
 
-    public static ownerDocument(node: Node): Document {
+    ownerDocument(node: Node): Document {
         if (!node.ownerDocument) {
             if (DomValidators.isDocument(node)) {
                 return node;
@@ -25,15 +24,15 @@ export class Xml {
         }
 
         return node.ownerDocument;
-    }
+    },
 
-    public static newDocument(document?: Document): Document {
+    newDocument(document?: Document): Document {
         if (!document) document = getDom().createDocument(null, null, null);
 
         return document;
-    }
+    },
 
-    public static newDocumentContent(content: string): Document {
+    newDocumentContent(content: string): Document {
         if (content === '') {
             throw new SyntaxError('Received xml string argument is empty');
         }
@@ -51,15 +50,15 @@ export class Xml {
         } catch (error) {
             throw new SyntaxError(`Cannot create a Document from xml string, errors: ${JSON.stringify(error)}`);
         }
-    }
+    },
 
-    public static isValidXmlName(name: string): boolean {
+    isValidXmlName(name: string): boolean {
         if (name === '') return false;
 
         return /^[\p{L}_:][\p{L}\d_:.-]*$/u.test(name);
-    }
+    },
 
-    public static createElement(document: Document, name: string, content = ''): Element {
+    createElement(document: Document, name: string, content = ''): Element {
         return Xml.createDOMElement(
             () => {
                 if (!name) {
@@ -71,9 +70,9 @@ export class Xml {
             `Cannot create element with name ${name}`,
             content
         );
-    }
+    },
 
-    public static createDOMElement(makeElement: () => Element, errorMessage: string, content: string): Element {
+    createDOMElement(makeElement: () => Element, errorMessage: string, content: string): Element {
         let element: Element | undefined;
         let previousException: Error | undefined;
         try {
@@ -94,4 +93,4 @@ export class Xml {
 
         return element;
     }
-}
+};

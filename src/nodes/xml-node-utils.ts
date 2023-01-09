@@ -8,13 +8,12 @@ import { XmlNodeImporter } from './xml-node-importer';
 /**
  * @public
  */
-// eslint-disable-next-line @typescript-eslint/no-extraneous-class
-export class XmlNodeUtils {
-    public static nodeToXmlElement(node: CNodeInterface): Element {
+export const XmlNodeUtils = {
+    nodeToXmlElement(node: CNodeInterface): Element {
         return new XmlNodeExporter().export(node);
-    }
+    },
 
-    public static nodeToXmlString(node: CNodeInterface, withXmlHeader = false): string {
+    nodeToXmlString(node: CNodeInterface, withXmlHeader = false): string {
         const element = XmlNodeUtils.nodeToXmlElement(node);
         if (withXmlHeader) {
             const document = element.ownerDocument;
@@ -25,13 +24,13 @@ export class XmlNodeUtils {
         }
 
         return getSerializer().serializeToString(element.ownerDocument);
-    }
+    },
 
-    public static nodeFromXmlElement(element: Element): CNodeInterface & CNodeHasValueInterface {
+    nodeFromXmlElement(element: Element): CNodeInterface & CNodeHasValueInterface {
         return new XmlNodeImporter().import(element);
-    }
+    },
 
-    public static nodeFromXmlString(content: string): CNodeInterface & CNodeHasValueInterface {
+    nodeFromXmlString(content: string): CNodeInterface & CNodeHasValueInterface {
         return XmlNodeUtils.nodeFromXmlElement(Xml.documentElement(Xml.newDocumentContent(content)));
     }
-}
+};
