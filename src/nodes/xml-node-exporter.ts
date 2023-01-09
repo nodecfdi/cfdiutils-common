@@ -1,7 +1,10 @@
-import { CNodeInterface } from './c-node-interface';
-import { CNodeHasValueInterface } from './c-node-has-value-interface';
 import { Xml } from '../utils/xml';
+import { type CNodeHasValueInterface } from './c-node-has-value-interface';
+import { type CNodeInterface } from './c-node-interface';
 
+/**
+ * @public
+ */
 export class XmlNodeExporter {
     public export(node: CNodeInterface): Element {
         const document = Xml.newDocument();
@@ -14,16 +17,16 @@ export class XmlNodeExporter {
     private exportRecursive(document: Document, node: CNodeInterface): Element {
         const element = document.createElement(node.name());
 
-        node.attributes().forEach((value, key) => {
+        for (const [key, value] of node.attributes().entries()) {
             element.setAttribute(key, value);
-        });
+        }
 
-        node.children().forEach((child) => {
+        for (const child of node.children()) {
             const childElement = this.exportRecursive(document, child);
             element.appendChild(childElement);
-        });
+        }
 
-        if (this.isCNodeHasValueInterface(node) && '' !== node.value()) {
+        if (this.isCNodeHasValueInterface(node) && node.value() !== '') {
             element.appendChild(document.createTextNode(node.value()));
         }
 

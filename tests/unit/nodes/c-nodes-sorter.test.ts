@@ -1,4 +1,5 @@
-import { CNode, CNodesSorter } from '~/index';
+import { CNode } from '~/nodes/c-node';
+import { CNodesSorter } from '~/nodes/c-nodes-sorter';
 
 describe('Nodes.CNodesSorter', () => {
     test('construct with names', () => {
@@ -14,17 +15,17 @@ describe('Nodes.CNodesSorter', () => {
 
     test('parse names', () => {
         const sorter = new CNodesSorter();
-        // all invalid values
+        // All invalid values
         expect(sorter.parseNames([null, undefined, 0, ''])).toStrictEqual(new Map());
-        // all valid values
+        // All valid values
         expect(sorter.parseNames(['foo', 'bar'])).toStrictEqual(
             new Map(['foo', 'bar'].map((value, key) => [key, value]))
         );
-        // duplicated values
+        // Duplicated values
         expect(sorter.parseNames(['foo', 'bar', 'bar', 'foo', 'baz'])).toStrictEqual(
             new Map(['foo', 'bar', 'baz'].map((value, key) => [key, value]))
         );
-        // mixed values
+        // Mixed values
         expect(sorter.parseNames(['', 'foo', '', 'bar', 'foo'])).toStrictEqual(
             new Map(['foo', 'bar'].map((value, key) => [key, value]))
         );
@@ -34,11 +35,11 @@ describe('Nodes.CNodesSorter', () => {
         const sorter = new CNodesSorter(['foo', 'bar']);
         expect(JSON.stringify(sorter.getOrder())).toEqual(JSON.stringify(['foo', 'bar']));
 
-        // it changed
+        // It changed
         expect(sorter.setOrder(['bar', 'foo'])).toBeTruthy();
         expect(JSON.stringify(sorter.getOrder())).toEqual(JSON.stringify(['bar', 'foo']));
 
-        // it did not change
+        // It did not change
         expect(sorter.setOrder(['bar', 'foo'])).toBeFalsy();
         expect(JSON.stringify(sorter.getOrder())).toEqual(JSON.stringify(['bar', 'foo']));
     });
@@ -62,11 +63,12 @@ describe('Nodes.CNodesSorter', () => {
 
     test('order preserve position', () => {
         const list: CNode[] = [];
-        let i = 0;
-        while (i < 1000) {
+        let index = 0;
+        while (index < 1000) {
             list.push(new CNode('foo'));
-            i++;
+            index++;
         }
+
         const sorter = new CNodesSorter(['foo']);
         expect(JSON.stringify(sorter.sort(list))).toEqual(JSON.stringify(list));
     });

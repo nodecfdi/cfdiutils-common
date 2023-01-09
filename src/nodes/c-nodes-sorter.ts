@@ -1,8 +1,31 @@
-import { CNodeInterface } from './c-node-interface';
+import { type CNodeInterface } from './c-node-interface';
 
+/**
+ * @public
+ */
 export class CNodesSorter {
-    private _order: Map<string, number> = new Map<string, number>();
+    /**
+     * Internal compare Maps
+     * @param a - map
+     * @param b - map
+     */
+    private static compareMaps(a: Map<unknown, unknown>, b: Map<unknown, unknown>): boolean {
+        let testValue;
+        if (a.size !== b.size) {
+            return false;
+        }
 
+        for (const [key, value] of a) {
+            testValue = b.get(key);
+            if (testValue !== value || (testValue === undefined && !b.has(key))) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private _order: Map<string, number> = new Map<string, number>();
     private size!: number;
 
     constructor(order: string[] = []) {
@@ -18,6 +41,7 @@ export class CNodesSorter {
         if (CNodesSorter.compareMaps(this._order, order)) {
             return false;
         }
+
         this._order = order;
         this.size = order.size;
 
@@ -25,14 +49,13 @@ export class CNodesSorter {
     }
 
     public parseNames(names: unknown[]): Map<number, string> {
-        const isValidName = (name: unknown): boolean => {
-            return !!name && typeof name === 'string' && name !== '0';
-        };
+        const isValidName = (name: unknown): boolean => Boolean(name) && typeof name === 'string' && name !== '0';
 
         return new Map(
-            [...new Set(names.filter(isValidName) as string[])].map((entry, i) => {
-                return [i, entry];
-            })
+            [...new Set(names.filter((element) => isValidName(element)) as string[])].map((entry, index) => [
+                index,
+                entry
+            ])
         );
     }
 
@@ -63,7 +86,7 @@ export class CNodesSorter {
     public valueByName(name: string): number {
         const getOrder = this._order.get(name);
 
-        return getOrder !== undefined ? getOrder : this.size;
+        return getOrder ?? this.size;
     }
 
     /**
@@ -72,22 +95,18 @@ export class CNodesSorter {
      * @param input - CNodeInterface
      * @param callable - function callable
      */
-    private stableArraySort(input: CNodeInterface[], callable: string): CNodeInterface[] {
-        let list = input.map((entry, i) => {
-            return {
-                item: entry,
-                index: i
-            };
-        });
+    private stableArraySort(input: CNodeInterface[], callable: keyof this): CNodeInterface[] {
+        let list = input.map((entry, index) => ({
+            item: entry,
+            index
+        }));
 
         // Double check by function provider and indexed
         const comparar = (
             a: { item: CNodeInterface; index: number },
             b: { item: CNodeInterface; index: number }
         ): number => {
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore
-            let value: number = this[callable](a.item, b.item) as number;
+            let value: number = (this[callable] as (a: CNodeInterface, b: CNodeInterface) => number)(a.item, b.item);
             if (value === 0) {
                 value = Math.sign(a.index - b.index);
             }
@@ -97,28 +116,6 @@ export class CNodesSorter {
 
         list = list.sort(comparar);
 
-        return list.map((node) => {
-            return node.item;
-        });
-    }
-
-    /**
-     * Internal compare Maps
-     * @param a - map
-     * @param b - map
-     */
-    private static compareMaps(a: Map<unknown, unknown>, b: Map<unknown, unknown>): boolean {
-        let testVal;
-        if (a.size !== b.size) {
-            return false;
-        }
-        for (const [key, val] of a) {
-            testVal = b.get(key);
-            if (testVal !== val || (testVal === undefined && !b.has(key))) {
-                return false;
-            }
-        }
-
-        return true;
+        return list.map((node) => node.item);
     }
 }

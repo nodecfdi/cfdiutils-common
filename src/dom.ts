@@ -6,6 +6,7 @@ let _serializer: XMLSerializer | undefined;
 
 /**
  * Get instance of DOMParser
+ * @public
  *
  * @returns the current DOMParser object
  *
@@ -21,6 +22,7 @@ const getParser = (): DOMParser => {
 
 /**
  * Get instance of XMLSerializer
+ * @public
  *
  * @returns the current XMLSerializer object
  *
@@ -36,6 +38,7 @@ const getSerializer = (): XMLSerializer => {
 
 /**
  * Get instance of DOMImplementation
+ * @public
  *
  * @returns the current DOMImplementation object
  *
@@ -51,6 +54,7 @@ const getDom = (): DOMImplementation => {
 
 /**
  * Install DOM instances for usage on this library
+ * @public
  */
 const install = (parser?: DOMParser, serializer?: XMLSerializer, dom?: DOMImplementation): void => {
     _parser = parser;

@@ -1,11 +1,20 @@
-import { XMLSerializer, DOMImplementation, DOMParser } from '@xmldom/xmldom';
-import { readFileSync } from 'fs';
-import { CNode, install, Xml, XmlNodeUtils } from '~/index';
-import { TestCase } from '../../test-case';
+/**
+ * \@vitest-environment jsdom
+ */
 
-describe('XmlNodeUtils', () => {
+import 'jest-xml-matcher';
+import { readFileSync } from 'node:fs';
+import { install } from '~/dom';
+import { CNode } from '~/nodes/c-node';
+import { XmlNodeUtils } from '~/nodes/xml-node-utils';
+import { Xml } from '~/utils/xml';
+import { useTestCase } from '../../../test-case';
+
+describe('XmlNodeUtils with jsdom', () => {
+    const { utilAsset } = useTestCase();
+
     beforeEach(() => {
-        install(new DOMParser(), new XMLSerializer(), new DOMImplementation());
+        install(new DOMParser(), new XMLSerializer(), document.implementation);
     });
 
     test('node to Xml string Xml Header', () => {
@@ -19,22 +28,22 @@ describe('XmlNodeUtils', () => {
     });
 
     test.each([
-        [/* 'simple-xml',  */ TestCase.utilAsset('nodes/sample.xml')],
-        [/* 'with-texts-xml', */ TestCase.utilAsset('nodes/sample-with-texts.xml')],
-        [/* 'cfdi', */ TestCase.utilAsset('cfdi33.xml')]
+        [/* 'simple-xml',  */ utilAsset('nodes/sample.xml')],
+        [/* 'with-texts-xml', */ utilAsset('nodes/sample-with-texts.xml')],
+        [/* 'cfdi', */ utilAsset('cfdi33.xml')]
     ])('export from file and export again', (filename: string) => {
-        const source = readFileSync(filename, 'utf-8');
+        const source = readFileSync(filename, 'utf8');
 
         const document = Xml.newDocumentContent(source);
 
-        // create node from element
+        // Create node from element
         const node = XmlNodeUtils.nodeFromXmlElement(Xml.documentElement(document));
 
-        // create element from node
+        // Create element from node
         const element = XmlNodeUtils.nodeToXmlElement(node);
         const xmlString = XmlNodeUtils.nodeToXmlString(node);
 
-        // compare versus source
+        // Compare versus source
         const xmlSave = new XMLSerializer().serializeToString(element.ownerDocument);
 
         expect(xmlSave).toEqualXML(source);
@@ -50,12 +59,13 @@ describe('XmlNodeUtils', () => {
     });
 
     test('import xml with namespace without prefix', () => {
-        const file = TestCase.utilAsset('xml-with-namespace-definitions-at-child-level.xml');
-        const node = XmlNodeUtils.nodeFromXmlString(readFileSync(file, 'utf-8'));
+        const file = utilAsset('xml-with-namespace-definitions-at-child-level.xml');
+        const node = XmlNodeUtils.nodeFromXmlString(readFileSync(file, 'utf8'));
         const inspected = node.searchNode('base:Third', 'innerNS');
         if (!inspected) {
             throw new Error('The specimen does not have the required test case');
         }
+
         expect(inspected.get('xmlns')).toBe('http://external.com/inner');
     });
 

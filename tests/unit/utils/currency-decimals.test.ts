@@ -2,25 +2,21 @@ import { CurrencyDecimals } from '~/utils/currency-decimals';
 
 describe('CurrencyDecimals', () => {
     test('create generic', () => {
-        const curDec = new CurrencyDecimals('FOO', 2);
+        const currentDec = new CurrencyDecimals('FOO', 2);
 
-        expect(curDec.currency()).toBe('FOO');
-        expect(curDec.decimals()).toBe(2);
+        expect(currentDec.currency()).toBe('FOO');
+        expect(currentDec.decimals()).toBe(2);
     });
 
     test.each([[''], ['ÑÑÑ'], ['XXXX']])('create with empty code', (currency) => {
-        const t = (): void => {
-            new CurrencyDecimals(currency, 2);
-        };
+        const t = (): CurrencyDecimals => new CurrencyDecimals(currency, 2);
 
         expect(t).toThrow(Error);
         expect(t).toThrow('currency');
     });
 
     test('create with negative decimals', () => {
-        const t = (): void => {
-            new CurrencyDecimals('FOO', -1);
-        };
+        const t = (): CurrencyDecimals => new CurrencyDecimals('FOO', -1);
 
         expect(t).toThrow(Error);
         expect(t).toThrow('decimals');

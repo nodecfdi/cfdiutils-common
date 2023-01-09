@@ -25,14 +25,14 @@ jobs:
           node-version: '16'
 
       - name: Install dependencies
-        uses: pnpm/action-setup@v2.2.2
+        uses: pnpm/action-setup@v2
         with:
-          version: 6.23.6
+          version: 7
           run_install: true
 
       - name: Create code coverage
         run: |
-          pnpm test:ci:coverage
+          pnpm test:coverage
         env:
           CI: true
 
@@ -53,15 +53,15 @@ jobs:
         id: check-secrets
         run: |
           if [ -n "${{ secrets.GITHUB_TOKEN }}" ]; then
-            echo "::set-output name=github::yes"
+            echo "github=yes" >> $GITHUB_OUTPUT
           else
-            echo "::set-output name=github::no"
+            echo "github=no" >> $GITHUB_OUTPUT
             echo "::warning ::GITHUB_TOKEN non set"
           fi
           if [ -n "${{ secrets.SONAR_TOKEN }}" ]; then
-            echo "::set-output name=sonar::yes"
+            echo "sonar=yes" >> $GITHUB_OUTPUT
           else
-            echo "::set-output name=sonar::no"
+            echo "sonar=no" >> $GITHUB_OUTPUT
             echo "::warning ::SONAR_TOKEN non set"
           fi
 
@@ -89,9 +89,9 @@ jobs:
           node-version: '16'
 
       - name: Install dependencies
-        uses: pnpm/action-setup@v2.2.2
+        uses: pnpm/action-setup@v2
         with:
-          version: 6.23.6
+          version: 7
           run_install: true
 
       - name: Obtain code coverage

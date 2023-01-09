@@ -1,22 +1,23 @@
-import { CNodeInterface } from './c-node-interface';
-import { CAttributes } from './c-attributes';
 import { Xml } from '../utils/xml';
+import { CAttributes } from './c-attributes';
+import { type CNodeHasValueInterface } from './c-node-has-value-interface';
+import { type CNodeInterface } from './c-node-interface';
 import { CNodes } from './c-nodes';
-import { CNodeHasValueInterface } from './c-node-has-value-interface';
 
+/**
+ * @public
+ */
 export class CNode implements CNodeInterface, CNodeHasValueInterface {
     private readonly _name: string;
-
     private readonly _attributes: CAttributes;
-
     private readonly _children: CNodes;
-
     private _value: string;
 
     constructor(name: string, attributes: Record<string, unknown> = {}, children: CNodeInterface[] = [], value = '') {
         if (!Xml.isValidXmlName(name)) {
             throw new SyntaxError(`Cannot create a node with an invalid xml name: ${name}`);
         }
+
         this._name = name;
         this._attributes = new CAttributes(attributes);
         this._children = new CNodes(children);
@@ -71,18 +72,18 @@ export class CNode implements CNodeInterface, CNodeHasValueInterface {
         const nodeName = searchPath.pop();
         const parent = this.searchNode(...searchPath);
         if (parent) {
-            parent.children().forEach((child) => {
+            for (const child of parent.children()) {
                 if (child.name() === nodeName) {
                     nodes.add(child);
                 }
-            });
+            }
         }
 
         return nodes;
     }
 
     public searchNode(...searchPath: string[]): CNodeInterface | undefined {
-        // eslint-disable-next-line @typescript-eslint/no-this-alias
+        // eslint-disable-next-line @typescript-eslint/no-this-alias, unicorn/no-this-assignment
         let node: CNodeInterface | undefined = this;
         for (const searchName of searchPath) {
             node = node.children().firstNodeWithName(searchName);

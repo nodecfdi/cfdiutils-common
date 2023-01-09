@@ -1,8 +1,11 @@
-import { CNodeInterface } from './c-node-interface';
+import { type CNodeInterface } from './c-node-interface';
 import { CNodesSorter } from './c-nodes-sorter';
 
+/**
+ * @public
+ */
 export class CNodes extends Array<CNodeInterface> {
-    private _sorter: CNodesSorter;
+    private readonly _sorter: CNodesSorter;
 
     constructor(nodes: CNodeInterface[] = []) {
         super();
@@ -12,12 +15,13 @@ export class CNodes extends Array<CNodeInterface> {
 
     public add(...nodes: CNodeInterface[]): this {
         let somethingChange = false;
-        nodes.forEach((node) => {
+        for (const node of nodes) {
             if (!this.exists(node)) {
                 this.push(node);
                 somethingChange = true;
             }
-        });
+        }
+
         if (somethingChange) {
             this.order();
         }
@@ -59,7 +63,7 @@ export class CNodes extends Array<CNodeInterface> {
     }
 
     public exists(node: CNodeInterface): boolean {
-        return this.indexOf(node) >= 0;
+        return this.includes(node);
     }
 
     public first(): CNodeInterface | undefined {
@@ -82,21 +86,22 @@ export class CNodes extends Array<CNodeInterface> {
 
     public getNodesByName(nodeName: string): CNodes {
         const nodes = new CNodes();
-        this.forEach((node) => {
+        for (const node of this) {
             if (node.name() === nodeName) {
                 nodes.add(node);
             }
-        });
+        }
 
         return nodes;
     }
 
-    public importFromArray(nodes: CNodeInterface[]): CNodes {
-        nodes.forEach((node, i) => {
+    public importFromArray(nodes: CNodeInterface[]): this {
+        for (const [index, node] of nodes.entries()) {
             if (typeof node.searchNodes !== 'function' || typeof node.children !== 'function') {
-                throw new SyntaxError(`The element index ${i} is not a CNodeInterface object`);
+                throw new SyntaxError(`The element index ${index} is not a CNodeInterface object`);
             }
-        });
+        }
+
         this.add(...nodes);
 
         return this;

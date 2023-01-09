@@ -1,59 +1,64 @@
-import { DomValidators } from './dom-validators';
 import { getDom, getParser } from '../dom';
+import { DomValidators } from './dom-validators';
 
-export class Xml {
-    public static documentElement(document: Document): Element {
+/**
+ * XML static utils
+ * @public
+ */
+export const Xml = {
+    documentElement(document: Document): Element {
         if (!DomValidators.isElement(document.documentElement)) {
             throw new SyntaxError('Document does not have root element');
         }
 
         return document.documentElement;
-    }
+    },
 
-    public static ownerDocument(node: Node): Document {
+    ownerDocument(node: Node): Document {
         if (!node.ownerDocument) {
             if (DomValidators.isDocument(node)) {
                 return node;
             }
+
             throw new TypeError('node.ownerDocument is undefined but node is not a Document');
         }
 
         return node.ownerDocument;
-    }
+    },
 
-    public static newDocument(document?: Document): Document {
+    newDocument(document?: Document): Document {
         if (!document) document = getDom().createDocument(null, null, null);
 
         return document;
-    }
+    },
 
-    public static newDocumentContent(content: string): Document {
+    newDocumentContent(content: string): Document {
         if (content === '') {
             throw new SyntaxError('Received xml string argument is empty');
         }
+
         const parser = getParser();
         try {
-            const docParse = parser.parseFromString(content, 'text/xml');
+            const documentParse = parser.parseFromString(content, 'text/xml');
 
-            // Capture errors for browser usage
-            /* istanbul ignore next */
-            if (docParse.getElementsByTagName('parsererror').length > 0) {
+            // eslint-disable-next-line unicorn/prefer-query-selector
+            if (documentParse.getElementsByTagName('parsererror').length > 0) {
                 throw new Error('Error parsing XML');
             }
 
-            return Xml.newDocument(docParse);
+            return Xml.newDocument(documentParse);
         } catch (error) {
             throw new SyntaxError(`Cannot create a Document from xml string, errors: ${JSON.stringify(error)}`);
         }
-    }
+    },
 
-    public static isValidXmlName(name: string): boolean {
+    isValidXmlName(name: string): boolean {
         if (name === '') return false;
 
         return /^[\p{L}_:][\p{L}\d_:.-]*$/u.test(name);
-    }
+    },
 
-    public static createElement(document: Document, name: string, content = ''): Element {
+    createElement(document: Document, name: string, content = ''): Element {
         return Xml.createDOMElement(
             () => {
                 if (!name) {
@@ -65,25 +70,27 @@ export class Xml {
             `Cannot create element with name ${name}`,
             content
         );
-    }
+    },
 
-    public static createDOMElement(makeElement: () => Element, errorMessage: string, content: string): Element {
-        let element: Element | null = null;
-        let previousException: Error | null = null;
+    createDOMElement(makeElement: () => Element, errorMessage: string, content: string): Element {
+        let element: Element | undefined;
+        let previousException: Error | undefined;
         try {
             element = makeElement();
-        } catch (e) {
-            previousException = e as Error;
+        } catch (error) {
+            previousException = error as Error;
         }
+
         if (!element || !DomValidators.isElement(element)) {
             throw new SyntaxError(
                 `${errorMessage} on ${previousException ? previousException.message : 'not is element'}`
             );
         }
+
         if (content !== '') {
             element?.appendChild(Xml.ownerDocument(element).createTextNode(content));
         }
 
         return element;
     }
-}
+};

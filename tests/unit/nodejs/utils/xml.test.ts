@@ -1,8 +1,9 @@
-import { DOMNotFoundError, install, Xml } from '~/index';
-import { DOMImplementation, XMLSerializer, DOMParser } from '@xmldom/xmldom';
-import { JSDOM } from 'jsdom';
+import { DOMImplementation, DOMParser, XMLSerializer } from '@xmldom/xmldom';
+import { install } from '~/dom';
+import { DOMNotFoundError } from '~/exceptions/dom-not-found-error';
+import { Xml } from '~/utils/xml';
 
-describe('Utils.Xml', () => {
+describe('Xml Util', () => {
     const provideElementMake: string[][] = [
         ['', ''],
         ['foo', 'foo'],
@@ -15,13 +16,16 @@ describe('Utils.Xml', () => {
         ['foo &amp; bar', 'foo & bar']
     ];
 
-    beforeEach(() => install());
+    beforeEach(() => {
+        // Restart DOM definitions install
+        install();
+    });
 
     test.each([['First_Name'], ['_4-lane'], ['tél'], ['month-day']])('true on valid names', (name) => {
         expect(Xml.isValidXmlName(name)).toBeTruthy();
     });
 
-    test.each([['Driver´s_License'], ['month/day'], ['first name'], ['4-lane']])('false on invalid names', (name) => {
+    test.each([['Driver`s_License'], ['month/day'], ['first name'], ['4-lane']])('false on invalid names', (name) => {
         expect(Xml.isValidXmlName(name)).toBeFalsy();
     });
 
@@ -85,26 +89,8 @@ describe('Utils.Xml', () => {
         expect(element.textContent).toBe(content);
 
         const rawXml = new XMLSerializer().serializeToString(document);
-        // fixed self-closing tags to full closing tags
-        const fixedXml = rawXml.replace(/<(.*?)\s*\/>/g, '<$1></$1>');
-        expect(fixedXml).toBe(`<${elementName}>${expected}</${elementName}>`);
-    });
 
-    test.each(provideElementMake)('method createElement with jsdom', (expected, content) => {
-        const dom = new JSDOM();
-        const jsDOMParser = new dom.window.DOMParser();
-        const jsXMLSerializer = new dom.window.XMLSerializer();
-        const jsDOMImplementation = dom.window.document.implementation;
-        install(jsDOMParser, jsXMLSerializer, jsDOMImplementation);
-
-        const elementName = 'element';
-        const document = Xml.newDocument();
-        const element = Xml.createElement(document, elementName, content);
-        document.appendChild(element);
-        expect(element.textContent).toBe(content);
-
-        const rawXml = new XMLSerializer().serializeToString(document);
-        // fixed self-closing tags to full closing tags
+        // Fixed self-closing tags to full closing tags
         const fixedXml = rawXml.replace(/<(.*?)\s*\/>/g, '<$1></$1>');
         expect(fixedXml).toBe(`<${elementName}>${expected}</${elementName}>`);
     });

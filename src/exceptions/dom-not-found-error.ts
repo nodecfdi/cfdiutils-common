@@ -1,3 +1,7 @@
+/**
+ * DOMNotFoundError exception. For not provided dom resolver.
+ * @public
+ */
 export class DOMNotFoundError extends Error {
     /**
      *

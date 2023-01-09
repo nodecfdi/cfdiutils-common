@@ -1,7 +1,10 @@
-import { CAttributes } from './c-attributes';
-import { CNodes } from './c-nodes';
+import { type CAttributes } from './c-attributes';
+import { type CNodes } from './c-nodes';
 
-export interface CNodeInterface {
+/**
+ * @public
+ */
+export type CNodeInterface = {
     name(): string;
 
     children(): CNodes;
@@ -31,4 +34,4 @@ export interface CNodeInterface {
     count(): number;
 
     [Symbol.iterator](): IterableIterator<CNodeInterface>;
-}
+};

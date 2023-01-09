@@ -1,6 +1,28 @@
 import { Xml } from '../utils/xml';
 
+/**
+ * @public
+ */
 export class CAttributes extends Map<string, string> {
+    /**
+     * Cast any value to string
+     */
+    private static castValueToString(key: string, value: unknown): undefined | string {
+        if (value === null || value === undefined) {
+            return undefined;
+        }
+
+        if (/boolean|number|string/.test(typeof value)) {
+            return `${value}`;
+        }
+
+        if (typeof value === 'object' && !Array.isArray(value)) {
+            return value.toString();
+        }
+
+        throw new SyntaxError(`Cannot convert value of attribute ${key} to string`);
+    }
+
     constructor(attributes: Record<string, unknown> = {}) {
         super();
         this.importRecord(attributes);
@@ -16,15 +38,17 @@ export class CAttributes extends Map<string, string> {
         return value;
     }
 
-    public override set(name: string, value: string | null | undefined = null): this {
-        if (value === null || value === undefined) {
+    public override set(name: string, value?: string): this {
+        if (value === undefined || value === null) {
             this.delete(name);
 
             return this;
         }
+
         if (!Xml.isValidXmlName(name)) {
             throw new SyntaxError(`Cannot set attribute with an invalid xml name: ${name}`);
         }
+
         super.set(name, value.toString());
 
         return this;
@@ -44,10 +68,10 @@ export class CAttributes extends Map<string, string> {
 
     public importRecord(attributes: Record<string, unknown>): this {
         if (Object.keys(attributes).length > 0) {
-            Object.entries(attributes).forEach(([key, value]) => {
+            for (const [key, value] of Object.entries(attributes)) {
                 const fixedValue = CAttributes.castValueToString(key, value);
                 this.set(key, fixedValue);
-            });
+            }
         }
 
         return this;
@@ -55,30 +79,11 @@ export class CAttributes extends Map<string, string> {
 
     public exportRecord(): Record<string, string> {
         const jsonResponse: Record<string, string> = {};
-        for (const [key, val] of this.entries()) {
-            jsonResponse[key] = val;
+        for (const [key, value] of this.entries()) {
+            jsonResponse[key] = value;
         }
 
         return jsonResponse;
-    }
-
-    /**
-     * Cast any value to string
-     *
-     * @param key - key
-     * @param value - value
-     */
-    private static castValueToString(key: string, value: unknown): null | string {
-        if (value === null || value === undefined) {
-            return null;
-        }
-        if (/boolean|number|string/.test(typeof value)) {
-            return `${value}`;
-        }
-        if (typeof value === 'object' && !Array.isArray(value)) {
-            return value.toString();
-        }
-        throw new SyntaxError(`Cannot convert value of attribute ${key} to string`);
     }
 
     /**
@@ -92,7 +97,7 @@ export class CAttributes extends Map<string, string> {
         return this.get(offset);
     }
 
-    public offsetSet(offset: string, value: unknown): void {
+    public offsetSet(offset: string, value?: unknown): void {
         this.set(offset, CAttributes.castValueToString(offset, value));
     }
 
