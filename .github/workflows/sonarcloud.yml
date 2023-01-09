@@ -53,15 +53,15 @@ jobs:
         id: check-secrets
         run: |
           if [ -n "${{ secrets.GITHUB_TOKEN }}" ]; then
-            echo "{github}={yes}" >> $GITHUB_OUTPUT
+            echo "github=yes" >> $GITHUB_OUTPUT
           else
-            echo "{github}={no}" >> $GITHUB_OUTPUT
+            echo "github=no" >> $GITHUB_OUTPUT
             echo "::warning ::GITHUB_TOKEN non set"
           fi
           if [ -n "${{ secrets.SONAR_TOKEN }}" ]; then
-            echo "{sonar}={yes}" >> $GITHUB_OUTPUT
+            echo "sonar=yes" >> $GITHUB_OUTPUT
           else
-            echo "{sonar}={no}" >> $GITHUB_OUTPUT
+            echo "sonar=no" >> $GITHUB_OUTPUT
             echo "::warning ::SONAR_TOKEN non set"
           fi
 
