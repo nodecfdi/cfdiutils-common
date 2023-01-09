@@ -25,14 +25,14 @@ jobs:
           node-version: '16'
 
       - name: Install dependencies
-        uses: pnpm/action-setup@v2.2.2
+        uses: pnpm/action-setup@v2
         with:
-          version: 6.23.6
+          version: 7
           run_install: true
 
       - name: Create code coverage
         run: |
-          pnpm test:ci:coverage
+          pnpm test:coverage
         env:
           CI: true
 
@@ -89,9 +89,9 @@ jobs:
           node-version: '16'
 
       - name: Install dependencies
-        uses: pnpm/action-setup@v2.2.2
+        uses: pnpm/action-setup@v2
         with:
-          version: 6.23.6
+          version: 7
           run_install: true
 
       - name: Obtain code coverage
