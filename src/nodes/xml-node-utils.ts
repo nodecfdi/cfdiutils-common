@@ -5,6 +5,9 @@ import { type CNodeInterface } from './c-node-interface';
 import { XmlNodeExporter } from './xml-node-exporter';
 import { XmlNodeImporter } from './xml-node-importer';
 
+/**
+ * @public
+ */
 // eslint-disable-next-line @typescript-eslint/no-extraneous-class
 export class XmlNodeUtils {
     public static nodeToXmlElement(node: CNodeInterface): Element {

@@ -1,6 +1,9 @@
 import { type CAttributes } from './c-attributes';
 import { type CNodes } from './c-nodes';
 
+/**
+ * @public
+ */
 export type CNodeInterface = {
     name(): string;
 

@@ -4,6 +4,9 @@ import { type CNodeHasValueInterface } from './c-node-has-value-interface';
 import { type CNodeInterface } from './c-node-interface';
 import { CNodes } from './c-nodes';
 
+/**
+ * @public
+ */
 export class CNode implements CNodeInterface, CNodeHasValueInterface {
     private readonly _name: string;
     private readonly _attributes: CAttributes;

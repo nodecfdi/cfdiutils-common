@@ -1,6 +1,9 @@
 import { type CNodeInterface } from './c-node-interface';
 import { CNodesSorter } from './c-nodes-sorter';
 
+/**
+ * @public
+ */
 export class CNodes extends Array<CNodeInterface> {
     private readonly _sorter: CNodesSorter;
 

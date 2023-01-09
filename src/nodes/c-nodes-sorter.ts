@@ -1,5 +1,8 @@
 import { type CNodeInterface } from './c-node-interface';
 
+/**
+ * @public
+ */
 export class CNodesSorter {
     /**
      * Internal compare Maps

@@ -1,5 +1,8 @@
 import { Xml } from '../utils/xml';
 
+/**
+ * @public
+ */
 export class CAttributes extends Map<string, string> {
     /**
      * Cast any value to string

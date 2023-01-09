@@ -1,3 +1,7 @@
+/**
+ * Currency Helper utility for parse string to number with currency value.
+ * @public
+ */
 export class CurrencyDecimals {
     public static decimalsCount(value: string): number {
         const values = value.split('.');

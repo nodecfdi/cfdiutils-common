@@ -3,6 +3,9 @@ import { CNode } from './c-node';
 import { type CNodeHasValueInterface } from './c-node-has-value-interface';
 import { type CNodeInterface } from './c-node-interface';
 
+/**
+ * @public
+ */
 export class XmlNodeImporter {
     /**
      * Local record for registered namespaces to avoid set the namespace declaration in every child

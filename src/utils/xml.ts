@@ -1,6 +1,10 @@
 import { getDom, getParser } from '../dom';
 import { DomValidators } from './dom-validators';
 
+/**
+ * XML static class utils
+ * @public
+ */
 // eslint-disable-next-line @typescript-eslint/no-extraneous-class
 export class Xml {
     public static documentElement(document: Document): Element {

@@ -1,3 +1,7 @@
+/**
+ * DOM validators for compare node elements.
+ * @public
+ */
 // eslint-disable-next-line @typescript-eslint/no-extraneous-class
 export class DomValidators {
     public static isElement(nodo: Node): nodo is Element {
