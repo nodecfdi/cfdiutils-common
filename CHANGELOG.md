@@ -1,5 +1,15 @@
 # @nodecfdi/cfdiutils-common ChangeLog
 
+## 1.2.2
+
+### Patch Changes on development and build
+
+- change build tool
+- update dependencies
+- added api-extractor for check types .d.ts
+- replace microbundle for tsup
+- replace jest for vitest (added support to multiple environment tests like a node and browser)
+
 ## 1.2.1
 
 ### Patch Changes
@@ -12,17 +22,17 @@
 
 - ab38a00: DOM agnostic
 
-  ***
+    ***
 
   - Add helper for install and use anything DOM implementation class.
   - Improve documentation about new process to use `XML` and `XmlNodeUtils` helper classes.
 
-  CI
+    CI
 
   - Update workflow for use pnpm and better test coverage.
   - Added Sonarcloud for better continuous code quality.
 
-  Build
+    Build
 
   - Replace rollup bundle for microbundle for generation of library.
 

@@ -1,6 +1,6 @@
 {
     "name": "@nodecfdi/cfdiutils-common",
-    "version": "1.2.1",
+    "version": "1.2.2",
     "description": "Librería usada para contener las estructuras de datos comunes, y utilerías o funciones de ayuda común.",
     "keywords": [
         "common",
@@ -13,17 +13,17 @@
     "author": "OcelotlStudio <contacto@ocelotlstudio.com>",
     "license": "MIT",
     "type": "module",
-    "main": "./dist/prod/cfdiutils-common.cjs",
-    "module": "./dist/prod/cfdiutils-common.modern.js",
-    "unpkg": "./dist/prod/cfdiutils-common.umd.js",
+    "main": "./dist/cfdiutils-common.cjs",
+    "module": "./dist/cfdiutils-common.cjs",
+    "unpkg": "./dist/cfdiutils-common.global.js",
     "exports": {
         ".": {
-            "import": "./dist/index.js",
-            "require": "./dist/index.cjs",
+            "import": "./dist/cfdiutils-common.js",
+            "require": "./dist/cfdiutils-common.cjs",
             "types": "./dist/index.d.ts"
         }
     },
-    "types": "dist/types/index.d.ts",
+    "types": "dist/index.d.ts",
     "files": [
         "dist"
     ],
