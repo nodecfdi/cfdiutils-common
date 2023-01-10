@@ -1,3 +1,8 @@
+// Copyright (c) Nodecfdi. All rights reserved. Licensed under the MIT license.
+
+/**
+ * A library for structures of common data and utils or functions on suit cfdiutils.
+ */
 export * from './dom';
 export * from './exceptions/dom-not-found-error';
 export * from './nodes/c-attributes';
