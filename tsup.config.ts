@@ -10,7 +10,8 @@ const sharedConfig = defineConfig({
     format: ['esm', 'cjs', 'iife'],
     treeshake: true,
     minify: isCI,
-    bundle: true
+    bundle: true,
+    shims: true
 });
 
 const mainConfig = defineConfig({
