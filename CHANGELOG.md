@@ -1,5 +1,11 @@
 # @nodecfdi/cfdiutils-common ChangeLog
 
+## 1.2.3
+
+### Fixed export iife for browser usage
+
+- update imports and require for include browser global iife export
+
 ## 1.2.2
 
 ### Patch Changes on development and build
@@ -27,12 +33,12 @@
   - Add helper for install and use anything DOM implementation class.
   - Improve documentation about new process to use `XML` and `XmlNodeUtils` helper classes.
 
-    CI
+        CI
 
   - Update workflow for use pnpm and better test coverage.
   - Added Sonarcloud for better continuous code quality.
 
-    Build
+        Build
 
   - Replace rollup bundle for microbundle for generation of library.
 
