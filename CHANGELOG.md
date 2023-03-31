@@ -1,5 +1,15 @@
 # @nodecfdi/cfdiutils-common ChangeLog
 
+## 1.2.4
+
+### Patch Changes - Update dependencies and maintenance in general
+
+- Update README.md with missing pnpm installation and browser usage
+- Fixed CI error
+- Fixed exports for support commonjs and module type correctly
+- Fixed generate types (typescript)
+- Update dependencies
+
 ## 1.2.3
 
 ### Fixed export iife for browser usage
@@ -33,12 +43,12 @@
   - Add helper for install and use anything DOM implementation class.
   - Improve documentation about new process to use `XML` and `XmlNodeUtils` helper classes.
 
-        CI
+            CI
 
   - Update workflow for use pnpm and better test coverage.
   - Added Sonarcloud for better continuous code quality.
 
-        Build
+            Build
 
   - Replace rollup bundle for microbundle for generation of library.
 

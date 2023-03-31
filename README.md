@@ -25,16 +25,30 @@ versión de php <https://github.com/eclipxe13/CfdiUtils>
 
 ## Instalación
 
-### Node NPM
+### NPM
 
-```shell
+```bash
 npm i @nodecfdi/cfdiutils-common --save
 ```
 
-### Yarn NPM
+### YARN
 
-```shell
+```bash
 yarn add @nodecfdi/cfdiutils-common --save
+```
+
+### PNPM
+
+```bash
+pnpm add @nodecfdi/cfdiutils-common --save
+```
+
+### CDN - Browser
+
+Usa la versión mas reciente publicada cambiando `<latest-version>` por la última versión. Por ejemplo ...cfdiutils-common@1.2.4/dist...
+
+```html
+<script src="https://unpkg.com/@nodecfdi/cfdiutils-common@<latest-version>/dist/cfdiutils-common.global.js"></script>
 ```
 
 ## Uso básico
