@@ -4,13 +4,13 @@ import { type CNodeHasValueInterface } from './c-node-has-value-interface';
 import { type CNodeInterface } from './c-node-interface';
 import { CNodes } from './c-nodes';
 
-/**
- * @public
- */
 export class CNode implements CNodeInterface, CNodeHasValueInterface {
     private readonly _name: string;
+
     private readonly _attributes: CAttributes;
+
     private readonly _children: CNodes;
+
     private _value: string;
 
     constructor(name: string, attributes: Record<string, unknown> = {}, children: CNodeInterface[] = [], value = '') {
@@ -62,7 +62,9 @@ export class CNode implements CNodeInterface, CNodeHasValueInterface {
     public searchAttribute(...searchPath: string[]): string {
         const attribute = searchPath.pop();
         const node = this.searchNode(...searchPath);
-        if (!node || !attribute) return '';
+        if (!node || !attribute) {
+            return '';
+        }
 
         return node.attributes().get(attribute) || '';
     }

@@ -1,6 +1,3 @@
-/**
- * @public
- */
 export type CNodeHasValueInterface = {
     value(): string;
 

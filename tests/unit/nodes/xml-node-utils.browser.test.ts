@@ -1,20 +1,19 @@
-import { DOMImplementation, DOMParser, XMLSerializer } from '@xmldom/xmldom';
-import 'jest-xml-matcher';
 import { readFileSync } from 'node:fs';
-import { install } from '~/dom';
-import { CNode } from '~/nodes/c-node';
-import { XmlNodeUtils } from '~/nodes/xml-node-utils';
-import { Xml } from '~/utils/xml';
-import { useTestCase } from '../../../test-case';
+import 'jest-xml-matcher';
+import { useTestCase } from '../../test-case';
+import { install } from 'src/dom';
+import { CNode } from 'src/nodes/c-node';
+import { XmlNodeUtils } from 'src/nodes/xml-node-utils';
+import { Xml } from 'src/utils/xml';
 
-describe('XmlNodeUtils', () => {
+describe('xml_node_utils_with_jsdom', () => {
     const { utilAsset } = useTestCase();
 
     beforeEach(() => {
-        install(new DOMParser(), new XMLSerializer(), new DOMImplementation());
+        install(new DOMParser(), new XMLSerializer(), document.implementation);
     });
 
-    test('node to Xml string Xml Header', () => {
+    test('node_to_xml_string_xml_header', () => {
         const node = new CNode('book', {}, [new CNode('chapter', { toc: '1' }), new CNode('chapter', { toc: '2' })]);
 
         let xmlString = XmlNodeUtils.nodeToXmlString(node, true);
@@ -25,10 +24,10 @@ describe('XmlNodeUtils', () => {
     });
 
     test.each([
-        [/* 'simple-xml',  */ utilAsset('nodes/sample.xml')],
-        [/* 'with-texts-xml', */ utilAsset('nodes/sample-with-texts.xml')],
-        [/* 'cfdi', */ utilAsset('cfdi33.xml')]
-    ])('export from file and export again', (filename: string) => {
+        ['simple-xml', utilAsset('nodes/sample.xml')],
+        ['with_texts_xml', utilAsset('nodes/sample-with-texts.xml')],
+        ['cfdi', utilAsset('cfdi33.xml')],
+    ])('export_from_file_and_export_again_%s', (_name, filename) => {
         const source = readFileSync(filename, 'utf8');
 
         const document = Xml.newDocumentContent(source);
@@ -47,7 +46,7 @@ describe('XmlNodeUtils', () => {
         expect(xmlString).toEqualXML(source);
     });
 
-    test('node from xml string', () => {
+    test('node_from_xml_string', () => {
         const node = new CNode('book', {}, [new CNode('chapter', { toc: '1' }), new CNode('chapter', { toc: '2' })]);
         const xmlString = XmlNodeUtils.nodeToXmlString(node, true);
         const resultNode = XmlNodeUtils.nodeFromXmlString(xmlString);
@@ -55,7 +54,7 @@ describe('XmlNodeUtils', () => {
         expect(resultNode.searchAttribute('chapter', 'toc')).toBe('1');
     });
 
-    test('import xml with namespace without prefix', () => {
+    test('import_xml_with_namespace_without_prefix', () => {
         const file = utilAsset('xml-with-namespace-definitions-at-child-level.xml');
         const node = XmlNodeUtils.nodeFromXmlString(readFileSync(file, 'utf8'));
         const inspected = node.searchNode('base:Third', 'innerNS');
@@ -66,7 +65,7 @@ describe('XmlNodeUtils', () => {
         expect(inspected.get('xmlns')).toBe('http://external.com/inner');
     });
 
-    test('xml with value with special chars', () => {
+    test('xml_with_value_with_special_chars', () => {
         const expectedValue = 'ampersand: &';
         const content = '<root>ampersand: &amp;</root>';
 
@@ -76,7 +75,7 @@ describe('XmlNodeUtils', () => {
         expect(XmlNodeUtils.nodeToXmlString(node)).toBe(content);
     });
 
-    test('xml with value with inner comment', () => {
+    test('xml_with_value_with_inner_comment', () => {
         const expectedValue = 'ampersand: &';
         const content = '<root>ampersand: <!-- comment -->&amp;</root>';
         const expectedContent = '<root>ampersand: &amp;</root>';
@@ -87,7 +86,7 @@ describe('XmlNodeUtils', () => {
         expect(XmlNodeUtils.nodeToXmlString(node)).toBe(expectedContent);
     });
 
-    test('xml with value with inner white space', () => {
+    test('xml_with_value_with_inner_white_space', () => {
         const expectedValue = '\n\nfirst line\n\tsecond line\n\t third line \t\nfourth line\n\n';
         const content = `<root>${expectedValue}</root>`;
 
@@ -97,7 +96,7 @@ describe('XmlNodeUtils', () => {
         expect(XmlNodeUtils.nodeToXmlString(node)).toBe(content);
     });
 
-    test('xml with value with inner element', () => {
+    test('xml_with_value_with_inner_element', () => {
         const expectedValue = 'ampersand: &';
         const content = '<root>ampersand: <inner/>&amp;</root>';
         const expectedContent = '<root><inner/>ampersand: &amp;</root>';

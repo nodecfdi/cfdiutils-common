@@ -3,9 +3,6 @@ import { CNode } from './c-node';
 import { type CNodeHasValueInterface } from './c-node-has-value-interface';
 import { type CNodeInterface } from './c-node-interface';
 
-/**
- * @public
- */
 export class XmlNodeImporter {
     /**
      * Local record for registered namespaces to avoid set the namespace declaration in every child
@@ -30,7 +27,7 @@ export class XmlNodeImporter {
 
         // Element is like <element namespace="uri"/>
         if (element.hasAttributeNS('http://www.w3.org/2000/xmlns/', '')) {
-            node.attributes().set('xmlns', element.getAttributeNS('http://www.w3.org/2000/xmlns/', '') ?? '');
+            node.attributes().set('xmlns', element.getAttributeNS('http://www.w3.org/2000/xmlns/', '') as string);
         }
 
         const children = element.childNodes;
@@ -49,15 +46,17 @@ export class XmlNodeImporter {
     }
 
     private registerNamespace(node: CNode, prefix: string, uri: string): void {
-        if (this.registeredNamespaces[prefix]) return;
+        if (this.registeredNamespaces[prefix]) {
+            return;
+        }
+
         this.registeredNamespaces[prefix] = uri;
         node.attributes().set(prefix, uri);
     }
 
     private extractValue(element: Element): string {
         const values: string[] = [];
-
-        for (const children of Array.from(element.childNodes)) {
+        for (let children = element.firstChild; children !== null; children = children.nextSibling) {
             if (!DomValidators.isText(children)) {
                 continue;
             }

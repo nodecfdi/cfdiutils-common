@@ -2,9 +2,6 @@ import { Xml } from '../utils/xml';
 import { type CNodeHasValueInterface } from './c-node-has-value-interface';
 import { type CNodeInterface } from './c-node-interface';
 
-/**
- * @public
- */
 export class XmlNodeExporter {
     public export(node: CNodeInterface): Element {
         const document = Xml.newDocument();

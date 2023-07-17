@@ -1,21 +1,20 @@
 /**
  * DOM validators for compare node elements.
- * @public
  */
 export const DomValidators = {
-    isElement(nodo: Node): nodo is Element {
-        return nodo && nodo.nodeType === 1;
+    isElement(nodo?: Node): nodo is Element {
+        return Boolean(nodo && nodo.nodeType === nodo.ELEMENT_NODE);
     },
 
-    isAttr(nodo: Node): nodo is Attr {
-        return nodo && nodo.nodeType === 2;
+    isAttr(nodo?: Node): nodo is Attr {
+        return Boolean(nodo && nodo.nodeType === nodo.ATTRIBUTE_NODE);
     },
 
-    isText(nodo: Node): nodo is Text {
-        return nodo && nodo.nodeType === 3;
+    isText(nodo?: Node): nodo is Text {
+        return Boolean(nodo && nodo.nodeType === nodo.TEXT_NODE);
     },
 
-    isDocument(nodo: Node): nodo is Document {
-        return nodo && nodo.nodeType === 9;
-    }
+    isDocument(nodo?: Node): nodo is Document {
+        return Boolean(nodo && nodo.nodeType === nodo.DOCUMENT_NODE);
+    },
 };

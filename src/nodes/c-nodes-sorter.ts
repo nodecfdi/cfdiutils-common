@@ -1,9 +1,14 @@
 import { type CNodeInterface } from './c-node-interface';
 
-/**
- * @public
- */
 export class CNodesSorter {
+    private _order: Map<string, number> = new Map<string, number>();
+
+    private size!: number;
+
+    constructor(order: string[] = []) {
+        this.setOrder(order);
+    }
+
     /**
      * Internal compare Maps
      * @param a - map
@@ -23,13 +28,6 @@ export class CNodesSorter {
         }
 
         return true;
-    }
-
-    private _order: Map<string, number> = new Map<string, number>();
-    private size!: number;
-
-    constructor(order: string[] = []) {
-        this.setOrder(order);
     }
 
     /**
@@ -54,8 +52,8 @@ export class CNodesSorter {
         return new Map(
             [...new Set(names.filter((element) => isValidName(element)) as string[])].map((entry, index) => [
                 index,
-                entry
-            ])
+                entry,
+            ]),
         );
     }
 
@@ -98,13 +96,13 @@ export class CNodesSorter {
     private stableArraySort(input: CNodeInterface[], callable: keyof this): CNodeInterface[] {
         let list = input.map((entry, index) => ({
             item: entry,
-            index
+            index,
         }));
 
         // Double check by function provider and indexed
         const comparar = (
             a: { item: CNodeInterface; index: number },
-            b: { item: CNodeInterface; index: number }
+            b: { item: CNodeInterface; index: number },
         ): number => {
             let value: number = (this[callable] as (a: CNodeInterface, b: CNodeInterface) => number)(a.item, b.item);
             if (value === 0) {

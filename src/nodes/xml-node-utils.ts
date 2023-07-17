@@ -5,9 +5,6 @@ import { type CNodeInterface } from './c-node-interface';
 import { XmlNodeExporter } from './xml-node-exporter';
 import { XmlNodeImporter } from './xml-node-importer';
 
-/**
- * @public
- */
 export const XmlNodeUtils = {
     nodeToXmlElement(node: CNodeInterface): Element {
         return new XmlNodeExporter().export(node);
@@ -32,5 +29,5 @@ export const XmlNodeUtils = {
 
     nodeFromXmlString(content: string): CNodeInterface & CNodeHasValueInterface {
         return XmlNodeUtils.nodeFromXmlElement(Xml.documentElement(Xml.newDocumentContent(content)));
-    }
+    },
 };

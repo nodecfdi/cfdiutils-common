@@ -7,7 +7,7 @@ const useTestCase = (): {
     const utilAsset = (file: string): string => join(dirname(fileURLToPath(import.meta.url)), '_files', file);
 
     return {
-        utilAsset
+        utilAsset,
     };
 };
 
