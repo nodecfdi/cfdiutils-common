@@ -1,9 +1,6 @@
 import { type CNodeInterface } from './c-node-interface';
 import { CNodesSorter } from './c-nodes-sorter';
 
-/**
- * @public
- */
 export class CNodes extends Array<CNodeInterface> {
     private readonly _sorter: CNodesSorter;
 
@@ -11,6 +8,10 @@ export class CNodes extends Array<CNodeInterface> {
         super();
         this._sorter = new CNodesSorter();
         this.importFromArray(nodes);
+    }
+
+    public static get [Symbol.species](): ArrayConstructor {
+        return Array;
     }
 
     public add(...nodes: CNodeInterface[]): this {
@@ -67,12 +68,12 @@ export class CNodes extends Array<CNodeInterface> {
     }
 
     public first(): CNodeInterface | undefined {
-        return this.find((x) => x !== undefined);
+        return this.at(0);
     }
 
     public get(position: number): CNodeInterface {
         const indexedNodes = [...this.values()];
-        const value = indexedNodes[position];
+        const value = indexedNodes.at(position);
         if (!value) {
             throw new RangeError(`The index ${position} does not exists`);
         }
@@ -105,9 +106,5 @@ export class CNodes extends Array<CNodeInterface> {
         this.add(...nodes);
 
         return this;
-    }
-
-    public static get [Symbol.species](): ArrayConstructor {
-        return Array;
     }
 }

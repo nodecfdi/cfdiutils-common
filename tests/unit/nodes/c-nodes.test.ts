@@ -1,15 +1,15 @@
-import { CNode } from '~/nodes/c-node';
-import { type CNodeInterface } from '~/nodes/c-node-interface';
-import { CNodes } from '~/nodes/c-nodes';
+import { CNode } from 'src/nodes/c-node';
+import { type CNodeInterface } from 'src/nodes/c-node-interface';
+import { CNodes } from 'src/nodes/c-nodes';
 
-describe('Nodes.CNodes', () => {
-    test('empty nodes', () => {
+describe('nodes_cnodes', () => {
+    test('empty_nodes', () => {
         const nodes = new CNodes();
         expect(nodes).toHaveLength(0);
         expect(nodes.firstNodeWithName('non-existent')).toBeUndefined();
     });
 
-    test('construct with nodes array', () => {
+    test('construct_with_nodes_array', () => {
         const expected = [new CNode('foo'), new CNode('bar')];
 
         const nodes = new CNodes(expected);
@@ -19,7 +19,7 @@ describe('Nodes.CNodes', () => {
         }
     });
 
-    test('manipulate the collection', () => {
+    test('manipulate_the_collection', () => {
         const first = new CNode('first');
         const second = new CNode('second');
 
@@ -54,7 +54,7 @@ describe('Nodes.CNodes', () => {
         expect(JSON.stringify(nodes.firstNodeWithName('second'))).toEqual(JSON.stringify(second));
     });
 
-    test('add find remove', () => {
+    test('add_find_remove', () => {
         const root = new CNode('root');
         const nodes = root.children();
         const child = new CNode('child');
@@ -72,12 +72,12 @@ describe('Nodes.CNodes', () => {
         expect(nodes.exists(child)).toBeFalsy();
     });
 
-    test('first returns null', () => {
+    test('first_returns_null', () => {
         const nodes = new CNodes();
         expect(nodes.first()).toBeUndefined();
     });
 
-    test('import from array', () => {
+    test('import_from_array', () => {
         const nodeOne = new CNode('one');
         const nodes = new CNodes();
         nodes.importFromArray([nodeOne, new CNode('two'), new CNode('three')]);
@@ -85,19 +85,19 @@ describe('Nodes.CNodes', () => {
         expect(nodes.first()).toStrictEqual(nodeOne);
     });
 
-    test('import from array with non node', () => {
+    test('import_from_array_with_non_node', () => {
         const nodes = new CNodes();
         expect(() => nodes.importFromArray([String() as unknown as CNodeInterface])).toThrow(
-            'The element index 0 is not a CNodeInterface object'
+            'The element index 0 is not a CNodeInterface object',
         );
     });
 
-    test('get throws exception when not found', () => {
+    test('get_throws_exception_when_not_found', () => {
         const nodes = new CNodes();
         expect(() => nodes.get(0)).toThrow('The index 0 does not exists');
     });
 
-    test('get with existent elements', () => {
+    test('get_with_existent_elements', () => {
         const foo = new CNode('foo');
         const bar = new CNode('bar');
         const nodes = new CNodes([foo, bar]);
@@ -110,7 +110,7 @@ describe('Nodes.CNodes', () => {
         expect(nodes.get(0)).toStrictEqual(bar);
     });
 
-    test('get nodes by name', () => {
+    test('get_nodes_by_name', () => {
         const nodes = new CNodes();
         const first = new CNode('children');
         const second = new CNode('children');
@@ -125,24 +125,24 @@ describe('Nodes.CNodes', () => {
         expect(byName.exists(third)).toBeTruthy();
     });
 
-    test('ordered children', () => {
+    test('ordered_children', () => {
         const nodes = new CNodes([new CNode('foo'), new CNode('bar'), new CNode('baz')]);
         // Test initial order
         expect(JSON.stringify([nodes.get(0).name(), nodes.get(1).name(), nodes.get(2).name()])).toEqual(
-            JSON.stringify(['foo', 'bar', 'baz'])
+            JSON.stringify(['foo', 'bar', 'baz']),
         );
 
         // Sort previous values
         nodes.setOrder(['baz', '', '0', 'foo', '', 'bar', 'baz']);
         expect(nodes.getOrder()).toEqual(['baz', 'foo', 'bar']);
         expect(JSON.stringify([nodes.get(0).name(), nodes.get(1).name(), nodes.get(2).name()])).toEqual(
-            JSON.stringify(['baz', 'foo', 'bar'])
+            JSON.stringify(['baz', 'foo', 'bar']),
         );
 
         // Add other baz (inserted at the bottom)
         nodes.add(new CNode('baz', { id: 'second' }));
         expect(JSON.stringify([nodes.get(0).name(), nodes.get(1).name(), nodes.get(2).name()])).toEqual(
-            JSON.stringify(['baz', 'baz', 'foo'])
+            JSON.stringify(['baz', 'baz', 'foo']),
         );
         expect(nodes.get(1).attributes().get('id')).toEqual('second');
 

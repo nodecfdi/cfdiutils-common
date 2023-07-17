@@ -3,7 +3,6 @@ import { DomValidators } from './dom-validators';
 
 /**
  * XML static utils
- * @public
  */
 export const Xml = {
     documentElement(document: Document): Element {
@@ -16,10 +15,12 @@ export const Xml = {
 
     ownerDocument(node: Node): Document {
         if (!node.ownerDocument) {
+            /* istanbul ignore else -- @preserve */
             if (DomValidators.isDocument(node)) {
                 return node;
             }
 
+            /* istanbul ignore next -- @preserve */
             throw new TypeError('node.ownerDocument is undefined but node is not a Document');
         }
 
@@ -27,7 +28,9 @@ export const Xml = {
     },
 
     newDocument(document?: Document): Document {
-        if (!document) document = getDom().createDocument(null, null, null);
+        if (!document) {
+            document = getDom().createDocument(null, null, null);
+        }
 
         return document;
     },
@@ -53,7 +56,9 @@ export const Xml = {
     },
 
     isValidXmlName(name: string): boolean {
-        if (name === '') return false;
+        if (name === '') {
+            return false;
+        }
 
         return /^[\p{L}_:][\p{L}\d_:.-]*$/u.test(name);
     },
@@ -68,7 +73,7 @@ export const Xml = {
                 return document.createElement(name);
             },
             `Cannot create element with name ${name}`,
-            content
+            content,
         );
     },
 
@@ -83,14 +88,14 @@ export const Xml = {
 
         if (!element || !DomValidators.isElement(element)) {
             throw new SyntaxError(
-                `${errorMessage} on ${previousException ? previousException.message : 'not is element'}`
+                `${errorMessage} on ${previousException ? previousException.message : 'not is element'}`,
             );
         }
 
         if (content !== '') {
-            element?.appendChild(Xml.ownerDocument(element).createTextNode(content));
+            element.appendChild(Xml.ownerDocument(element).createTextNode(content));
         }
 
         return element;
-    }
+    },
 };

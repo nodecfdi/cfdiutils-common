@@ -1,9 +1,11 @@
 import { Xml } from '../utils/xml';
 
-/**
- * @public
- */
 export class CAttributes extends Map<string, string> {
+    constructor(attributes: Record<string, unknown> = {}) {
+        super();
+        this.importRecord(attributes);
+    }
+
     /**
      * Cast any value to string
      */
@@ -13,19 +15,14 @@ export class CAttributes extends Map<string, string> {
         }
 
         if (/boolean|number|string/.test(typeof value)) {
-            return `${value}`;
+            return `${value as boolean | number | string}`;
         }
 
         if (typeof value === 'object' && !Array.isArray(value)) {
-            return value.toString();
+            return (value as { toString: () => string }).toString();
         }
 
         throw new SyntaxError(`Cannot convert value of attribute ${key} to string`);
-    }
-
-    constructor(attributes: Record<string, unknown> = {}) {
-        super();
-        this.importRecord(attributes);
     }
 
     public override get(name: string): string {
@@ -38,7 +35,7 @@ export class CAttributes extends Map<string, string> {
         return value;
     }
 
-    public override set(name: string, value?: string): this {
+    public override set(name: string, value?: string | null): this {
         if (value === undefined || value === null) {
             this.delete(name);
 

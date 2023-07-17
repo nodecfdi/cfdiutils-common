@@ -1,7 +1,7 @@
-import { CNode } from '~/nodes/c-node';
+import { CNode } from 'src/nodes/c-node';
 
-describe('Nodes.CNode', () => {
-    test('construct without arguments', () => {
+describe('nodes_cnode', () => {
+    test('construct_without_arguments', () => {
         const node = new CNode('name');
         expect(node.name()).toBe('name');
         expect(node.count()).toBe(0);
@@ -9,10 +9,10 @@ describe('Nodes.CNode', () => {
         expect(node.value()).toBe('');
     });
 
-    test('construct with arguments', () => {
+    test('construct_with_arguments', () => {
         const dummyNode = new CNode('dummy');
         const attributes = {
-            foo: 'bar'
+            foo: 'bar',
         };
         const children = [dummyNode];
         const value = 'xee';
@@ -22,23 +22,23 @@ describe('Nodes.CNode', () => {
         expect(node.value()).toBe(value);
     });
 
-    test('construct with empty name', () => {
+    test('construct_with_empty_name', () => {
         const t = (): CNode => new CNode('\n  \t  \n');
 
         expect(t).toThrow(SyntaxError);
         expect(t).toThrow('invalid xml name');
     });
 
-    test('construct with untrimmed name', () => {
+    test('construct_with_untrimmed_name', () => {
         expect(() => new CNode(' x ')).toThrow('invalid xml name');
     });
 
-    test('search attribute', () => {
+    test('search_attribute', () => {
         const node = new CNode('root', { level: '1' }, [
             new CNode('child', { level: 2 }, [
                 new CNode('grandchild', { level: 3.1 }),
-                new CNode('grandchild', { level: 3.2 })
-            ])
+                new CNode('grandchild', { level: 3.2 }),
+            ]),
         ]);
 
         expect(node.searchAttribute('level')).toBe('1');
@@ -49,7 +49,7 @@ describe('Nodes.CNode', () => {
         expect(node.searchAttribute('not-found-attribute')).toBe('');
     });
 
-    test('search node', () => {
+    test('search_node', () => {
         const grandChildOne = new CNode('grandchild', { level: '3.1' });
         const grandChildTwo = new CNode('grandchild', { level: '3.2' });
         const child = new CNode('child', { level: 2 }, [grandChildOne, grandChildTwo]);
@@ -64,7 +64,7 @@ describe('Nodes.CNode', () => {
         expect(root.searchNode('not-found')).toBeUndefined();
     });
 
-    test('search nodes', () => {
+    test('search_nodes', () => {
         const grandChildOne = new CNode('grandchild', { level: '3.1' });
         const grandChildTwo = new CNode('grandchild', { level: '3.2' });
         const child = new CNode('child', { level: 2 }, [grandChildOne, grandChildTwo]);
@@ -84,7 +84,7 @@ describe('Nodes.CNode', () => {
         expect(root.searchNodes('not-found')).toHaveLength(0);
     });
 
-    test('map access to attributes', () => {
+    test('map_access_to_attributes', () => {
         const node = new CNode('x');
         node.set('id', 'form');
 
@@ -100,7 +100,7 @@ describe('Nodes.CNode', () => {
         expect(node.get('id')).toBe('');
     });
 
-    test('value property', () => {
+    test('value_property', () => {
         const node = new CNode('x');
 
         node.setValue('first');
@@ -110,7 +110,7 @@ describe('Nodes.CNode', () => {
         expect(node.value()).toBe('second');
     });
 
-    test('add children', () => {
+    test('add_children', () => {
         const node = new CNode('x');
         const childrenNode = new CNode('y');
 
@@ -119,7 +119,7 @@ describe('Nodes.CNode', () => {
         expect(node.count()).toBe(1);
     });
 
-    test('add attributes', () => {
+    test('add_attributes', () => {
         const node = new CNode('x');
         expect(node.attributes().size).toBe(0);
 
@@ -127,7 +127,7 @@ describe('Nodes.CNode', () => {
         expect(node.attributes().size).toBe(1);
     });
 
-    test('clear all', () => {
+    test('clear_all', () => {
         const node = new CNode('x', { foo: '1' });
         const childrenNode = new CNode('y');
         node.addChild(childrenNode);

@@ -1,5 +1,16 @@
 # @nodecfdi/cfdiutils-common ChangeLog
 
+## 1.2.5
+
+### Patch Changes - Maintenance and Small Optimizations
+
+- Update dependencies
+- Update types exports for typescript module and commonjs
+- Update to ESM support
+- Update CI workflow for fix pipeline to latest github and pnpm changes
+- Increment code coverage
+- Drop support to node versions < 16
+
 ## 1.2.4
 
 ### Patch Changes - Update dependencies and maintenance in general
@@ -43,12 +54,12 @@
   - Add helper for install and use anything DOM implementation class.
   - Improve documentation about new process to use `XML` and `XmlNodeUtils` helper classes.
 
-            CI
+                CI
 
   - Update workflow for use pnpm and better test coverage.
   - Added Sonarcloud for better continuous code quality.
 
-            Build
+                Build
 
   - Replace rollup bundle for microbundle for generation of library.
 

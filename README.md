@@ -45,7 +45,7 @@ pnpm add @nodecfdi/cfdiutils-common --save
 
 ### CDN - Browser
 
-Usa la versión mas reciente publicada cambiando `<latest-version>` por la última versión. Por ejemplo ...cfdiutils-common@1.2.4/dist...
+Usa la versión mas reciente publicada cambiando `<latest-version>` por la última versión. Por ejemplo ...cfdiutils-common@1.2.5/dist...
 
 ```html
 <script src="https://unpkg.com/@nodecfdi/cfdiutils-common@<latest-version>/dist/cfdiutils-common.global.js"></script>

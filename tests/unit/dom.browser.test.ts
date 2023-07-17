@@ -1,24 +1,20 @@
-/**
- * \@vitest-environment jsdom
- */
+import { getDom, getParser, getSerializer, install } from 'src/dom';
+import { DOMNotFoundError } from 'src/exceptions/dom-not-found-error';
 
-import { getDom, getParser, getSerializer, install } from '~/dom';
-import { DOMNotFoundError } from '~/exceptions/dom-not-found-error';
-
-describe('dom agnostic on browser with jsdom', () => {
-    test('getDom getParser and getSerializer will be throw error on not install', () => {
+describe('dom_with_jsdom', () => {
+    test('getDom_getParser_and_getSerializer_will_be_throw_error_on_not_install', () => {
         expect(() => getDom()).toThrow(DOMNotFoundError);
         expect(() => getParser()).toThrow(DOMNotFoundError);
         expect(() => getSerializer()).toThrow(DOMNotFoundError);
     });
 
-    test('getDom getParser and getSerializer will be throw error with specific type', () => {
+    test('getDom_getParser_and_getSerializer_will_be_throw_error_with_specific_type', () => {
         expect(() => getDom()).toThrow('DOMImplementation');
         expect(() => getParser()).toThrow('DOMParser');
         expect(() => getSerializer()).toThrow('XMLSerializer');
     });
 
-    test('using browser usage with jsdom return dom expected', () => {
+    test('using_browser_usage_with_jsdom_return_dom_expected', () => {
         const jsDOMParser = new DOMParser();
         const jsXMLSerializer = new XMLSerializer();
         const jsDOMImplementation = document.implementation;
