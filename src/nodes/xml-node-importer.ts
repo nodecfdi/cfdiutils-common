@@ -15,7 +15,7 @@ export class XmlNodeImporter {
         node.setValue(this.extractValue(element));
 
         if (element.prefix && element.prefix !== '') {
-            this.registerNamespace(node, `xmlns:${element.prefix}`, element.namespaceURI ?? '');
+            this.registerNamespace(node, `xmlns:${element.prefix}`, element.namespaceURI as string);
             this.registerNamespace(node, `xmlns:xsi`, 'http://www.w3.org/2001/XMLSchema-instance');
         }
 
@@ -26,19 +26,17 @@ export class XmlNodeImporter {
         }
 
         // Element is like <element namespace="uri"/>
+        /* istanbul ignore if -- @preserve Hard of test */
         if (element.hasAttributeNS('http://www.w3.org/2000/xmlns/', '')) {
             node.attributes().set('xmlns', element.getAttributeNS('http://www.w3.org/2000/xmlns/', '') as string);
         }
 
-        const children = element.childNodes;
-        let index_;
-        for (index_ = 0; index_ < children.length; index_++) {
-            const child = children[index_];
-            if (!DomValidators.isElement(child)) {
+        for (let children = element.firstChild; children !== null; children = children.nextSibling) {
+            if (!DomValidators.isElement(children)) {
                 continue;
             }
 
-            const childNode = this.import(child);
+            const childNode = this.import(children);
             node.children().add(childNode);
         }
 

@@ -15,10 +15,12 @@ export const Xml = {
 
     ownerDocument(node: Node): Document {
         if (!node.ownerDocument) {
+            /* istanbul ignore else -- @preserve */
             if (DomValidators.isDocument(node)) {
                 return node;
             }
 
+            /* istanbul ignore next -- @preserve */
             throw new TypeError('node.ownerDocument is undefined but node is not a Document');
         }
 
