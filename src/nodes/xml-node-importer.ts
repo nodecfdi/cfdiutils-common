@@ -19,10 +19,9 @@ export class XmlNodeImporter {
             this.registerNamespace(node, `xmlns:xsi`, 'http://www.w3.org/2001/XMLSchema-instance');
         }
 
-        const xmlAttributes = element.attributes;
-        let index;
-        for (index = 0; index < xmlAttributes.length; index++) {
-            node.attributes().set(xmlAttributes[index].name, xmlAttributes[index].value);
+        // eslint-disable-next-line unicorn/prefer-spread
+        for (const attribute of Array.from(element.attributes)) {
+            node.attributes().set(attribute.name, attribute.value);
         }
 
         // Element is like <element namespace="uri"/>
@@ -31,7 +30,8 @@ export class XmlNodeImporter {
             node.attributes().set('xmlns', element.getAttributeNS('http://www.w3.org/2000/xmlns/', '') as string);
         }
 
-        for (let children = element.firstChild; children !== null; children = children.nextSibling) {
+        // eslint-disable-next-line unicorn/prefer-spread
+        for (const children of Array.from(element.childNodes)) {
             if (!DomValidators.isElement(children)) {
                 continue;
             }
@@ -54,7 +54,8 @@ export class XmlNodeImporter {
 
     private extractValue(element: Element): string {
         const values: string[] = [];
-        for (let children = element.firstChild; children !== null; children = children.nextSibling) {
+        // eslint-disable-next-line unicorn/prefer-spread
+        for (const children of Array.from(element.childNodes)) {
             if (!DomValidators.isText(children)) {
                 continue;
             }

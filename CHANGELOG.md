@@ -1,5 +1,12 @@
 # @nodecfdi/cfdiutils-common ChangeLog
 
+## 1.2.6
+
+### Patch Changes - Fixed correct iteration element-chilnodes and attributes
+
+- Update dependencies
+- Fixed correct iteration of element childNodes and attributes
+
 ## 1.2.5
 
 ### Patch Changes - Maintenance and Small Optimizations
@@ -54,12 +61,12 @@
   - Add helper for install and use anything DOM implementation class.
   - Improve documentation about new process to use `XML` and `XmlNodeUtils` helper classes.
 
-                CI
+                    CI
 
   - Update workflow for use pnpm and better test coverage.
   - Added Sonarcloud for better continuous code quality.
 
-                Build
+                    Build
 
   - Replace rollup bundle for microbundle for generation of library.
 
