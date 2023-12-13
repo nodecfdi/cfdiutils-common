@@ -1,39 +1,39 @@
-import { Xml } from '../utils/xml';
-import { type CNodeHasValueInterface } from './c-node-has-value-interface';
-import { type CNodeInterface } from './c-node-interface';
+import { Xml } from '../utils/xml.js';
+import { type NodeHasValueInterface } from './node-has-value-interface.js';
+import { type NodeInterface } from './node-interface.js';
 
 export class XmlNodeExporter {
-    public export(node: CNodeInterface): Element {
-        const document = Xml.newDocument();
-        const rootElement = this.exportRecursive(document, node);
-        document.appendChild(rootElement);
+  public export(node: NodeInterface): Element {
+    const document = Xml.newDocument();
+    const rootElement = this.exportRecursive(document, node);
+    document.appendChild(rootElement);
 
-        return rootElement;
+    return rootElement;
+  }
+
+  private exportRecursive(document: Document, node: NodeInterface): Element {
+    const element = document.createElement(node.name());
+
+    for (const [key, value] of node.attributes().entries()) {
+      element.setAttribute(key, value);
     }
 
-    private exportRecursive(document: Document, node: CNodeInterface): Element {
-        const element = document.createElement(node.name());
-
-        for (const [key, value] of node.attributes().entries()) {
-            element.setAttribute(key, value);
-        }
-
-        for (const child of node.children()) {
-            const childElement = this.exportRecursive(document, child);
-            element.appendChild(childElement);
-        }
-
-        if (this.isCNodeHasValueInterface(node) && node.value() !== '') {
-            element.appendChild(document.createTextNode(node.value()));
-        }
-
-        return element;
+    for (const child of node.children()) {
+      const childElement = this.exportRecursive(document, child);
+      element.appendChild(childElement);
     }
 
-    private isCNodeHasValueInterface(nodo: CNodeInterface | CNodeHasValueInterface): nodo is CNodeHasValueInterface {
-        return (
-            typeof (nodo as CNodeHasValueInterface).value === 'function' &&
-            typeof (nodo as CNodeHasValueInterface).setValue === 'function'
-        );
+    if (this.isNodeHasValueInterface(node) && node.value() !== '') {
+      element.appendChild(document.createTextNode(node.value()));
     }
+
+    return element;
+  }
+
+  private isNodeHasValueInterface(nodo: NodeInterface | NodeHasValueInterface): nodo is NodeHasValueInterface {
+    return (
+      typeof (nodo as NodeHasValueInterface).value === 'function' &&
+      typeof (nodo as NodeHasValueInterface).setValue === 'function'
+    );
+  }
 }
