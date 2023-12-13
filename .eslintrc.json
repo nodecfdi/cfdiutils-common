@@ -1,7 +1,0 @@
-{
-    "root": true,
-    "extends": "@nodecfdi/eslint-config-nodecfdi",
-    "rules": {
-        "unicorn/prefer-dom-node-append": "off"
-    }
-}
