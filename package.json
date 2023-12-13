@@ -67,7 +67,7 @@
     "rimraf": "^5.0.5",
     "tsup": "^8.0.1",
     "typedoc": "^0.25.4",
-    "typedoc-theme-hierarchy": "^4.1.2",
+    "typedoc-material-theme": "^1.0.1",
     "typescript": "^5.3.3",
     "vite": "^5.0.8",
     "vite-tsconfig-paths": "^4.2.2",

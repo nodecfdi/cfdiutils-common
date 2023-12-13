@@ -50,9 +50,9 @@ devDependencies:
   typedoc:
     specifier: ^0.25.4
     version: 0.25.4(typescript@5.3.3)
-  typedoc-theme-hierarchy:
-    specifier: ^4.1.2
-    version: 4.1.2(typedoc@0.25.4)
+  typedoc-material-theme:
+    specifier: ^1.0.1
+    version: 1.0.1(typedoc@0.25.4)
   typescript:
     specifier: ^5.3.3
     version: 5.3.3
@@ -1005,6 +1005,10 @@ packages:
       fs-extra: 8.1.0
       globby: 11.1.0
       read-yaml-file: 1.1.0
+    dev: true
+
+  /@material/material-color-utilities@0.2.7:
+    resolution: {integrity: sha512-0FCeqG6WvK4/Cc06F/xXMd/pv4FeisI0c1tUpBbfhA2n9Y8eZEv4Karjbmf2ZqQCPUWMrGp8A571tCjizxoTiQ==}
     dev: true
 
   /@microsoft/api-extractor-model@7.28.3(@types/node@18.19.3):
@@ -3179,15 +3183,6 @@ packages:
 
   /fs-extra@11.1.0:
     resolution: {integrity: sha512-0rcTq621PD5jM/e0a3EJoGC/1TC5ZBCERW82LQuwfGnCa1V8w7dpYH1yNu+SLb6E5dkeCBzKEyLGlFrnr+dUyw==}
-    engines: {node: '>=14.14'}
-    dependencies:
-      graceful-fs: 4.2.11
-      jsonfile: 6.1.0
-      universalify: 2.0.0
-    dev: true
-
-  /fs-extra@11.1.1:
-    resolution: {integrity: sha512-MGIE4HOvQCeUCzmlHs0vXpih4ysz4wg9qiSAu6cd42lVwPbTM1TjV7RusoyQqMmk/95gdQZX72u+YW+c3eEpFQ==}
     engines: {node: '>=14.14'}
     dependencies:
       graceful-fs: 4.2.11
@@ -5995,12 +5990,13 @@ packages:
       is-typed-array: 1.1.10
     dev: true
 
-  /typedoc-theme-hierarchy@4.1.2(typedoc@0.25.4):
-    resolution: {integrity: sha512-X3H+zaDkg7wLNoaPJoqXs3rnMfZ9BZjmlXRwplWDciaPfn2hojHxJJ+yVKdqqmojgiHJgg7MYWGDVpOfNlOJ5A==}
+  /typedoc-material-theme@1.0.1(typedoc@0.25.4):
+    resolution: {integrity: sha512-D+X5dS0VVx0UAr1gRDnb7Y16Y9BIBy3/OX54Iu7IXxl9dqkxC3qR8rdIXyCpGaoGKZigajQjmU1ap0uihIFDOw==}
+    engines: {node: '>=20.0.0', npm: '>=9.6.4'}
     peerDependencies:
-      typedoc: ^0.24.0 || ^0.25.0
+      typedoc: ^0.25.3
     dependencies:
-      fs-extra: 11.1.1
+      '@material/material-color-utilities': 0.2.7
       typedoc: 0.25.4(typescript@5.3.3)
     dev: true
 
