@@ -20,7 +20,7 @@ jobs:
         node: ['16', '17', '18', '19', '20']
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Cache .pnpm-store
         uses: actions/cache@v3
@@ -29,7 +29,7 @@ jobs:
           key: ${{ runner.os }}-node${{ matrix.node }}-${{ hashFiles('**/pnpm-lock.yaml') }}
 
       - name: Setup node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node }}
 
@@ -72,6 +72,6 @@ jobs:
 
       - name: Commit docs
         if: steps.changesets.outputs.published == 'true'
-        uses: stefanzweifel/git-auto-commit-action@v4
+        uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: 'docs: generate docs'

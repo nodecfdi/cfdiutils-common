@@ -45,7 +45,7 @@ pnpm add @nodecfdi/cfdiutils-common --save
 
 ### CDN - Browser
 
-Usa la versión mas reciente publicada cambiando `<latest-version>` por la última versión. Por ejemplo ...cfdiutils-common@1.2.6/dist...
+Usa la versión mas reciente publicada cambiando `<latest-version>` por la última versión. Por ejemplo ...cfdiutils-common@2.0.1/dist...
 
 ```html
 <script src="https://unpkg.com/@nodecfdi/cfdiutils-common@<latest-version>/dist/cfdiutils-common.global.js"></script>
@@ -53,12 +53,12 @@ Usa la versión mas reciente publicada cambiando `<latest-version>` por la últi
 
 ## Uso básico
 
-Estructura de datos CNode
+Estructura de datos Node
 
 ```ts
-import { CNode } from '@nodecfdi/cfdiutils-common';
+import { Node } from '@nodecfdi/cfdiutils-common';
 // Creación de un nodo con atributos
-const node = new CNode('root', {
+const node = new Node('root', {
     id: '1',
 });
 console.log(node.attributes().get('id')); // '1'
@@ -75,13 +75,13 @@ node.attributes().forEach((attributeValue, attributeName) => {
 Utileria XmlNodeUtils y XML
 
 ```ts
-import { CNode, install, Xml, XmlNodeUtils } from '@nodecfdi/cfdiutils-common';
+import { Node, install, Xml, XmlNodeUtils } from '@nodecfdi/cfdiutils-common';
 
 // DomParser, XMLSerializer, DOMImplementation agnostic can use xmldom, jsdom, etc.
 // Is necesary install for XML helper and XmlNodeUtils
 install(new DOMParser(), new XMLSerializer(), new DOMImplementation());
 
-const node = new CNode('book', {}, [new CNode('chapter', { toc: '1' }), new CNode('chapter', { toc: '2' })]);
+const node = new Node('book', {}, [new Node('chapter', { toc: '1' }), new Node('chapter', { toc: '2' })]);
 const xmlString = XmlNodeUtils.nodeToXmlString(node, true);
 console.log(xmlString); // xml valido en formato string
 
@@ -92,16 +92,16 @@ const document = Xml.newDocumentContent('my xml string');
 const node = XmlNodeUtils.nodeFromXmlElement(Xml.documentElement(document));
 ```
 
-## Objeto CNode
+## Objeto Node
 
 Esta es la estructura básica. Un nodo debe tener un nombre y esta propiedad no se puede cambiar. Su constructor admite
 tres parámetros:
 
 - `name: string`: Nombre del nodo, se eliminan espacios en blanco al inicio y al final, no permite vacíos.
 - `attributes: Record<string, unknown>`: Objeto de elementos clave/valor que serán importados como atributos.
-- `nodes: CNode[]`: Arreglo de elementos `CNode` que serán importados como nodos hijo.
+- `nodes: Node[]`: Arreglo de elementos `Node` que serán importados como nodos hijo.
 
-## Atributos de nodos CAttributes
+## Atributos de nodos Attributes
 
 Se accede a sus atributos utilizando la forma de Map de javascript siguiendo estas reglas básicas:
 
@@ -109,20 +109,20 @@ Se accede a sus atributos utilizando la forma de Map de javascript siguiendo est
 - La escritura de un nodo es siempre con una cadena de caracteres, también puede ser un objeto que implemente el
   método `toString`
 
-Los atributos se manejan con una colección de tipo `CAttributes` y se pueden obtener usando el método `attributes()` en
-el objeto `CNode`.
+Los atributos se manejan con una colección de tipo `Attributes` y se pueden obtener usando el método `attributes()` en
+el objeto `Node`.
 
-## CNodes
+## Nodes
 
-Los nodos hijos se manejan a través de una colección de nodos `CNodes`. Se puede acceder al objeto `CNodes` usando el
-método `children()` en el objeto `CNode`.
+Los nodos hijos se manejan a través de una colección de nodos `Nodes`. Se puede acceder al objeto `Nodes` usando el
+método `children()` en el objeto `Node`.
 
 Cuando se itera el objeto en realidad se está iterando sobre la colección de nodos.
 
-La clase `CNode` tiene estos métodos de ayuda que sirven para trabajar directamente sobre la colección CNodes:
+La clase `Node` tiene estos métodos de ayuda que sirven para trabajar directamente sobre la colección Nodes:
 
 - iterador: El método `foreach` se realiza sobre la colección de nodos.
-- `addChild(node: CNode)`: Agrega un nodo en la colección de nodos.
+- `addChild(node: Node)`: Agrega un nodo en la colección de nodos.
 
 ## XmlNodeUtils
 
@@ -146,7 +146,7 @@ disponible en <https://www.sat.gob.mx/consulta/76197/complemento-para-factura-el
 los valores en atributos, pone los valores en el contenido textual del elemento, además de otros cambios como usar
 nombres de nodos en inglés.
 
-Por lo anterior, se introdujo la interfaz `CNodeHasValueInterface` que contiene los métodos `value(): string` y
+Por lo anterior, se introdujo la interfaz `NodeHasValueInterface` que contiene los métodos `value(): string` y
 `setValue(valueString: string): void` con lo que se puede escribir y leer este contenido simple.
 
 ## Soporte

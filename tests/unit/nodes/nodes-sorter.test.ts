@@ -1,7 +1,7 @@
 import { Node } from 'src/nodes/node';
 import { NodesSorter } from 'src/nodes/nodes-sorter';
 
-describe('nodes_cnodes_sorter', () => {
+describe('nodes_nodes_sorter', () => {
   test('construct_with_names', () => {
     const values = ['foo', 'bar', 'baz'];
     const sorter = new NodesSorter(values);

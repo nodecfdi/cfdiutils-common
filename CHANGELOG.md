@@ -1,5 +1,13 @@
 # @nodecfdi/cfdiutils-common ChangeLog
 
+## 2.0.1
+
+### Patch Changes - Docs and CI/CD
+
+- Update docs with latest changes
+- Update CI dependencies and resolve problems
+- Remove old name of nodes, node and node interface
+
 ## 2.0.0
 
 ### Major Changes - Rename of files to standard of xo and sync with phpcfdi
