@@ -1,4 +1,4 @@
-import { DOMNotFoundError } from './exceptions/dom-not-found-error';
+import { DomNotFoundError } from './exceptions/dom-not-found-error.js';
 
 let _dom: DOMImplementation | undefined;
 let _parser: DOMParser | undefined;
@@ -9,14 +9,14 @@ let _serializer: XMLSerializer | undefined;
  *
  * @returns the current DOMParser object
  *
- * @throws {@link DOMNotFoundError} This exception is throw if not install DOMParser.
+ * @throws {@link DomNotFoundError} This exception is throw if not install DOMParser.
  */
 const getParser = (): DOMParser => {
-    if (!_parser) {
-        throw new DOMNotFoundError('DOMParser');
-    }
+  if (!_parser) {
+    throw new DomNotFoundError('DOMParser');
+  }
 
-    return _parser;
+  return _parser;
 };
 
 /**
@@ -24,14 +24,14 @@ const getParser = (): DOMParser => {
  *
  * @returns the current XMLSerializer object
  *
- * @throws {@link DOMNotFoundError} This exception is throw if not install XMLSerializer.
+ * @throws {@link DomNotFoundError} This exception is throw if not install XMLSerializer.
  */
 const getSerializer = (): XMLSerializer => {
-    if (!_serializer) {
-        throw new DOMNotFoundError('XMLSerializer');
-    }
+  if (!_serializer) {
+    throw new DomNotFoundError('XMLSerializer');
+  }
 
-    return _serializer;
+  return _serializer;
 };
 
 /**
@@ -39,23 +39,23 @@ const getSerializer = (): XMLSerializer => {
  *
  * @returns the current DOMImplementation object
  *
- * @throws {@link DOMNotFoundError} This exception is throw if not install DOMImplementation.
+ * @throws {@link DomNotFoundError} This exception is throw if not install DOMImplementation.
  */
 const getDom = (): DOMImplementation => {
-    if (!_dom) {
-        throw new DOMNotFoundError('DOMImplementation');
-    }
+  if (!_dom) {
+    throw new DomNotFoundError('DOMImplementation');
+  }
 
-    return _dom;
+  return _dom;
 };
 
 /**
  * Install DOM instances for usage on this library
  */
 const install = (parser?: DOMParser, serializer?: XMLSerializer, dom?: DOMImplementation): void => {
-    _parser = parser;
-    _serializer = serializer;
-    _dom = dom;
+  _parser = parser;
+  _serializer = serializer;
+  _dom = dom;
 };
 
 export { getParser, getSerializer, getDom, install };

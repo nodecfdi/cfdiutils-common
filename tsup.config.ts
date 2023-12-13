@@ -1,36 +1,17 @@
-import isCI from 'is-ci';
-import { defineConfig, type Options } from 'tsup';
-
-const entry = 'src/index.ts';
-
-const sharedConfig = defineConfig({
-    name: 'cfdiutils-common',
-    globalName: 'cfdiutilsCommon',
-    splitting: false,
-    sourcemap: true,
-    format: ['esm', 'cjs', 'iife'],
-    minify: isCI,
-    shims: true,
-});
+import { defineConfig } from 'tsup';
 
 const mainConfig = defineConfig({
-    ...sharedConfig,
-    entry: {
-        'cfdiutils-common': entry,
-    },
-    dts: false,
-}) as Options;
+  splitting: true,
+  clean: true,
+  experimentalDts: true,
+  name: 'cfdiutils-common',
+  globalName: 'cfdiutilsCommon',
+  treeshake: true,
+  format: ['esm', 'cjs', 'iife'],
+  shims: true,
+  entry: {
+    'cfdiutils-common': 'src/index.ts',
+  },
+});
 
-const dtsConfig = defineConfig({
-    ...sharedConfig,
-    entry: {
-        'cfdiutils-common': entry,
-    },
-    dts: {
-        entry,
-        only: true,
-        resolve: true,
-    },
-}) as Options;
-
-export default defineConfig([mainConfig, dtsConfig]);
+export default mainConfig;

@@ -3,15 +3,15 @@
 /**
  * A library for structures of common data and utils or functions on suit cfdiutils.
  */
-export * from './dom';
-export * from './exceptions/dom-not-found-error';
-export * from './nodes/c-attributes';
-export * from './nodes/c-node';
-export * from './nodes/c-node-has-value-interface';
-export * from './nodes/c-node-interface';
-export * from './nodes/c-nodes';
-export * from './nodes/c-nodes-sorter';
-export * from './nodes/xml-node-utils';
-export * from './utils/currency-decimals';
-export * from './utils/dom-validators';
-export * from './utils/xml';
+export * from './dom.js';
+export * from './exceptions/dom-not-found-error.js';
+export * from './nodes/attributes.js';
+export * from './nodes/node.js';
+export * from './nodes/node-has-value-interface.js';
+export * from './nodes/node-interface.js';
+export * from './nodes/nodes.js';
+export * from './nodes/nodes-sorter.js';
+export * from './nodes/xml-node-utils.js';
+export * from './utils/currency-decimals.js';
+export * from './utils/dom-validators.js';
+export * from './utils/xml.js';

@@ -1,5 +1,15 @@
 # @nodecfdi/cfdiutils-common ChangeLog
 
+## 2.0.0
+
+### Major Changes - Rename of files to standard of xo and sync with phpcfdi
+
+- Update dependencies
+- Change from Eslint to XO (a wrapped shared eslint config with steroids)
+- Update bundle generator to library and outputs types
+- Rename files and classes to follow xo standard guide
+- Prepare lib for drop support to Commonjs (Q2 2024)
+
 ## 1.2.6
 
 ### Patch Changes - Fixed correct iteration element-chilnodes and attributes
@@ -56,7 +66,7 @@
 
 - ab38a00: DOM agnostic
 
-    ***
+  ***
 
   - Add helper for install and use anything DOM implementation class.
   - Improve documentation about new process to use `XML` and `XmlNodeUtils` helper classes.
