@@ -87,7 +87,7 @@ export class NodesSorter {
   /**
    * This function is a replacement for sort that try to sort
    * but if items are equal then uses the relative position as second argument
-   * @param input - CNodeInterface
+   * @param input - NodeInterface
    * @param callable - function callable
    */
   private stableArraySort(input: NodeInterface[], callable: keyof this): NodeInterface[] {
