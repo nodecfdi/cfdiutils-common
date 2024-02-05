@@ -59,7 +59,7 @@
     "@types/is-ci": "^3.0.4",
     "@vitest/coverage-istanbul": "^1.0.4",
     "@xmldom/xmldom": "^0.8.10",
-    "husky": "^8.0.3",
+    "husky": "^9.0.0",
     "is-ci": "^3.0.1",
     "jest-xml-matcher": "^1.2.0",
     "jsdom": "^23.0.1",
