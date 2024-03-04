@@ -53,8 +53,8 @@
   "homepage": "https://github.com/nodecfdi/cfdiutils-common",
   "devDependencies": {
     "@changesets/cli": "^2.27.1",
-    "@commitlint/cli": "^18.4.3",
-    "@commitlint/config-conventional": "^18.4.3",
+    "@commitlint/cli": "^19.0.0",
+    "@commitlint/config-conventional": "^19.0.0",
     "@microsoft/api-extractor": "^7.38.5",
     "@types/is-ci": "^3.0.4",
     "@vitest/coverage-istanbul": "^1.0.4",
