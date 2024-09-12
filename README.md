@@ -1,3 +1,4 @@
+> Note: @nodecfdi/cfdiutils-common is now deprecated. Use [@nodecfdi/cfdi-core](https://github.com/nodecfdi/cfdi-core).
 # `@nodecfdi/cfdiutils-common`
 
 [![Source Code][badge-source]][source]
